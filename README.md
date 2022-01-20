@@ -14,7 +14,7 @@ You might need to run activate.bat or activate.ps1 instead depending on the term
 1. Now you can do `pip install ...` and finish setting up
 
 ## **Set up Backend Server**
-From the server directory in the repository enter into the command line...
-
-Install python packages: `pip install -r requirements.txt`\
-To start the backend server: `flask run`
+1. Ensure flask installed, preferably by activating the venv you already set up. You can also run
+```pip install -r requirements.txt```
+1. Navigate to the `\server\` folder and start the server with the command
+```flask run```
