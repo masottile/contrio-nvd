@@ -48,22 +48,6 @@ class Contract:
         if isInstace(state, State):
             self.state = state
 
-def update_contract_state(contract_id, state):
-    try:
-        # Find Contract using contract_id
-        response = table.update_item(Key={
-            'id': str(contract_id)
-        },
-        UpdateExpression="set contract_state=:s",
-        ExpressionAttributeValues={
-            ':s' : str(state)        
-            },
-            ReturnValues="UPDATED_NEW"
-        )
-        return response
-    except Exception as e:
-        raise e
-
 app = Flask(__name__)
 
 BASE_ROUTE = "/api/contracts"
@@ -104,10 +88,9 @@ def approve_contract(client_id, contract_id):
         response = table.update_item(Key={
             'id': str(contract_id)
         },
-        UpdateExpression="set contract_state=:contract_state, client_id=:client_id",
+        UpdateExpression="set contract_state=:contract_state",
         ExpressionAttributeValues={
-            ':contract_state' : str(state)  ,
-            ':client_id' : str(client_id)      
+            ':contract_state' : str(State.COMPLETED)    
             },
             ReturnValues="UPDATED_NEW"
         )
@@ -119,7 +102,16 @@ def approve_contract(client_id, contract_id):
 @app.route(BASE_ROUTE + "/submit/<freelancer_id>/<contract_id>", methods=["GET", "PUT"])
 def submit_deliverable(freelancer_id, contract_id):
     try:
-        return update_contract_state(contract_id, State.IN_REVIEW)
+        response = table.update_item(Key={
+            'id': str(contract_id)
+        },
+        UpdateExpression="set contract_state=:s",
+        ExpressionAttributeValues={
+            ':s' : str(State.IN_REVIEW)        
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+        return response
     except Exception as e:
         print(e)
         return "Error"
@@ -127,7 +119,17 @@ def submit_deliverable(freelancer_id, contract_id):
 @app.route(BASE_ROUTE + "/fund/<client_id>/<contract_id>",  methods=["GET", "PUT"])
 def fund_contract(client_id, contract_id):
     try:
-        return update_contract_state(contract_id, State.IN_PROGRESS)
+        response = table.update_item(Key={
+            'id': str(contract_id)
+        },
+        UpdateExpression="set contract_state=:s, client_id=:cid",
+        ExpressionAttributeValues={
+            ':s' : str(State.IN_PROGRESS),
+            ':cid': str(client_id)       
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+        return response
     except Exception as e:
         print(e)
         return "Error"
