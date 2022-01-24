@@ -18,3 +18,14 @@ You might need to run activate.bat or activate.ps1 instead depending on the term
 ```pip install -r requirements.txt```
 1. Navigate to the `\server\` folder and start the server with the command
 ```flask run```
+
+## **Set up AWS Dynamo Database**
+1. Create access keys for IAM user with Programmatic Access that has permissions for Dynamo
+1. Having ran the `pip install -r requirements.txt` you should have installed `awscli` package.
+1. Run `aws configure` in the command line.
+1. Enter your `AWS ACCESS KEY ID`
+1. Enter your `AWS SECRET ACCESS KEY`
+1. Enter region name `us-west-2`
+1. Enter default output format `json`
+
+You should be able to now run the `create_table.py` in the `./server/scripts` directory and create a Table for your contracts!
