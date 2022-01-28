@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 # from Contract import Contract
 # from State import State
 import uuid
@@ -49,6 +50,7 @@ class Contract:
             self.state = state
 
 app = Flask(__name__)
+CORS(app)
 
 BASE_ROUTE = "/api/contracts"
 table = dynamodb.Table("contracts")
