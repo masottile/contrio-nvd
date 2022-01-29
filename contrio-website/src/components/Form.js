@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react";
+import axios from 'axios';
 
 const Form = ({ type }) => {
     const [freelancerName, setFreelancerName] = useState("");
@@ -9,9 +10,14 @@ const Form = ({ type }) => {
     const handleInputSubmit = (event) => {
         event.preventDefault();
         alert('creating contract for ' + freelancerName + " and " + clientName + " of the amount of: " + paymentAmount);
+        axios.post(`api/contracts/create/${event.target[0].value}/${event.target[2].value}`).then((response) => {
+            if (response.status === 200) {
+                console.log(response.data);
+            }
+        })
     } 
 
-    if (type == 'input') {
+    if (type === 'input') {
         return (
             <div style={containerStyle}>
                 <h1 style={{ textAlign: 'center' }}>Input new Contract Details</h1>
