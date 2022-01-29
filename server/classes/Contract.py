@@ -1,3 +1,6 @@
+import uuid
+from classes.State import State
+
 class Contract:
     def __init__(self, fid, contract_val):
         self.id = uuid.uuid4()
@@ -28,5 +31,5 @@ class Contract:
         return self.state
     
     def set_state(self, state):
-        if isInstace(state, State):
+        if isinstance(state, State):
             self.state = state

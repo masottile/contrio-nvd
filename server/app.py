@@ -1,53 +1,12 @@
 from flask import Flask, request
 from flask_cors import CORS
-# from Contract import Contract
-# from State import State
+from classes.Contract import Contract
+from classes.State import State
 import uuid
 import boto3
 from enum import Enum
 
 dynamodb = boto3.resource('dynamodb')
-
-class State(Enum):
-    CREATED = 1
-    FUNDED = 2
-    IN_PROGRESS = 3
-    IN_REVIEW = 4
-    COMPLETED = 5
-    ARCHIVED = 6
-
-class Contract:
-    def __init__(self, fid, contract_val):
-        self.id = uuid.uuid4()
-        self.client_id = None
-        self.freelancer_id = fid
-        self.contract_val = contract_val
-        self.state = State.CREATED
-
-    def get_id(self):
-        return self.id
-    
-    def get_freelancer_id(self):
-        return self.freelancer_id
-    
-    def get_client_id(self):
-        return self.client_id
-
-    def set_client_id(self):
-        return self.client_id    
-    
-    def get_contract_val(self):
-        return self.contract_val
-
-    def set_contract_val(self, value):
-        self.contract_val = value
-    
-    def get_state(self):
-        return self.state
-    
-    def set_state(self, state):
-        if isInstace(state, State):
-            self.state = state
 
 app = Flask(__name__)
 CORS(app)
