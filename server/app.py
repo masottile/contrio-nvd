@@ -18,10 +18,13 @@ table = dynamodb.Table("contracts")
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route(BASE_ROUTE + "/retrieve/<freelancer_id>", methods=["GET"])
-def retrieve_active_contracts(freelancer_id):
+@app.route(BASE_ROUTE + "/retrieve/<contract_id>", methods=["GET"])
+def retrieve_active_contracts(contract_id):
     try:
-        return "<p>Hello, World!</p>"
+        response = table.query(
+        KeyConditionExpression=boto3.dynamodb.conditions.Key('id').eq(contract_id)
+        )
+        return response
     except Exception as e:
         print(e)
         return "Error"
@@ -37,6 +40,8 @@ def create_contract(freelancer_id, contract_val):
             'contract_val': contract.get_contract_val(),
             'contract_state': str(contract.get_state())
         })
+        # for dev purposes, can delete this line
+        print(contract.get_id()) 
         return response
     except Exception as e:
         print(e)

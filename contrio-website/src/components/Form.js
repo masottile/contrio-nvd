@@ -6,6 +6,7 @@ const Form = ({ type }) => {
     const [freelancerName, setFreelancerName] = useState("");
     const [clientName, setClientName] = useState("");
     const [paymentAmount, setPaymentAmount] = useState("");
+    const [contractID, checkContractID] = useState("");
 
     const handleInputSubmit = (event) => {
         event.preventDefault();
@@ -15,6 +16,17 @@ const Form = ({ type }) => {
                 console.log(response.data);
             }
         })
+        // would also be good to figure out how to display and returned data (e.g. get backend to return the id of the contract just created)
+    }
+    const handleOutputSubmit = (event) => {
+        event.preventDefault();
+        alert('checking values for Contrack' + contractID);
+        axios.get(`api/contracts/retrieve/${event.target[0].value}`).then((response) => {
+            if (response.status === 200) {
+                console.log(response.data);
+            }
+        })
+        // now just need to figure out how to display the response data 
     } 
 
     if (type === 'input') {
@@ -46,10 +58,10 @@ const Form = ({ type }) => {
                 <h1 style={{ textAlign: 'center' }}>View Existing Contract</h1>
                 <br></br>
 
-                <form>
+                <form onSubmit={handleOutputSubmit}>
                     <input type='submit' value='Submit' />
                     <br></br>
-                    <input type='text' style={outputStyle} name='' />
+                    <input type='text' style={outputStyle} name='check-Contract' placeholder='Enter Contract Number' onChange={e => checkContractID(e.target.value)} />
                 </form>
 
             </div>
