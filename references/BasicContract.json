@@ -1,0 +1,9 @@
+{
+    "uuid": 1234,
+    "contract" : { 
+        "section" : { 
+            "component" : {"field": "value"}
+        }
+    },
+    "state" : {}
+}
