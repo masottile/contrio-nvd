@@ -1,10 +1,8 @@
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
 from classes.Contract import Contract
 from classes.State import State
-import uuid
 import boto3
-from enum import Enum
 
 dynamodb = boto3.resource('dynamodb')
 
