@@ -1,12 +1,11 @@
-.cts-box {
-    margin-right: 5px;
+.ces-box {
+    margin-left: 5px;
 }
 
-.cts-container {
+.ces-container {
     border-radius: 10px;
     border-style: solid;
     border-color: black;
     height: 80vh;
     padding: 25px;
-    /* background-color: black; */
 }

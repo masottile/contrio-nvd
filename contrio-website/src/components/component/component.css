@@ -1,9 +1,11 @@
 @import "../cssConstants.css";
 
-.c-card {
-    background-color: var(--ac_green);
-    border-style: solid;
-    height: 5vh;
+.c-item {
+    height: fit-content;
+    width: 80%;
+    background: #f2f2f2;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .c-cardcontainer {
@@ -16,4 +18,8 @@
     height: 100%;
     width: 100%;
     max-height: 100%;
+}
+
+.c-title {
+    text-align: center;
 }
