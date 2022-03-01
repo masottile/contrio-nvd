@@ -1,12 +1,13 @@
 .cts-box {
+    min-height: fit-content;
     margin-right: 5px;
 }
 
 .cts-container {
+    min-height: 80vh;
     border-radius: 10px;
     border-style: solid;
     border-color: black;
-    height: 80vh;
     padding: 25px;
     /* background-color: black; */
 }

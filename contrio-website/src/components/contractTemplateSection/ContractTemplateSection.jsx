@@ -6,18 +6,18 @@ import Section from '../section/Section';
 import './contractTemplateSection.css';
 
 const ContractTemplate = () => {
-  return <Box className='cts-box' sx={{ flexGrow: 1 }}>
-    <Grid container className='cts-container' spacing={2}>
+  return (
+    <Grid container className='cts-container'>
       <Section
         key={"header"}
         title={"HEADER"}
       />
-      {/* <Section
+      <Section
         key={"agreement"}
         title={"AGREEMENT"}
-      /> */}
+      />
     </Grid>
-  </Box>;
+    )
 };
 
 export default ContractTemplate;

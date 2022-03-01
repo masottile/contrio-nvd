@@ -8,34 +8,12 @@ import ContractComponentSection from './components/contractComponentSection/Cont
 import AppContext from './components/AppContext';
 import { sections } from './components/section/sections';
 import React from 'react';
+import ContractComponent from './components/contractComponent/ContractComponent'
 
 function App() {
-  const [section, setSection] = useState('DEFAULT');
-
-  const appContext = {
-    currSection: section,
-    setSection
-  }
-
   return (
     <div className="App">
-      <AppContext.Provider value={appContext}>
-        <>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} sx={{ padding: 4 }}>
-              <Grid item xs={12}>
-                <Header />
-              </Grid>
-              <Grid item xs={8}>
-                <ContractTemplateSection />
-              </Grid>
-              <Grid item xs={4}>
-                <ContractComponentSection />
-              </Grid>
-            </Grid>
-          </Box>
-        </>
-      </AppContext.Provider>
+      <ContractComponent/>
     </div>
   );
 }

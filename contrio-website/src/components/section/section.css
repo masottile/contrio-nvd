@@ -5,6 +5,7 @@
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
+    justify-content: center;
 }
 
 .s-item:hover {
