@@ -24,6 +24,7 @@ export const ElementRender = ({ name, type, enf }) => {
 
     const handleOnChange = ( event ) => {
         if(context.currentContract.hasOwnProperty({name})) {
+            console.log(".")
             context.setContract(prevState => {
                 let currentContract = { ...prevState.currentContract };
                 currentContract[name] = event.target.value;
@@ -39,7 +40,7 @@ export const ElementRender = ({ name, type, enf }) => {
 
     const RenderElement = () => {
         if (type === Type.tbs) {
-            return <input className='er-all er-tbs' placeholder='Enter Here' onChange={handleOnChange}></input>
+            return <input className='er-all er-tbs' placeholder='Enter Here' defaultValue={context.currentContract[name]} onChange={handleOnChange}></input>
         }
         else if (type === Type.tbl) {
             return <input className='er-all er-tbl' placeholder='Enter Here'></input>
