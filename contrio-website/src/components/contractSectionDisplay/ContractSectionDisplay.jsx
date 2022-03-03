@@ -1,11 +1,9 @@
 // drop section
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { useState } from 'react';
 import Section from '../section/Section';
-import './contractTemplateSection.css';
+import './contractSectionDisplay.css';
 
-const ContractTemplate = () => {
+const ContractDisplay = () => {
   return (
     <Grid container className='cts-container'>
       <Section
@@ -20,4 +18,4 @@ const ContractTemplate = () => {
     )
 };
 
-export default ContractTemplate;
+export default ContractDisplay;

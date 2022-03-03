@@ -16,3 +16,16 @@
 .s-item::selection {
     border-style: solid;
 }
+
+.s-subitem {
+    background: #f2f2f2;
+    overflow: hidden;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.s-title {
+    text-align: center;
+}

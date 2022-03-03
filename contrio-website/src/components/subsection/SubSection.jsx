@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import Grid from '@mui/material/Grid';
-import './component.css'
+import './subsection.css'
 import { defaultElements, customElements } from '../element/elements';
 import { Status } from '../Status';
 import Element from '../element/Element';
 
-const Component = ({ sectionName, currContext }) => {
-    const componentArray = [];
+const SubSection = ({ sectionName, currContext }) => {
+    const subsectionArray = [];
     
     const Defaults = Object.entries(defaultElements).map(item => {
         if (item[0] === currContext.currSection) {
@@ -15,7 +15,7 @@ const Component = ({ sectionName, currContext }) => {
                 const element = e[1];
                 if (element.status === Status.active) {
                     
-                    componentArray.push(
+                    subsectionArray.push(
                         <Element className='c-element' key={element.id} name={name} desc={element.desc} type={element.type} enf={element.enf} />)
                 }
             });
@@ -24,8 +24,8 @@ const Component = ({ sectionName, currContext }) => {
 
     return <Grid item className='c-item' xs={12}>
         <h2 className='c-title'>{sectionName}</h2>
-        {componentArray}
+        {subsectionArray}
     </Grid>
 };
 
-export default Component;
+export default SubSection;

@@ -5,36 +5,10 @@ import './element.css'
 
 export const ElementRender = ({ name, type, enf }) => {
     const context = useContext(ContractContext);
-    console.log(name);
-
-    // const handleOnChange = (prevState, event) => ({
-    //     prevState: {
-    //         ...prevState.context,
-    //         title: event.target.value
-    //     }
-    // })
-
-    // console.log(context);
-
-    // this.setState(prevState => {
-    //     let jasper = Object.assign({}, prevState.jasper);  // creating copy of state variable jasper
-    //     jasper.name = 'someothername';                     // update the name property, assign a new value                 
-    //     return { jasper };                                 // return new object jasper object
-    //   })
+    // console.log(name);
 
     const handleOnChange = ( event ) => {
-        if(context.currentContract.hasOwnProperty({name})) {
-            console.log(".")
-            context.setContract(prevState => {
-                let currentContract = { ...prevState.currentContract };
-                currentContract[name] = event.target.value;
-                return {currentContract};
-            })
-        }
-        else {
-            context.currentContract[name] = event.target.value;
-        }
-
+        context.currentContract[name] = event.target.value;
         console.log(context); 
     }
 
