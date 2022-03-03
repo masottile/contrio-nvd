@@ -1,3 +1,4 @@
+import React from 'react';
 import Homepage from './pages/Homepage';
 import ContractsPage from './pages/ContractsPage';
 import { Amplify } from 'aws-amplify';
@@ -12,6 +13,13 @@ import {
 import NavigationBar from './components/NavigationBar'
 
 Amplify.configure(awsExports);
+
+// import { useState } from 'react';
+// import { styled } from '@mui/material/styles';
+// import Box from '@mui/material/Box';
+// import Grid from '@mui/material/Grid';
+
+// import ContractComponent from './components/contractComponent/ContractComponent'
 
 function App() {
   return (

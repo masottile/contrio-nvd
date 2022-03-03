@@ -1,11 +1,11 @@
 import React from "react";
-import Form from '../components/Form'
+// import Form from '../components/Form'
+import ContractComponent from '../components/contractComponent/ContractComponent'
   
 function ContractsPage(){
     return (
         <>
-            <Form type={'input'}/>
-            <Form type={'output'}/>
+            <ContractComponent/>
         </>
     );
 }
