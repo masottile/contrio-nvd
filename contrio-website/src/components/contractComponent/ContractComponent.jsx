@@ -28,21 +28,13 @@ const ContractComponent = () => {
     const handleContractSubmit = (event) => {
         event.preventDefault();
         alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
-        axios.post(`http://127.0.0.1:5000/api/contracts/create`, {'f_name': contract.employee_name, 'c_name': contract.employer_name, 'title': contract.title}).then((response) => {
+        axios.post(`api/contracts/create`, {'f_name': contract.employee_name, 'c_name': contract.employer_name, 'title': contract.title}).then((response) => {
             console.log("submitted post request and got a response");
             console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);
             }
         })
-        // axios.post(`api/contracts/create`, contract).then((response) => {
-        //     console.log("submitted post request and got a response");
-        //     console.log(response.status);
-        //     if (response.status === 200) {
-        //         console.log(response.data);
-        //     }
-        // })
-        // would also be good to figure out how to display and returned data (e.g. get backend to return the id of the contract just created)
     }
 
 
@@ -50,9 +42,6 @@ const ContractComponent = () => {
         <ContractContext.Provider value={contractContext}>
             <AppContext.Provider value={appContext}>
                 <Grid container spacing={2} sx={{ padding: 4 }}>
-                    <Grid className='cc-header' item xs={12}>
-                        <Header />
-                    </Grid>
                     <Grid className='cc-template' item xs={8}>
                         <ContractDisplay />
                     </Grid>
