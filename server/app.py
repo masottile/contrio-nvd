@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 BASE_ROUTE = "/api/contracts"
-table = dynamodb.Table("contracts")
+table = dynamodb.Table("test_contracts")
 
 @app.route("/")
 def hello_world():
@@ -38,7 +38,6 @@ def retrieve_active_contracts(contract_id):
 
 @app.route(BASE_ROUTE + "/create", methods=["POST"])
 def create_contract():
-    print(request.is_json)
     if request.is_json:
         print(request.json)
     try:

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Homepage from './pages/Homepage';
 import ContractsPage from './pages/ContractsPage';
 import { Amplify } from 'aws-amplify';
@@ -15,6 +15,8 @@ import NavigationBar from './components/NavigationBar'
 Amplify.configure(awsExports);
 
 function App() {
+  // const [user, setUser] = useState(null);
+
   return (
     <div className="App">
       <Router>
