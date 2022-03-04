@@ -29,6 +29,7 @@ You might need to run activate.bat or activate.ps1 instead depending on the term
 1. Enter default output format `json`
 
 You should be able to now run the `create_table.py` in the `./server/scripts` directory and create a Table for your contracts!
+
 ## **Set up Amplify Cognito**
 1. Run `npm install -g @aws-amplify/cli`
 2. Run `amplify configure`
