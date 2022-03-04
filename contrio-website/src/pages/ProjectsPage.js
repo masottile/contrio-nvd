@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Paper } from "@mui/material";
 import Stage from "../components/kanban/Stage";
 import { DragDropContext } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 const testData = {
     'project-1': {
         'phases': {
-            'backlog-1' : {
+            'backlog-1': {
                 'id': 'backlog-1',
                 'name': 'Backlog',
                 'tasks': {
                     'backlog-task-1': {
-                    'title': 'Backlog Title Task Name',
-                    'description': 'Short Description explaining work that needs to be done',
-                    'category': 'Feature'
-                },},
+                        'title': 'Backlog Title Task Name',
+                        'description': 'Short Description explaining work that needs to be done',
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
+                    },
+                },
                 'taskIds': ['backlog-task-1']
             },
             'design-1': {
@@ -24,17 +29,26 @@ const testData = {
                     'design-task-1': {
                         'title': 'Design Title Task Name 1',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                     'design-task-2': {
                         'title': 'Design Title Task Name 2',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                     'design-task-3': {
                         'title': 'Design Title Task Name 3',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     }
                 },
                 'taskIds': ['design-task-1', 'design-task-2', 'design-task-3']
@@ -46,17 +60,26 @@ const testData = {
                     'build-task-1': {
                         'title': ' Build Title Task Name 1',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                     'build-task-2': {
                         'title': 'Build Title Task Name 2',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                     'build-task-3': {
                         'title': 'Build Title Task Name 3',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                 },
                 'taskIds': ['build-task-1', 'build-task-2', 'build-task-3']
@@ -68,29 +91,41 @@ const testData = {
                     'test-task-1': {
                         'title': 'Title Task Name',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Blocked",
+                            color: "#e4e669",
+                        }
                     },
                     'test-task-2': {
                         'title': 'Title Task Name',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Blocked",
+                            color: "#e4e669",
+                        }
                     },
                     'test-task-3': {
                         'title': 'Title Task Name',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Blocked",
+                            color: "#e4e669",
+                        }
                     },
                 },
                 'taskIds': ['test-task-1', 'test-task-2', 'test-task-3']
             },
-            'finished-1' : {
+            'finished-1': {
                 'id': 'finished-1',
                 'name': 'Finished',
                 'tasks': {
                     'finished-task-1': {
                         'title': 'Finished Title Task Name',
                         'description': 'Short Description explaining work that needs to be done',
-                        'category': 'Feature'
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
                     },
                 },
                 'taskIds': ['finished-task-1']
@@ -102,11 +137,60 @@ const testData = {
 function ProjectsPage() {
     const projectId = 'project-1';
     const phases = testData[projectId]['phases'];
-    const [columns, setColumns] = useState(phases);
+    const [stages, setStages] = useState(phases);
+
+    const handleAddCard = (stageId, card) => {
+        const uuid = uuidv4();
+        const newStage = {
+            ...stages[stageId]
+        }
+
+        newStage['tasks'][uuid] = card;
+        newStage['taskIds'].push(uuid);
+
+        const newstages = {
+            ...stages,
+            [stageId]: newStage,
+        }
+
+        setStages(newstages);
+    }
+
+    const handleSaveCard = (stageId, cardId, card) => {
+        const newStage = {
+            ...stages[stageId]
+        }
+
+        newStage['tasks'][cardId] = card;
+
+        const newstages = {
+            ...stages,
+            [stageId]: newStage,
+        }
+
+        setStages(newstages);
+    }
+
+    const handleDeleteCard = (stageId, cardId) => {
+        const newStage = {
+            ...stages[stageId]
+        }
+        const newTaskIds = newStage['taskIds'].filter(taskId => taskId !== cardId);
+
+        delete newStage['tasks'][cardId];
+        newStage['taskIds'] = newTaskIds;
+
+        const newstages = {
+            ...stages,
+            [stageId]: newStage,
+        }
+
+        setStages(newstages);
+    }
 
     const onDragEnd = (result) => {
         const { destination, source, draggableId } = result;
-        debugger;
+
         if (!destination) {
             return;
         }
@@ -114,9 +198,9 @@ function ProjectsPage() {
             return;
         }
 
-        const task = columns[source.droppableId]['tasks'][draggableId];
-        const sourceColumn = columns[source.droppableId];
-        const destColumn = columns[destination.droppableId];
+        const task = stages[source.droppableId]['tasks'][draggableId];
+        const sourceColumn = stages[source.droppableId];
+        const destColumn = stages[destination.droppableId];
         const sourceTaskIds = sourceColumn.taskIds;
         const destTaskIds = destColumn.taskIds;
 
@@ -136,12 +220,12 @@ function ProjectsPage() {
             taskIds: destTaskIds,
         }
 
-        const newColumns = {
-            ...columns,
+        const newstages = {
+            ...stages,
             [newSourceColumn.id]: newSourceColumn,
             [newDestinationColumn.id]: newDestinationColumn,
         }
-        setColumns(newColumns);
+        setStages(newstages);
     }
     return (
         <Paper style={{
@@ -151,8 +235,8 @@ function ProjectsPage() {
         }}>
             <DragDropContext
                 onDragEnd={onDragEnd}>
-                {Object.values(phases).map((stage) => (
-                    <Stage id={stage.id} title={stage.name} tasks={stage.tasks} taskIds={stage.taskIds} />
+                {Object.values(stages).map((stage) => (
+                    <Stage id={stage.id} title={stage.name} tasks={stage.tasks} taskIds={stage.taskIds} handleAddCard={handleAddCard} handleSaveCard={handleSaveCard} handleDeleteCard={handleDeleteCard}/>
                 ))
                 }
             </DragDropContext>

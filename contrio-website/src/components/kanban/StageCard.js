@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Typography, CardContent, Divider, Chip, Box} from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
+import DetailedStageCard from "./DetailedStageCard"
 
+function StageCard({id, stageId, index, title, description, tag, handleSaveCard, handleDeleteCard}) {
+    const [open, setOpen] = useState(false);
 
-function StageCard({id, index, title, description, category}) {
+    const handleClose = () => {
+        setOpen(false);
+    }
+    const handleOpen = () => {
+        setOpen(true);
+    }
 
     return (
         <Draggable draggableId={id} index={index}>
@@ -11,12 +19,15 @@ function StageCard({id, index, title, description, category}) {
                 <Box 
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-                ref={provided.innerRef}>
+                ref={provided.innerRef}
+                >
+                    <DetailedStageCard id={id} stageId={stageId} title={title} description={description} tag={tag} open={open} handleClose={handleClose} handleSaveCard={handleSaveCard} handleDeleteCard={handleDeleteCard}/>
                     <Card style={{
                     textAlign: 'center',
                     alignContent: 'center',
-                    width: '95%',
+                    width: '16rem',
                     display: 'flex',
+                    flexDirection: 'column',
                     maxHeight: '100%',
                     overflowX: 'hidden',
                     overflowY: 'hidden',
@@ -24,17 +35,17 @@ function StageCard({id, index, title, description, category}) {
                     marginRight: '8px',
                     marginBottom: '0.5rem',
                     paddingRight: '5px',
-                    borderLeft: '5px solid red'}}
-                    >
+                    borderLeft: `5px solid ${tag.color}`}}
+                    onClick={handleOpen}>
                     <CardContent>
                         <Typography>
-                            {title}
+                            {title.length > 45 ? title.substring(0,45) + "..." : title}
                         </Typography>
                         <Divider style={{marginBottom: '0.5rem'}}/>
                         <Typography> 
-                            {description}
+                            {description.length > 55 ? description.substring(0, 55) + "...": description}
                         </Typography>
-                        <Chip size='small' label={category} style={{marginTop: '0.5rem',backgroundColor: 'red', color: '#FFF'}}/>
+                        <Chip size='small' label={tag.label} style={{marginTop: '0.5rem',backgroundColor: `${tag.color}`, color: '#FFF'}}/>
                     </CardContent>
                 </Card>
                 </Box>
