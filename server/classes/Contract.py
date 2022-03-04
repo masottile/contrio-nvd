@@ -2,12 +2,21 @@ import uuid
 from classes.State import State
 
 class Contract:
-    def __init__(self, fid, contract_val):
+    def __init__(self, contract_json):
         self.id = uuid.uuid4()
-        self.client_id = None
-        self.freelancer_id = fid
-        self.contract_val = contract_val
+        self.client_id = contract_json['c_name']
+        self.freelancer_id = contract_json['f_name']
+        self.contract_title = contract_json['title']
+        # self.contract_val = contract_json['pay_amount']
         self.state = State.CREATED
+
+    def get_json(self):
+        return {'id' : str(self.id),
+                'client_id': str(self.client_id),
+                'freelancer_id': str(self.freelancer_id),
+                # 'contract_val': str(self.contract_val),
+                'contract_title': str(self.contract_title),
+                'contract_state': str(self.state)}
 
     def get_id(self):
         return self.id

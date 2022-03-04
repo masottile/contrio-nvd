@@ -1,3 +1,26 @@
+.submit-button {
+    height: 300px;
+    width: 80%;
+    background: #c1e1ec;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.submit-button:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 20px 8px #d0d0d0;
+}
+
+.submit-name {
+    margin: 0;
+    text-align: left;
+    font-size: medium;
+}
+
 /* :root {
     width: 100%;
 } */

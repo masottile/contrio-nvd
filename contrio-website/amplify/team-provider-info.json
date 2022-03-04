@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-contriowebsite-dev-195707-authRole",
+      "UnauthRoleArn": "arn:aws:iam::481735647023:role/amplify-contriowebsite-dev-195707-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::481735647023:role/amplify-contriowebsite-dev-195707-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-contriowebsite-dev-195707-deployment",
+      "UnauthRoleName": "amplify-contriowebsite-dev-195707-unauthRole",
+      "StackName": "amplify-contriowebsite-dev-195707",
+      "StackId": "arn:aws:cloudformation:us-west-2:481735647023:stack/amplify-contriowebsite-dev-195707/06b71c90-87ca-11ec-9a58-0266575e789f",
+      "AmplifyAppId": "d6wrlrow0ko3k"
+    },
+    "categories": {
+      "auth": {
+        "contriowebsitebc520878": {}
+      }
+    }
+  }
+}

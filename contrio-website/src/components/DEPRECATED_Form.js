@@ -11,7 +11,10 @@ const Form = ({ type }) => {
     const handleInputSubmit = (event) => {
         event.preventDefault();
         alert('creating contract for ' + freelancerName + " and " + clientName + " of the amount of: " + paymentAmount);
-        axios.post(`api/contracts/create/${event.target[0].value}/${event.target[2].value}`).then((response) => {
+        console.log("submitting");
+        axios.post(`api/contracts/create`, {'f_name': freelancerName, 'c_name': clientName, 'pay_amount': paymentAmount}).then((response) => {
+            console.log("submitted post request and got a response");
+            console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);
             }
