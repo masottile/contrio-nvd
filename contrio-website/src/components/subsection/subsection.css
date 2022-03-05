@@ -1,0 +1,17 @@
+@import "../cssConstants.css";
+
+.c-item {
+    min-height: 200px;
+    width: 80%;
+    background: #f2f2f2;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.c-title {
+    text-align: center;
+}
+/* 
+.c-element {
+    margin: 10px;
+} */

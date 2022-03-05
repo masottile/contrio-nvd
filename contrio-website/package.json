@@ -2,6 +2,7 @@
   "name": "contrio-website",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:5000/",
   "dependencies": {
     "@aws-amplify/cli": "^7.6.15",
     "@aws-amplify/ui-react": "^2.2.2",
@@ -12,6 +13,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.25.0",
     "aws-amplify": "^4.3.14",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

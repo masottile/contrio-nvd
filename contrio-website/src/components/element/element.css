@@ -1,0 +1,52 @@
+.e-item {
+    background: #c1e1ec;
+    overflow: hidden;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.e-name {
+    margin: 0;
+    text-align: left;
+    font-size: medium;
+}
+
+.e-desc{
+    margin: 0;
+    text-align: left;
+    font-size: x-small;
+}
+
+.er-all {
+    margin-top: 3px;
+}
+
+.er-tbs {
+    width: 50%;
+    border: none;
+    border-bottom: 2px solid;
+    background-color: transparent;
+    transition: width 0.4s ease-in-out;
+}
+
+.er-tbs:focus {
+    width: 100%;
+}
+
+.er-tbl {
+    width: 100%;
+    height: 4vh;
+    border: none;
+    border-bottom: 2px solid;
+    background-color: transparent;
+    transition: width 0.4s ease-in-out;
+    transition: height 0.4s ease-in-out;
+    resize: none;
+}
+
+.er-tbl:focus {
+    width: 100%;
+    height: 10vh;
+}
