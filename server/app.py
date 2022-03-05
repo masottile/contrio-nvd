@@ -16,22 +16,21 @@ table = dynamodb.Table("test_contracts")
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route(BASE_ROUTE + "/retrieve/<contract_id>", methods=["GET"])
-def retrieve_active_contracts(contract_id):
+@app.route(BASE_ROUTE + "/retrieve/<user_id>", methods=["GET"])
+def retrieve_active_contracts(user_id):
     try:
-        response = table.query(
-        KeyConditionExpression=boto3.dynamodb.conditions.Key('id').eq(contract_id)
+        db_response = table.query(
+        KeyConditionExpression=boto3.dynamodb.conditions.Key('userid').eq(user_id)
         )
-        print(response)
-        return response
-        # response = table.get_item(
-        #     Key={
-        #         'username': 'janedoe',
-        #         'last_name': 'Doe'
-        #     }
-        # )
-        # item = response['Item']
-        # print(item)
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            response_data = db_response['Items']
+            http_response = make_response(jsonify({'items': response_data}), 200)
+        else:
+            http_response = make_response(jsonify({}), db_response['ResponseMetadata']['HTTPStatusCode'])
+
+        print(http_response)
+        return http_response
+
     except Exception as e:
         print(e)
         return "Error"

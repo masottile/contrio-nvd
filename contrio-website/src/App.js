@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Homepage from './pages/Homepage';
 import ContractsPage from './pages/ContractsPage';
+import ViewPage from './pages/ViewPage';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
@@ -23,6 +24,7 @@ function App() {
         <NavigationBar/>
         <Routes>
           <Route path='/contracts' element={<ContractsPage/>}/>
+          <Route path='/view' element={<ViewPage/>}/>
           <Route exact path='/' element={<Homepage/>}/>
         </Routes>
       </Router>

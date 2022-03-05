@@ -32,7 +32,7 @@ export default function NavigationBar() {
       if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
         const userData = JSON.parse(localStorage.getItem(key))
         setUser(userData)
-        console.log(userData)
+        // console.log(userData)
       }
     })
   }, [])
@@ -59,7 +59,7 @@ export default function NavigationBar() {
               <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/contracts'}>Contracts</Typography>
             </Button>
             <Button color="inherit">
-              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/calendar'}>Calendar</Typography>
+              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/view'}>View</Typography>
               </Button>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
