@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import axios from 'axios';
 
 import ViewContext from '../viewComponents/ViewContext';
+import ContractList from '../viewComponents/contractList/ContractList'
 
 
 const ViewPage = () => {
@@ -36,6 +37,7 @@ const ViewPage = () => {
                     console.log(contract);
                     contractObj[contract.id] = contract
                 })
+                console.log(contractObj)
                 setAllContracts(contractObj)
             }
         })
@@ -50,7 +52,7 @@ const ViewPage = () => {
         <ViewContext.Provider value={viewContext}>
             <Grid container spacing={2} sx={{ padding: 4 }}>
                 <Grid className='vp-list' item xs={4}>
-                    {'will list all contracts'}
+                    <ContractList allContracts={allContracts} currContext={viewContext}/>
                 </Grid>
                 <Grid className='vp-contract' item xs={8}>
                     {'will display details and options for each contract'}
