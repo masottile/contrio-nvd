@@ -1,0 +1,44 @@
+{
+    "uuid" : 1234,
+    "hash" : null,
+    "contract" : { 
+        "header" : { 
+            "title" : {"title": "title"},
+            "client" : {
+                "name" : "client name",
+                "userID" : 1234
+            },
+            "freelancer" : {
+                "name" : "freelancer name",
+                "userID" : 1234
+            },
+            "date": {
+                "effective" : "some date",
+                "expires" : "some date"
+            }
+        },
+        "phase" : {
+            "design": {
+                "value" : 50,
+                "payment" : true,
+                "review" : true
+            },
+            "build": {
+                "value" : 50,
+                "payment" : true,
+                "review" : true
+            }
+        },
+        "signature" : {
+            "client" : {
+                "signed" : false,
+                "date" : null
+            },
+            "feelancer" : {
+                "signed" : false,
+                "date" : null
+            }
+        }
+    },
+    "state" : {}
+}

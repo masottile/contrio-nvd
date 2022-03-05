@@ -1,3 +1,4 @@
+import React from 'react';
 import Homepage from './pages/Homepage';
 import ContractsPage from './pages/ContractsPage';
 import { Amplify } from 'aws-amplify';
