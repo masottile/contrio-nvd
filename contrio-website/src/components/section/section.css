@@ -12,7 +12,3 @@
     transform: scale(1.01);
     box-shadow: 0 0 20px 8px #d0d0d0;
 }
-
-.s-item::selection {
-    border-style: solid;
-}
