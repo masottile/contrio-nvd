@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import Header from './components/header/Header'
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import ContractTemplateSection from './components/contractTemplateSection/ContractTemplateSection'
-import ContractComponentSection from './components/contractComponentSection/ContractComponentSection'
-import AppContext from './components/AppContext';
-import { sections } from './components/section/sections';
 import React from 'react';
-import ContractComponent from './components/contractComponent/ContractComponent'
+import Homepage from './pages/Homepage';
+import ContractsPage from './pages/ContractsPage';
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import awsExports from './aws-exports';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import NavigationBar from './components/NavigationBar'
+
+Amplify.configure(awsExports);
 
 function App() {
   return (
     <div className="App">
-      <ContractComponent/>
+      <Router>
+        <NavigationBar/>
+        <Routes>
+          <Route path='/contracts' element={<ContractsPage/>}/>
+          <Route exact path='/' element={<Homepage/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);

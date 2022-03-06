@@ -1,0 +1,30 @@
+    # does not permit new attributes to be added, but does alow for modification of existing attributes
+    # def __setattr__(cls, attr, value):
+    #         if attr not in cls.attr:
+    #             raise AttributeError ("Cannot assign attributes to this class")
+    #         return type.__setattr__(cls, attr, value)
+
+    # does not permit attribute modification or addition EXCEPT in the constructor function
+    # requires: import inspect
+    # def __setattr__(self, *args):
+    #     if inspect.stack()[1][3] == '__init__':
+    #         object.__setattr__(self, *args)
+    #     else:
+    #         raise TypeError('Cannot modify immutable instance')
+
+    # to prevent attribute deletion, overwrite the __delattr__ method
+
+
+    # want the object to be mutable while it is being drafted, but to be immutable once it is signed by both parties
+    # in terms of avaiable functions, some functions will be included by default and some will have to be enabled by the contract creators
+
+    # contract creation class that creates a contract object based on the contents of a json
+    # draft contracts can be stored as json files or objects
+    # once singed the contract will be created as an immutable class
+    # creation class will set the functions
+
+    # the contract class template will have the default functions and boilerplate functions that just throw errors
+    # the creation class will have versions of functions (including the immutable stuff) and will set what the contract functions do
+    # https://mgarod.medium.com/dynamically-add-a-method-to-a-class-in-python-c49204b85bd6
+
+    # https://stackoverflow.com/questions/972/adding-a-method-to-an-existing-object-instance#2982

@@ -8,10 +8,10 @@ import { ElementRender } from './ElementRender';
 
 const Element = ({name, desc, type, enf}) => {
     return (
-    <div item className='e-item' xs={12}>
+    <div className='e-item' xs={12}>
         <div className='e-name' >{name}</div>
         <p className='e-desc'>{desc}</p>
-        <ElementRender type={type} enf={enf}/>
+        <ElementRender name={name} type={type} enf={enf}/>
     </div>
   )
 }
