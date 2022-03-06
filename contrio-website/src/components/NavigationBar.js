@@ -59,7 +59,7 @@ export default function NavigationBar() {
               <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/contracts'}>Contracts</Typography>
             </Button>
             <Button color="inherit">
-              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/calendar'}>Calendar</Typography>
+              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/projects'}>Projects</Typography>
               </Button>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
