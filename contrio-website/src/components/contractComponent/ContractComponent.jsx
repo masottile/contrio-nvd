@@ -1,13 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
-import Box from '@mui/material/Box';
+import React,{ useState } from 'react';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
-
-import Header from '../header/Header';
 import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
 import ComponentDisplay from '../contractComponentDisplay/ContractComponentDisplay'
-
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
 import { Dialog } from '@mui/material';
@@ -15,14 +10,6 @@ import { Dialog } from '@mui/material';
 const ContractComponent = ({open, handleClose}) => {
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
-
-    const styles = {
-        dialogPaper: {
-            minHeight: '80vh',
-            maxHeight: '80vh',
-            minWidth: '1000px',
-        },
-    };
 
     const contractContext = {
         currentContract: contract,

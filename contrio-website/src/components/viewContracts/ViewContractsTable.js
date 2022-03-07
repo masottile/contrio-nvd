@@ -10,7 +10,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import PreviewIcon from '@mui/icons-material/Preview';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Chip, Typography, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
+import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
 import { CONTRACT_STATES } from "./util";
 
 const testData = () => {
@@ -28,7 +28,7 @@ const testData = () => {
     return retArr;
 }
 
-function ViewContractsTable({ }) {
+function ViewContractsTable() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
