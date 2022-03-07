@@ -10,10 +10,19 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
+import { Dialog } from '@mui/material';
 
-const ContractComponent = () => {
+const ContractComponent = ({open, handleClose}) => {
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
+
+    const styles = {
+        dialogPaper: {
+            minHeight: '80vh',
+            maxHeight: '80vh',
+            minWidth: '1000px',
+        },
+    };
 
     const contractContext = {
         currentContract: contract,
@@ -39,7 +48,8 @@ const ContractComponent = () => {
 
 
     return (
-        <ContractContext.Provider value={contractContext}>
+        <Dialog fullWidth maxWidth='xl' open={open} onClose={handleClose}>
+            <ContractContext.Provider value={contractContext}>
             <AppContext.Provider value={appContext}>
                 <Grid container spacing={2} sx={{ padding: 4 }}>
                     <Grid className='cc-template' item xs={8}>
@@ -56,6 +66,7 @@ const ContractComponent = () => {
                 </Grid>
             </AppContext.Provider>
         </ContractContext.Provider>
+        </Dialog>
 
     )
 }
