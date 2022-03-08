@@ -1,21 +1,21 @@
-import React from 'react';
-import { useState } from 'react';
-import Box from '@mui/material/Box';
+import React,{ useState } from 'react';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
-
-import Header from '../header/Header';
 import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
 import ComponentDisplay from '../contractComponentDisplay/ContractComponentDisplay'
-
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
+import { Dialog } from '@mui/material';
 
+<<<<<<< HEAD
 /*
  * Main 'contract-creation' component that creates the contract and component displays 
  */
 
 const ContractComponent = () => {
+=======
+const ContractComponent = ({open, handleClose}) => {
+>>>>>>> add contract view frontend (#13)
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
 
@@ -43,7 +43,8 @@ const ContractComponent = () => {
 
 
     return (
-        <ContractContext.Provider value={contractContext}>
+        <Dialog fullWidth maxWidth='xl' open={open} onClose={handleClose}>
+            <ContractContext.Provider value={contractContext}>
             <AppContext.Provider value={appContext}>
                 <Grid container spacing={2} sx={{ padding: 4 }}>
                     <Grid className='cc-template' item xs={8}>
@@ -60,6 +61,7 @@ const ContractComponent = () => {
                 </Grid>
             </AppContext.Provider>
         </ContractContext.Provider>
+        </Dialog>
 
     )
 }
