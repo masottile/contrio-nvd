@@ -1,0 +1,33 @@
+.h {
+    padding: 20px;
+    height: 92vh;
+    background-color: #EEEEEE;
+}
+
+.h-progress {
+    /* height: fit-content; */
+}
+
+.h-basic-info {
+    height: 100%;
+}
+
+.h-progress-circular-all {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.h-select-project {
+    height: 50px;
+}
+
+.h-row0 {
+    margin-top: 30px;
+    max-height: 50px;
+}
+
+.h-row1 {
+    /* min-height: 200px; */
+    height: 200px;
+}

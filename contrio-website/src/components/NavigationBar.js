@@ -32,14 +32,14 @@ export default function NavigationBar() {
       if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
         const userData = JSON.parse(localStorage.getItem(key))
         setUser(userData)
-        console.log(userData)
+        // console.log(userData)
       }
     })
   }, [])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             size="large"
