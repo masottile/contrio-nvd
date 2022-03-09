@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { Dialog } from '@mui/material';
 import axios from 'axios';
 
 import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
@@ -10,7 +10,7 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
 
-const ContractComponent = () => {
+const ContractComponent = ({open, handleClose}) => {
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
     const [user, setUser] = useState(null);
@@ -41,6 +41,7 @@ const ContractComponent = () => {
         event.preventDefault();
         alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
         // console.log(user.Username)
+        // need to figure out the contract json structure here. Can we just copy contract?
         const contractData = {'title': contract.title, 'freelancer': {'name' : contract.employee_name, 'id': user.Username}, 'c_name': contract.employer_name};
         // console.log(contractData)
         axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
@@ -53,7 +54,8 @@ const ContractComponent = () => {
 
 
     return (
-        <ContractContext.Provider value={contractContext}>
+        <Dialog fullWidth maxWidth='xl' open={open} onClose={handleClose}>
+            <ContractContext.Provider value={contractContext}>
             <AppContext.Provider value={appContext}>
                 <Grid container spacing={2} sx={{ padding: 4 }}>
                     <Grid className='cc-template' item xs={8}>
@@ -70,6 +72,7 @@ const ContractComponent = () => {
                 </Grid>
             </AppContext.Provider>
         </ContractContext.Provider>
+        </Dialog>
 
     )
 }

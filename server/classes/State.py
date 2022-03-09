@@ -2,6 +2,8 @@ from enum import Enum
 
 class State(Enum):
     CREATED = 1
-    SIGNED = 2
+    FUNDED = 2
     IN_PROGRESS = 3
-    COMPLETED = 4
+    IN_REVIEW = 4
+    COMPLETED = 5
+    ARCHIVED = 6

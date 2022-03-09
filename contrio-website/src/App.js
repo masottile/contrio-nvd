@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import Homepage from './pages/Homepage';
+import React from 'react';
+import Homepage from './pages/Homepage/Homepage';
 import ContractsPage from './pages/ContractsPage';
-import ViewPage from './pages/ViewPage';
+import ProjectsPage from './pages/ProjectsPage';
 import { Amplify } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
@@ -12,6 +12,7 @@ import {
   Route,
 } from "react-router-dom";
 import NavigationBar from './components/NavigationBar'
+import { Grid } from '@mui/material';
 
 Amplify.configure(awsExports);
 
@@ -20,14 +21,14 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <NavigationBar/>
-        <Routes>
-          <Route path='/contracts' element={<ContractsPage/>}/>
-          <Route path='/view' element={<ViewPage/>}/>
-          <Route exact path='/' element={<Homepage/>}/>
-        </Routes>
-      </Router>
+        <Router>
+          <NavigationBar />
+          <Routes>
+            <Route path='/contracts' element={<ContractsPage />} />
+            <Route path='/projects' element={<ProjectsPage />} />
+            <Route exact path='/' element={<Homepage />} />
+          </Routes>
+        </Router>
     </div>
   );
 }

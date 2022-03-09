@@ -39,7 +39,7 @@ export default function NavigationBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             size="large"
@@ -55,11 +55,11 @@ export default function NavigationBar() {
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button color="inherit">
-              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/contracts'}>Contracts</Typography>
+            <Button color="inherit" component={Link} to={'/contracts'}>
+              <Typography style={{textDecoration: 'none', color: 'white'}}>Contracts</Typography>
             </Button>
-            <Button color="inherit">
-              <Typography style={{textDecoration: 'none', color: 'white'}} component={Link} to={'/view'}>View</Typography>
+            <Button color="inherit" component={Link} to={'/projects'}>
+              <Typography style={{textDecoration: 'none', color: 'white'}}>Projects</Typography>
               </Button>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">

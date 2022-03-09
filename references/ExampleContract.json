@@ -1,9 +1,10 @@
 {
-    "uuid" : 1234,
+    "id" : 1234,
+    "userid" : 2345,
     "hash" : null,
     "contract" : { 
         "header" : { 
-            "title" : {"title": "title"},
+            "title" : "title",
             "client" : {
                 "name" : "client name",
                 "userID" : 1234
@@ -40,5 +41,5 @@
             }
         }
     },
-    "state" : {}
+    "state" : "CREATED"
 }
