@@ -9,6 +9,7 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
+import ViewContext from '../ViewContext';
 
 const ContractComponent = ({open, handleClose}) => {
     const [section, setSection] = useState('DEFAULT');
@@ -16,6 +17,7 @@ const ContractComponent = ({open, handleClose}) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        // set current user id
         Object.keys(localStorage).forEach((key) => {
           const keySplit = key.split('.');
     
@@ -25,6 +27,11 @@ const ContractComponent = ({open, handleClose}) => {
             console.log(userData)
           }
         })
+
+        //TODO
+        // check if this is a request to edit a contract rather than create one from scratch.
+        // the context ViewContext may or may not contain a contract id (and it will contain a list of all contracts associated with this user)
+        // we simply need to check for this contract id and if it is not an empty string, set the ContractContext to hold all values from this contract
     }, [])
 
     const contractContext = {
@@ -42,9 +49,10 @@ const ContractComponent = ({open, handleClose}) => {
         alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
         // console.log(user.Username)
         // need to figure out the contract json structure here. Can we just copy contract?
-        const contractData = {'title': contract.title, 'freelancer': {'name' : contract.employee_name, 'id': user.Username}, 'c_name': contract.employer_name};
+        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name};
         // console.log(contractData)
-        axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
+        // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
+        axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
             console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);

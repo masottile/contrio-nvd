@@ -1,5 +1,5 @@
 import uuid
-from classes.State import State
+from classes import State
 
 class Contract:
     def __init__(self, contract_json):
@@ -12,7 +12,7 @@ class Contract:
         return {'id' : str(self.id),
                 'userid': str(self.userid),
                 'contract' : self.contract,
-                'state': str(self.state)}
+                'state': self.state}
 
     def get_id(self):
         return self.id
@@ -23,3 +23,17 @@ class Contract:
     def set_state(self, state):
         if isinstance(state, State):
             self.state = state
+
+def create_contract(user_id, contract_json):
+    return {'id' : str(uuid.uuid4()),
+            'userid': str(user_id),
+            'signed' : False,
+            'contract' : contract_json,
+            'state': State.CREATED}
+
+def edit_contract(user_id, contract_id, contract_json):
+    return {'id' : str(contract_id),
+            'userid': str(user_id),
+            'signed' : False,
+            'contract' : contract_json,
+            'state': State.CREATED}

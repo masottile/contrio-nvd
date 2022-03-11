@@ -44,15 +44,15 @@ function ViewContractsTable() {
     // const contracts = testData();
     const contracts = viewContext.listContracts;
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        console.log(event);
-        console.log(event.target)
-        // console.log(rowid)
-    };
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //     console.log(event);
+    //     console.log(event.target)
+    //     // console.log(rowid)
+    // };
     const handleClose = () => {
         setAnchorEl(null);
-        // setContractID("");
+        viewContext.setContractID("");
     };
     
 
