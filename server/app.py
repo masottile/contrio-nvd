@@ -65,14 +65,15 @@ def edit_contract(user_id, contract_id):
         edit this DB contract to reflect the new json representation
         BUT only edit if the contract has not yet been signed
     '''
+    # print(request)
     if request.is_json:
         print(request.json)
     try:
         check_response = table.get_item(
             Key={'userid': str(user_id), 'id': str(contract_id)}
         )
-        print(check_response)
-        signed = check_response['signed']
+        # print(check_response)
+        signed = check_response['Item']['signed']
 
         if signed:
             return make_response("Could not edit signed contract", 405)
@@ -81,7 +82,11 @@ def edit_contract(user_id, contract_id):
             # DB response is a dict object and we can create our api response based on it
             db_response = table.update_item(
                 Key={'userid': str(user_id), 'id': str(contract_id)},
-                AttributeUpdates={'contract': request.json}
+                UpdateExpression="set contract=:contract",
+                ExpressionAttributeValues={
+                    ':contract' : request.json   
+                    },
+                    ReturnValues="UPDATED_NEW"
             )
             if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
                 http_response = make_response(jsonify(request.json), 200)
@@ -93,24 +98,51 @@ def edit_contract(user_id, contract_id):
         print(e)
         return make_response("Encountered Error", 500)
 
-
-@app.route(BASE_ROUTE + "/approve/<client_id>/<contract_id>", methods=["GET","PUT"])
-def approve_contract(client_id, contract_id):
+@app.route(BASE_ROUTE + "/delete/<user_id>/<contract_id>", methods=["DELETE"])
+def delete_contract(user_id, contract_id):
+    ''' given a user_id and contract_id, delete this contract from the database
+    '''
     try:
-        # Find Contract using contract_id
-        response = table.update_item(Key={
-            'id': str(contract_id)
-        },
-        UpdateExpression="set contract_state=:contract_state",
-        ExpressionAttributeValues={
-            ':contract_state' : str(State.COMPLETED)    
-            },
-            ReturnValues="UPDATED_NEW"
+        db_response = table.delete_item(
+            Key={'userid': str(user_id), 'id': str(contract_id)}
         )
-        return response
+
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response("Contract Deleted", 200)
+        else:
+            http_response = make_response("Database Error Encountered", db_response['ResponseMetadata']['HTTPStatusCode'])
+
+        return http_response
     except Exception as e:
         print(e)
-        return "Error"
+        return make_response("Encountered Error", 500)
+
+
+@app.route(BASE_ROUTE + "/sign/<user_id>/<contract_id>", methods=["PUT"])
+def sign_contract(user_id, contract_id):
+    ''' "sign" the given contract. Contract will be signed by the user 
+        and assumed signed by the second party for demo purposes
+    '''
+    try:
+        # Find Contract using contract_id
+        db_response = table.update_item(
+            Key={'userid': str(user_id), 'id': str(contract_id)},
+            UpdateExpression="set signed=:signed",
+            ExpressionAttributeValues={
+                ':signed' : True   
+                },
+                ReturnValues="UPDATED_NEW"
+        )
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response("Contract Signed", 200)
+        else:
+            http_response = make_response("Database Error Encountered", db_response['ResponseMetadata']['HTTPStatusCode'])
+
+        return http_response
+    except Exception as e:
+        print(e)
+        return make_response("Encountered Error", 500)
+
 
 @app.route(BASE_ROUTE + "/submit/<freelancer_id>/<contract_id>", methods=["GET", "PUT"])
 def submit_deliverable(freelancer_id, contract_id):
