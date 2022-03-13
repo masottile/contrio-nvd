@@ -110,7 +110,7 @@ function ViewContractsTable() {
                         <TableRow>
                             <TableCell align="center">Title</TableCell>
                             <TableCell align="center">Client</TableCell>
-                            <TableCell align="center">Agreement Date</TableCell>
+                            <TableCell align="center">Contract Signed</TableCell>
                             <TableCell align="center">State</TableCell>
                             <TableCell align="center" />
                         </TableRow>
@@ -127,7 +127,7 @@ function ViewContractsTable() {
                                     <TableCell align="center">{row.contract.date}</TableCell>
                                     <TableCell align="center">
                                         {/* <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} /> */}
-                                        <Chip size='small' label={CONTRACT_STATES[0].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[0].color}`, color: '#FFF' }} />
+                                        <Chip size='small' label={CONTRACT_STATES[row.state].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.state].color}`, color: '#FFF' }} />
                                     </TableCell>
 
                                     <TableCell align="center">

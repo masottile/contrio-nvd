@@ -12,11 +12,11 @@ const testData = {
                 'name': 'Backlog',
                 'tasks': {
                     'backlog-task-1': {
-                        'title': 'Backlog Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Stream19 Scope Project',
+                        'description': 'Discuss project scope proposal and deliverables with John',
                         'tag': {
-                            label: "Feature",
-                            color: "#7057ff",
+                            label: "Scope",
+                            color: "#ADD8E6",
                         }
                     },
                 },
@@ -27,24 +27,24 @@ const testData = {
                 'name': 'Design',
                 'tasks': {
                     'design-task-1': {
-                        'title': 'Design Title Task Name 1',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Maple Gifts System Diagram',
+                        'description': 'Plan out system diagram and new services for the project',
                         'tag': {
                             label: "Feature",
-                            color: "#7057ff",
+                            color: "#0075ca",
                         }
                     },
                     'design-task-2': {
-                        'title': 'Design Title Task Name 2',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Database Table Schema',
+                        'description': 'Decide on Table Schema for optimal customer data storage',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
                     },
                     'design-task-3': {
-                        'title': 'Design Title Task Name 3',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Entry Portal Mock-Up',
+                        'description': 'Sketch mock-up for data entry portal with all fields and different images for the click-through flow',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
@@ -58,73 +58,73 @@ const testData = {
                 'name': 'Build',
                 'tasks': {
                     'build-task-1': {
-                        'title': ' Build Title Task Name 1',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Maple Gifts Email Forwarding Implementation',
+                        'description': 'Backend Forwarding to existing accounts',
                         'tag': {
                             label: "Feature",
-                            color: "#7057ff",
+                            color: "#0075ca",
                         }
                     },
                     'build-task-2': {
-                        'title': 'Build Title Task Name 2',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Database Migration',
+                        'description': 'Convert existing stored data into the new DB schema and add it to the DB',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
                     },
                     'build-task-3': {
-                        'title': 'Build Title Task Name 3',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Entry Portal Build',
+                        'description': 'Implement Frontend for the new Data Entry Portal',
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
+                    },
+                    'build-task-4': {
+                        'title': 'B3nd3r Frontend-Backend Connection through APIs',
+                        'description': 'Set up the APIs to integrate the Entry Portal frontend with the Database Backend',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
                     },
                 },
-                'taskIds': ['build-task-1', 'build-task-2', 'build-task-3']
+                'taskIds': ['build-task-1', 'build-task-2', 'build-task-3', 'build-task-4']
             },
             'test-1': {
                 'id': 'test-1',
                 'name': 'Test',
                 'tasks': {
                     'test-task-1': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Maple Gifts Stress and Security test new email connection',
+                        'description': 'Test with malformed input and identify attack surface. Make any necessary changes to fix bugs found.',
                         'tag': {
                             label: "Blocked",
                             color: "#e4e669",
                         }
                     },
                     'test-task-2': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
-                        'tag': {
-                            label: "Blocked",
-                            color: "#e4e669",
-                        }
-                    },
-                    'test-task-3': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Collection Stress and Security Test',
+                        'description': 'Test with malformed input and identify attack surface. Make any necessary changes to fix bugs found.',
                         'tag': {
                             label: "Blocked",
                             color: "#e4e669",
                         }
                     },
                 },
-                'taskIds': ['test-task-1', 'test-task-2', 'test-task-3']
+                'taskIds': ['test-task-1', 'test-task-2']
             },
             'finished-1': {
                 'id': 'finished-1',
                 'name': 'Finished',
                 'tasks': {
                     'finished-task-1': {
-                        'title': 'Finished Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Collection System Diagram',
+                        'description': 'Layout all necessary components and how they will be connected for the new Data Collection and Storage System',
                         'tag': {
                             label: "Feature",
-                            color: "#7057ff",
+                            color: "#7057ff" ,
                         }
                     },
                 },

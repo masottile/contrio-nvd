@@ -14,13 +14,21 @@ const Section = ({ title }) => {
   // console.log("title" in contractContext.currentContract);
 
   const RenderHeader = ({}) => {
-    let sectionTitle = title
+    let sectionTitle = "Header Section"
     if ("title" in contractContext.currentContract) {
       sectionTitle = contractContext.currentContract.title
     }
+    let client = "___________"
+    if ("employer_name" in contractContext.currentContract) {
+      client = contractContext.currentContract.employer_name
+    }
+    let freelancer = "___________"
+    if ("employee_name" in contractContext.currentContract) {
+      freelancer = contractContext.currentContract.employee_name
+    }
     return <div className='s-subitem' xs={12}>
       <h2 className='s-title'>{sectionTitle}</h2>
-      <p>Contract between {contractContext.currentContract.employer_name} (employer) and {contractContext.currentContract.employee_name} (freelancer)</p>
+      <p>This Contract, is entered into as of ___________, and outlines the agreement between {client} (hereafter referred to as the "Client") and {freelancer} (hereafter referred to as the "Freelancer"), collectively referred to as the "Parties".</p>
     </div>
   }
 
@@ -35,12 +43,12 @@ const Section = ({ title }) => {
           // </h2>
       )}
       {title === "AGREEMENT" && (
-        <div>
-          <h2 className='s-title'>{"agreement section"}</h2>
-          <p>{contractContext.currentContract.title} </p>
+        <div className='s-subitem' xs={12}>
+          <h2 className='s-title'>{"Scope of the Project and Copyright"}</h2>
+          <p> In consideration of the mutual covenants made herin, the Parties agree as follows: </p>
+          <p>The Freelancer agrees to produce materials such as ________________________________________________________________________ __________________________________________________________________________________________ (hereinafter referred to as the "Work") at the request of the Client for the fees agreed upon in advance and turn in or deliver the Work by the agreed upon deadline. The Freelancer agress that they will be the sole owner of the Work, which will be original Work by the Freelancer, free of plagiarism.</p>
         </div>
       )}
-      
     </Grid>
     
   )

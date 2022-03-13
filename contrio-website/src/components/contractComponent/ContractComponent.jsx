@@ -49,7 +49,7 @@ const ContractComponent = ({open, handleClose}) => {
         alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
         // console.log(user.Username)
         // need to figure out the contract json structure here. Can we just copy contract?
-        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name};
+        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name, 'date': contract.contract_date};
         // console.log(contractData)
         // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
         axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
