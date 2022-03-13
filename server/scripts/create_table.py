@@ -5,11 +5,15 @@ dynamodb = boto3.resource('dynamodb')
 
 # Create the DynamoDB table.
 table = dynamodb.create_table(
-    TableName='contracts',
+    TableName='test_contracts',
     KeySchema=[
         {
-            'AttributeName': 'id',
+            'AttributeName': 'userid',
             'KeyType': 'HASH'
+        },
+        {
+            'AttributeName': 'id',
+            'KeyType': 'RANGE'
         }
     ],
     AttributeDefinitions=[
@@ -17,6 +21,10 @@ table = dynamodb.create_table(
             'AttributeName': 'id',
             'AttributeType': 'S'
         },
+        {
+           'AttributeName': 'userid',
+            'AttributeType': 'S' 
+        }
     ],
     ProvisionedThroughput={
         'ReadCapacityUnits': 20,

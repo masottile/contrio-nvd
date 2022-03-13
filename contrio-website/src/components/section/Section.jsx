@@ -11,7 +11,7 @@ const Section = ({ title }) => {
   const contractContext = useContext(ContractContext);
 
   // todo ----- will need to iterate through the state (javascript object)
-  console.log("title" in contractContext.currentContract);
+  // console.log("title" in contractContext.currentContract);
 
   const RenderHeader = ({}) => {
     let sectionTitle = title

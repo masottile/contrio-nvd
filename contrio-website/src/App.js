@@ -17,6 +17,8 @@ import { Grid } from '@mui/material';
 Amplify.configure(awsExports);
 
 function App() {
+  // const [user, setUser] = useState(null);
+
   return (
     <div className="App">
         <Router>

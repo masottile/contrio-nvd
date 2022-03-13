@@ -1,17 +1,12 @@
 {
-    "uuid" : 1234,
-    "hash" : null,
+    "id" : 1234,
+    "userid" : 2345,
+    "signed" : false,
     "contract" : { 
         "header" : { 
-            "title" : {"title": "title"},
-            "client" : {
-                "name" : "client name",
-                "userID" : 1234
-            },
-            "freelancer" : {
-                "name" : "freelancer name",
-                "userID" : 1234
-            },
+            "title" : "title",
+            "client" : "client name",
+            "freelancer" : "freelancer name",
             "date": {
                 "effective" : "some date",
                 "expires" : "some date"
@@ -40,5 +35,5 @@
             }
         }
     },
-    "state" : {}
+    "state" : 0
 }

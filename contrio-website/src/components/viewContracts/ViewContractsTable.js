@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { styled, alpha } from '@mui/material/styles';
@@ -11,35 +11,50 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
+
 import { CONTRACT_STATES } from "./util";
+import ViewContext from '../ViewContext';
+
 
 const testData = () => {
     let retArr = [];
     for (let i = 0; i < 11; i++) {
         retArr.push({
             id: i,
-            client: "Smith Inc " + i.toString(),
-            deliveryDate: new Date().toISOString().toString().split("T")[0],
-            agreementDate: new Date().toISOString().toString().split("T")[0],
-            totalValue: "$100000 CAD",
+            contract: {
+                title: "Contract " + i.toString(),
+                client: "Smith Inc " + i.toString(),
+                date: new Date().toISOString().toString().split("T")[0],
+                totalValue: "$100000 CAD"
+            },
             state: CONTRACT_STATES[i % 6]
         })
     }
     return retArr;
 }
 
+
 function ViewContractsTable() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const contracts = testData();
     const [page, setPage] = useState(0);
     const rowsPerPage = 10;
+
+    const viewContext = useContext(ViewContext);
+    // const contracts = testData();
+    const contracts = viewContext.listContracts;
+
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    //     console.log(event);
+    //     console.log(event.target)
+    //     // console.log(rowid)
+    // };
+    const handleClose = () => {
+        setAnchorEl(null);
+        viewContext.setContractID("");
+    };
+    
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -86,18 +101,16 @@ function ViewContractsTable() {
         },
     }));
 
-
-
+    // console.log(allContracts)
     return (
         <Paper>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
+                            <TableCell align="center">Title</TableCell>
                             <TableCell align="center">Client</TableCell>
                             <TableCell align="center">Agreement Date</TableCell>
-                            <TableCell align="center">Delivery Date</TableCell>
-                            <TableCell align="center">Contract Value</TableCell>
                             <TableCell align="center">State</TableCell>
                             <TableCell align="center" />
                         </TableRow>
@@ -109,25 +122,28 @@ function ViewContractsTable() {
                                     key={row.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align="center" component="th" scope="row">
-                                        {row.client}
-                                    </TableCell>
-                                    <TableCell align="center">{row.agreementDate}</TableCell>
-                                    <TableCell align="center">{row.deliveryDate}</TableCell>
-                                    <TableCell align="center">{row.totalValue}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{row.contract.title}</TableCell>
+                                    <TableCell align="center">{row.contract.client}</TableCell>
+                                    <TableCell align="center">{row.contract.date}</TableCell>
                                     <TableCell align="center">
-                                        <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} />
+                                        {/* <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} /> */}
+                                        <Chip size='small' label={CONTRACT_STATES[0].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[0].color}`, color: '#FFF' }} />
                                     </TableCell>
 
                                     <TableCell align="center">
                                         <Button
                                             id="customized-button"
+                                            // key={row.id}
                                             aria-controls={open ? 'customized-menu' : undefined}
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
                                             variant="contained"
                                             disableElevation
-                                            onClick={handleClick}
+                                            // onClick={handleClick}
+                                            onClick={(e) => {setAnchorEl(e.currentTarget);
+                                                viewContext.setContractID(row.id);
+                                                console.log(e.target)
+                                                console.log(row.id)}}
                                             endIcon={<KeyboardArrowDownIcon />}
                                         >
                                             Options
