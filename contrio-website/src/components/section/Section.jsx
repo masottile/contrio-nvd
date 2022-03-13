@@ -20,7 +20,7 @@ const Section = ({ title }) => {
     }
     return <div className='s-subitem' xs={12}>
       <h2 className='s-title'>{sectionTitle}</h2>
-      <p>Contract between {contractContext.currentContract.employer_name} (employer) and {contractContext.currentContract.employee_name} (freelancer)</p>
+      <p>Contract between {contractContext.currentContract.client} (Client) and {contractContext.currentContract.freelancer} (Freelancer)</p>
     </div>
   }
 

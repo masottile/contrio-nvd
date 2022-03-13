@@ -11,9 +11,11 @@ import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
 import ViewContext from '../ViewContext';
 
-const ContractComponent = ({open, handleClose}) => {
+const ContractComponent = ({open, handleClose, view, contractObj}) => {
     const [section, setSection] = useState('DEFAULT');
-    const [contract, setContract] = useState({});
+    if (contractObj === null) contractObj = {};
+    if (view === null) view = false; 
+    const [contract, setContract] = useState(contractObj);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -36,6 +38,7 @@ const ContractComponent = ({open, handleClose}) => {
 
     const contractContext = {
         currentContract: contract,
+        disableInput: view,
         setContract
     }
 
@@ -46,18 +49,27 @@ const ContractComponent = ({open, handleClose}) => {
 
     const handleContractSubmit = (event) => {
         event.preventDefault();
-        alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
+
+        alert('Creating contract ' + contract.title +  ' between ' + contract.freelancer + ' and ' + contract.client);
         // console.log(user.Username)
         // need to figure out the contract json structure here. Can we just copy contract?
-        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name};
+        const contractData = {'title': contract.title, 'freelancer': contract.freelancer, 'client': contract.client};
         // console.log(contractData)
         // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
-        axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
+        if (contract.id !== undefined) {
+            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contract.id}`, contract).then((response) => {
+                if (response.status === 200) {
+                    console.log(response.data);
+                }
+            })
+        } else {
+            axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
             console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);
             }
         })
+        }
     }
 
 
@@ -73,9 +85,9 @@ const ContractComponent = ({open, handleClose}) => {
                         <ComponentDisplay />
                     </Grid>
                     <Grid className='cc-button' item xs={2}>
-                        <form onSubmit={handleContractSubmit}>
+                        {!view && <form onSubmit={handleContractSubmit}>
                             <input type='submit' value='Submit' />
-                        </form>    
+                        </form>}  
                     </Grid>
                 </Grid>
             </AppContext.Provider>

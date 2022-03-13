@@ -11,36 +11,18 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
-
+import ContractComponent from "../contractComponent/ContractComponent";
 import { CONTRACT_STATES } from "./util";
 import ViewContext from '../ViewContext';
-
-
-const testData = () => {
-    let retArr = [];
-    for (let i = 0; i < 11; i++) {
-        retArr.push({
-            id: i,
-            contract: {
-                title: "Contract " + i.toString(),
-                client: "Smith Inc " + i.toString(),
-                date: new Date().toISOString().toString().split("T")[0],
-                totalValue: "$100000 CAD"
-            },
-            state: CONTRACT_STATES[i % 6]
-        })
-    }
-    return retArr;
-}
-
 
 function ViewContractsTable() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [page, setPage] = useState(0);
     const rowsPerPage = 10;
-
+    const [openDetailedContract, setOpenDetailedContract] = useState(false);
     const viewContext = useContext(ViewContext);
+    const [contractObj, setContractObj] = useState({});
     // const contracts = testData();
     const contracts = viewContext.listContracts;
 
@@ -50,6 +32,10 @@ function ViewContractsTable() {
     //     console.log(event.target)
     //     // console.log(rowid)
     // };
+    const handleViewContractClick = () => {
+        setOpenDetailedContract(true);
+    }
+
     const handleClose = () => {
         setAnchorEl(null);
         viewContext.setContractID("");
@@ -116,10 +102,12 @@ function ViewContractsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {
+                        { 
                             contracts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+            
                                 <TableRow
                                     key={row.id}
+                                    value={row.contract}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell align="center" component="th" scope="row">{row.contract.title}</TableCell>
@@ -127,21 +115,22 @@ function ViewContractsTable() {
                                     <TableCell align="center">{row.contract.date}</TableCell>
                                     <TableCell align="center">
                                         {/* <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} /> */}
-                                        <Chip size='small' label={CONTRACT_STATES[0].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[0].color}`, color: '#FFF' }} />
+                                        <Chip size='small' label={CONTRACT_STATES[parseInt(row.state)].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.state].color}`, color: '#FFF' }} />
                                     </TableCell>
 
                                     <TableCell align="center">
                                         <Button
                                             id="customized-button"
-                                            // key={row.id}
+                                            value={row}
                                             aria-controls={open ? 'customized-menu' : undefined}
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
                                             variant="contained"
                                             disableElevation
-                                            // onClick={handleClick}
                                             onClick={(e) => {setAnchorEl(e.currentTarget);
                                                 viewContext.setContractID(row.id);
+                                                setContractObj(row.contract)
+                                                console.log(row.contract)
                                                 console.log(e.target)
                                                 console.log(row.id)}}
                                             endIcon={<KeyboardArrowDownIcon />}
@@ -157,9 +146,10 @@ function ViewContractsTable() {
                                             open={open}
                                             onClose={handleClose}
                                         >
-                                            <MenuItem onClick={handleClose} disableRipple>
+                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} view={row.state !== "0"} contractObj={contractObj}/>}
+                                            <MenuItem onClick={handleViewContractClick} disableRipple>
                                                 <PreviewIcon />
-                                                View Contract
+                                                {row.state === "0" ? "Edit Contract" : "View Contract"}
                                             </MenuItem>
                                             <MenuItem onClick={handleClose} disableRipple>
                                                 <AssessmentIcon />

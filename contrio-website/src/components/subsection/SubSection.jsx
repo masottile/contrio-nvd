@@ -16,7 +16,7 @@ const SubSection = ({ sectionName, currContext }) => {
                 if (element.status === Status.active) {
                     
                     subsectionArray.push(
-                        <Element className='c-element' key={element.id} name={name} desc={element.desc} type={element.type} enf={element.enf} />)
+                        <Element className='c-element' key={element.id} name={element.name} id={name} desc={element.desc} type={element.type} enf={element.enf} />)
                 }
             });
         }

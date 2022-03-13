@@ -20,26 +20,26 @@ export const defaultElements = {
             type: Type.tbs,
             enf: Enforce.none
         },
-        employer_name: {
+        client: {
             id: 2,
             status: Status.active,
-            name: "Employer Name",
-            desc: "Name of the employee (e.g. client's name)",
+            name: "Client's Name",
+            desc: "Name of the client (e.g. Apple Inc.)",
             type: Type.tbs,
             enf: Enforce.none
         },
-        employee_name: {
+        freelancer: {
             id: 3,
             status: Status.active,
-            name: "Employee Name",
-            desc: "Name of the employee (e.g. freelancer's name)",
+            name: "Freelancer's Name",
+            desc: "Name of the freelancer (e.g. John Doe)",
             type: Type.tbs,
             enf: Enforce.none
         },
-        contract_date: {
+        date: {
             id: 4,
             status: Status.active,
-            name: "Contract Date",
+            name: "Agreement Date",
             desc: "Date of signing",
             type: Type.tbs,
             enf: Enforce.date
