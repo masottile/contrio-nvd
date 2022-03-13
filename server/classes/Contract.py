@@ -1,40 +1,21 @@
 import uuid
-from classes.State import State
+from classes import State
 
 class Contract:
     def __init__(self, contract_json):
         self.id = uuid.uuid4()
-        self.client_id = contract_json['c_name']
-        self.freelancer_id = contract_json['f_name']
-        self.contract_title = contract_json['title']
-        # self.contract_val = contract_json['pay_amount']
+        self.userid = contract_json['userid']
+        self.contract = contract_json['contract']
         self.state = State.CREATED
 
     def get_json(self):
         return {'id' : str(self.id),
-                'client_id': str(self.client_id),
-                'freelancer_id': str(self.freelancer_id),
-                # 'contract_val': str(self.contract_val),
-                'contract_title': str(self.contract_title),
-                'contract_state': str(self.state)}
+                'userid': str(self.userid),
+                'contract' : self.contract,
+                'state': self.state}
 
     def get_id(self):
         return self.id
-    
-    def get_freelancer_id(self):
-        return self.freelancer_id
-    
-    def get_client_id(self):
-        return self.client_id
-
-    def set_client_id(self):
-        return self.client_id    
-    
-    def get_contract_val(self):
-        return self.contract_val
-
-    def set_contract_val(self, value):
-        self.contract_val = value
     
     def get_state(self):
         return self.state
@@ -42,3 +23,17 @@ class Contract:
     def set_state(self, state):
         if isinstance(state, State):
             self.state = state
+
+def create_contract(user_id, contract_json):
+    return {'id' : str(uuid.uuid4()),
+            'userid': str(user_id),
+            'signed' : False,
+            'contract' : contract_json,
+            'state': State.CREATED}
+
+def edit_contract(user_id, contract_id, contract_json):
+    return {'id' : str(contract_id),
+            'userid': str(user_id),
+            'signed' : False,
+            'contract' : contract_json,
+            'state': State.CREATED}

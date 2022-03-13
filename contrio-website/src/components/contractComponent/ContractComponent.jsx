@@ -1,11 +1,15 @@
-import React,{ useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { Dialog } from '@mui/material';
 import axios from 'axios';
+
 import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
 import ComponentDisplay from '../contractComponentDisplay/ContractComponentDisplay'
+
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
-import { Dialog } from '@mui/material';
+import ViewContext from '../ViewContext';
 
 <<<<<<< HEAD
 /*
@@ -18,6 +22,25 @@ const ContractComponent = ({open, handleClose}) => {
 >>>>>>> add contract view frontend (#13)
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        // set current user id
+        Object.keys(localStorage).forEach((key) => {
+          const keySplit = key.split('.');
+    
+          if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
+            const userData = JSON.parse(localStorage.getItem(key))
+            setUser(userData)
+            console.log(userData)
+          }
+        })
+
+        //TODO
+        // check if this is a request to edit a contract rather than create one from scratch.
+        // the context ViewContext may or may not contain a contract id (and it will contain a list of all contracts associated with this user)
+        // we simply need to check for this contract id and if it is not an empty string, set the ContractContext to hold all values from this contract
+    }, [])
 
     const contractContext = {
         currentContract: contract,
@@ -32,8 +55,12 @@ const ContractComponent = ({open, handleClose}) => {
     const handleContractSubmit = (event) => {
         event.preventDefault();
         alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
-        axios.post(`api/contracts/create`, {'f_name': contract.employee_name, 'c_name': contract.employer_name, 'title': contract.title}).then((response) => {
-            console.log("submitted post request and got a response");
+        // console.log(user.Username)
+        // need to figure out the contract json structure here. Can we just copy contract?
+        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name};
+        // console.log(contractData)
+        // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
+        axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
             console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);

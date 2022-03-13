@@ -1,9 +1,6 @@
-from enum import Enum
-
-class State(Enum):
-    CREATED = 1
-    FUNDED = 2
-    IN_PROGRESS = 3
-    IN_REVIEW = 4
-    COMPLETED = 5
-    ARCHIVED = 6
+CREATED = 0
+FUNDED = 1
+IN_PROGRESS = 2
+IN_REVIEW = 3
+COMPLETED = 4
+ARCHIVED = 5
