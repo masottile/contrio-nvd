@@ -128,8 +128,11 @@ function ViewContractsTable() {
                                             variant="contained"
                                             disableElevation
                                             onClick={(e) => {setAnchorEl(e.currentTarget);
-                                                viewContext.setContractID(row.id);
-                                                setContractObj(row.contract)
+                                                const cObj = {
+                                                    ...row.contract,
+                                                    id : row.id
+                                                }
+                                                setContractObj(cObj)
                                                 console.log(row.contract)
                                                 console.log(e.target)
                                                 console.log(row.id)}}
