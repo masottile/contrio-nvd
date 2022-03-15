@@ -9,19 +9,19 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
-import ViewContext from '../ViewContext';
 
-<<<<<<< HEAD
 /*
  * Main 'contract-creation' component that creates the contract and component displays 
  */
 
-const ContractComponent = () => {
-=======
-const ContractComponent = ({open, handleClose}) => {
->>>>>>> add contract view frontend (#13)
+
+
+const ContractComponent = ({open, handleClose, view, contractObj}) => {
+
     const [section, setSection] = useState('DEFAULT');
-    const [contract, setContract] = useState({});
+    if (contractObj === undefined || contractObj === null) contractObj = {};
+    if (view === undefined || view === null) view = false; 
+    const [contract, setContract] = useState(contractObj);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -32,7 +32,6 @@ const ContractComponent = ({open, handleClose}) => {
           if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
             const userData = JSON.parse(localStorage.getItem(key))
             setUser(userData)
-            console.log(userData)
           }
         })
 
@@ -43,7 +42,8 @@ const ContractComponent = ({open, handleClose}) => {
     }, [])
 
     const contractContext = {
-        currentContract: contract,
+        currentContract: contract.contract ?? {},
+        disableInput: view,
         setContract
     }
 
@@ -54,18 +54,25 @@ const ContractComponent = ({open, handleClose}) => {
 
     const handleContractSubmit = (event) => {
         event.preventDefault();
-        alert('Creating contract ' + contract.title +  ' between ' + contract.employer_name + ' and ' + contract.employee_name);
-        // console.log(user.Username)
-        // need to figure out the contract json structure here. Can we just copy contract?
-        const contractData = {'title': contract.title, 'freelancer': contract.employee_name, 'client': contract.employer_name};
-        // console.log(contractData)
-        // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
-        axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
+        const contractData = contractContext.currentContract;
+
+        alert('Creating contract ' + contractData.title +  ' between ' + contractData.freelancer + ' and ' + contractData.client);
+
+        if (contract.id !== undefined && contract.id !== null) {
+            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contract.id}`, contractData).then((response) => {
+                if (response.status === 200) {
+                    console.log(response.data);
+                }
+            })
+        } else {
+            axios.post(`http://127.0.0.1:5000/api/contracts/create/${user.Username}`, contractData).then((response) => {
             console.log(response.status);
             if (response.status === 200) {
                 console.log(response.data);
             }
         })
+        }
+        handleClose();
     }
 
 
@@ -81,9 +88,9 @@ const ContractComponent = ({open, handleClose}) => {
                         <ComponentDisplay />
                     </Grid>
                     <Grid className='cc-button' item xs={2}>
-                        <form onSubmit={handleContractSubmit}>
+                        {!view && <form onSubmit={handleContractSubmit}>
                             <input type='submit' value='Submit' />
-                        </form>    
+                        </form>}  
                     </Grid>
                 </Grid>
             </AppContext.Provider>

@@ -1,9 +1,5 @@
-import React, {useContext} from 'react'
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { defaultElements, customElements } from './elements';
+import React from 'react'
 import './element.css'
-import { Type } from '../Type';
 import { ElementRender } from './ElementRender';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -41,7 +37,7 @@ const Element = ({ id, section, name, desc, type, enf, deletable }) => {
     <div className='e-item' xs={12}>
       <div className='e-name' >{name}</div>
       <p className='e-desc'>{desc}</p>
-      <ElementRender name={name} type={type} enf={enf} />
+      <ElementRender name={name} id={id} type={type} enf={enf}/>
       <RenderDeleteButton />
     </div>
   )

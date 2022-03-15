@@ -9,7 +9,6 @@ import axios from 'axios';
 // const ViewPage = () => 
 function ContractsPage() {
     const [openCreateForm, setCreateForm] = useState(false);
-    const [user, setUser] = useState(null);
     const [contractID, setContractID] = useState("");
     const [allContracts, setAllContracts] = useState([]);
 
@@ -18,6 +17,7 @@ function ContractsPage() {
     }
 
     const viewContext = {
+        currentContract: {},
         currContractID: contractID,
         setContractID,
         listContracts: allContracts
@@ -31,17 +31,13 @@ function ContractsPage() {
     
           if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
             userData = JSON.parse(localStorage.getItem(key));
-            setUser(userData);
           }
         })
-        // console.log(userData)
-
         // retrieve all of that user's contracts
         // axios.get(`api/contracts/retrieve/${userData.Username}`).then((response) => {
         axios.get(`http://127.0.0.1:5000/api/contracts/retrieve/${userData.Username}`).then((response) => {
             console.log(response)
             if (response.status === 200) {
-                // console.log(response.data);
                 setAllContracts(response.data['items'])
             }
         })
