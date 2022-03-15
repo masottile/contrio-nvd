@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import Grid from '@mui/material/Grid';
 import './section.css'
 import AppContext from '../AppContext';
@@ -13,7 +13,7 @@ const Section = ({ title }) => {
   // todo ----- will need to iterate through the state (javascript object)
   // console.log("title" in contractContext.currentContract);
 
-  const RenderHeader = ({}) => {
+  const RenderHeader = () => {
     let sectionTitle = title
     if ("title" in contractContext.currentContract) {
       sectionTitle = contractContext.currentContract.title
@@ -37,7 +37,7 @@ const Section = ({ title }) => {
       {title === "AGREEMENT" && (
         <div>
           <h2 className='s-title'>{"agreement section"}</h2>
-          <p>{contractContext.currentContract.title} </p>
+          <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p>
         </div>
       )}
       

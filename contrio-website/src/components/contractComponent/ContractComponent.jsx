@@ -9,12 +9,11 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
-import ViewContext from '../ViewContext';
 
 const ContractComponent = ({open, handleClose, view, contractObj}) => {
     const [section, setSection] = useState('DEFAULT');
-    if (contractObj === null) contractObj = {};
-    if (view === null) view = false; 
+    if (contractObj === undefined || contractObj === null) contractObj = {};
+    if (view === undefined || view === null) view = false; 
     const [contract, setContract] = useState(contractObj);
     const [user, setUser] = useState(null);
 
@@ -37,7 +36,7 @@ const ContractComponent = ({open, handleClose, view, contractObj}) => {
     }, [])
 
     const contractContext = {
-        currentContract: contract,
+        currentContract: contract.contract ?? {},
         disableInput: view,
         setContract
     }
@@ -49,15 +48,12 @@ const ContractComponent = ({open, handleClose, view, contractObj}) => {
 
     const handleContractSubmit = (event) => {
         event.preventDefault();
+        const contractData = contractContext.currentContract;
 
-        alert('Creating contract ' + contract.title +  ' between ' + contract.freelancer + ' and ' + contract.client);
-        // console.log(user.Username)
-        // need to figure out the contract json structure here. Can we just copy contract?
-        const contractData = {'title': contract.title, 'freelancer': contract.freelancer, 'client': contract.client};
-        // console.log(contractData)
-        // axios.post(`api/contracts/create`, {'userid': user.Username, 'contract': contractData}).then((response) => {
-        if (contract.id !== undefined) {
-            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contract.id}`, contract).then((response) => {
+        alert('Creating contract ' + contractData.title +  ' between ' + contractData.freelancer + ' and ' + contractData.client);
+
+        if (contract.id !== undefined && contract.id !== null) {
+            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contract.id}`, contractData).then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
                 }
@@ -70,6 +66,7 @@ const ContractComponent = ({open, handleClose, view, contractObj}) => {
             }
         })
         }
+        handleClose();
     }
 
 

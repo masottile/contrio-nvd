@@ -5,11 +5,9 @@ import './element.css'
 
 export const ElementRender = ({ type, id }) => {
     const context = useContext(ContractContext);
-    console.log(context);
 
     const handleOnChange = ( event ) => {
         context.currentContract[id] = event.target.value;
-        console.log(context); 
     }
 
     const RenderElement = () => {

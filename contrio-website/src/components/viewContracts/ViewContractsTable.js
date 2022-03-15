@@ -22,16 +22,7 @@ function ViewContractsTable() {
     const rowsPerPage = 10;
     const [openDetailedContract, setOpenDetailedContract] = useState(false);
     const viewContext = useContext(ViewContext);
-    const [contractObj, setContractObj] = useState({});
-    // const contracts = testData();
     const contracts = viewContext.listContracts;
-
-    // const handleClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    //     console.log(event);
-    //     console.log(event.target)
-    //     // console.log(rowid)
-    // };
     const handleViewContractClick = () => {
         setOpenDetailedContract(true);
     }
@@ -128,14 +119,7 @@ function ViewContractsTable() {
                                             variant="contained"
                                             disableElevation
                                             onClick={(e) => {setAnchorEl(e.currentTarget);
-                                                const cObj = {
-                                                    ...row.contract,
-                                                    id : row.id
-                                                }
-                                                setContractObj(cObj)
-                                                console.log(row.contract)
-                                                console.log(e.target)
-                                                console.log(row.id)}}
+                                                viewContext.currentContract = row}}
                                             endIcon={<KeyboardArrowDownIcon />}
                                         >
                                             Options
@@ -149,10 +133,10 @@ function ViewContractsTable() {
                                             open={open}
                                             onClose={handleClose}
                                         >
-                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} view={row.state !== "0"} contractObj={contractObj}/>}
+                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} view={viewContext.currentContract.signed} contractObj={JSON.parse(JSON.stringify(viewContext.currentContract))}/>}
                                             <MenuItem onClick={handleViewContractClick} disableRipple>
                                                 <PreviewIcon />
-                                                {row.state === "0" ? "Edit Contract" : "View Contract"}
+                                                {viewContext.currentContract.signed ? "View Contract" : "Edit Contract"}
                                             </MenuItem>
                                             <MenuItem onClick={handleClose} disableRipple>
                                                 <AssessmentIcon />
