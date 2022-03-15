@@ -11,6 +11,10 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
 
+/*
+ * Main 'contract-creation' component that creates the contract and component displays 
+ */
+
 const ContractComponent = () => {
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});

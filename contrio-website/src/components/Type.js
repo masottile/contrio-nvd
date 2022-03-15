@@ -3,4 +3,5 @@ export const Type = {
     tbl: "textBoxLong",        // multi-line textbox (auto resized by content)
     btn: "button",             
     img: "image",
+    blp: "bulletPoint",
 }
