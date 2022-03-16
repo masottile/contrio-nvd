@@ -9,7 +9,7 @@ import axios from 'axios';
 // const ViewPage = () => 
 function ContractsPage() {
     const [openCreateForm, setCreateForm] = useState(false);
-    const [contractID, setContractID] = useState("");
+    const [contract, setContract] = useState({});
     const [allContracts, setAllContracts] = useState([]);
 
     const handleCloseForm = () => {
@@ -17,9 +17,8 @@ function ContractsPage() {
     }
 
     const viewContext = {
-        currentContract: {},
-        currContractID: contractID,
-        setContractID,
+        currContract: contract,
+        setContract,
         listContracts: allContracts
     }
 
@@ -48,7 +47,7 @@ function ContractsPage() {
     return (
         <ViewContext.Provider value={viewContext}>
         <Paper>
-            {openCreateForm && <ContractComponent open={openCreateForm} handleClose={handleCloseForm}/>}
+            {openCreateForm && <ContractComponent open={openCreateForm} handleClose={handleCloseForm} contractObj={{}}/>}
             <Button variant="contained" style={{ margin: '1rem 1.5rem 1rem 1rem', alignSelf: 'right', float: 'right' }} onClick={() => {setCreateForm(true)}}>Create Contract</Button>
             <Typography style={{ textAlign:'left', float: 'left', fontSize: '25px', fontWeight: 'bold', margin :'1rem 0 0 1rem',}}>
                 Contracts

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import { Dialog } from '@mui/material';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import ComponentDisplay from '../contractComponentDisplay/ContractComponentDispl
 
 import AppContext from '../AppContext';
 import ContractContext from '../ContractContext';
+import ViewContext from '../ViewContext';
 
 /*
  * Main 'contract-creation' component that creates the contract and component displays 
@@ -16,12 +17,10 @@ import ContractContext from '../ContractContext';
 
 
 
-const ContractComponent = ({open, handleClose, view, contractObj}) => {
-
+const ContractComponent = ({open, handleClose, contractObj}) => {
     const [section, setSection] = useState('DEFAULT');
-    if (contractObj === undefined || contractObj === null) contractObj = {};
-    if (view === undefined || view === null) view = false; 
-    const [contract, setContract] = useState(contractObj);
+    const [contract, setContract] = useState({});
+    const [view, setView] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -35,14 +34,16 @@ const ContractComponent = ({open, handleClose, view, contractObj}) => {
           }
         })
 
-        //TODO
-        // check if this is a request to edit a contract rather than create one from scratch.
-        // the context ViewContext may or may not contain a contract id (and it will contain a list of all contracts associated with this user)
-        // we simply need to check for this contract id and if it is not an empty string, set the ContractContext to hold all values from this contract
+        // Check if this is Edit Mode or Create Mode
+        if (contractObj.id !== undefined && contractObj.id !== null){
+            setContract(contractObj.contract);
+            setView(contractObj.signed);
+        }
+
     }, [])
 
     const contractContext = {
-        currentContract: contract.contract ?? {},
+        currentContract: contract,
         disableInput: view,
         setContract
     }
@@ -54,12 +55,14 @@ const ContractComponent = ({open, handleClose, view, contractObj}) => {
 
     const handleContractSubmit = (event) => {
         event.preventDefault();
+        console.log(contract);
+        console.log(contractContext.currentContract)
         const contractData = contractContext.currentContract;
 
         alert('Creating contract ' + contractData.title +  ' between ' + contractData.freelancer + ' and ' + contractData.client);
 
-        if (contract.id !== undefined && contract.id !== null) {
-            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contract.id}`, contractData).then((response) => {
+        if (contractObj.id !== undefined && contractObj.id !== null) {
+            axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contractObj.id}`, contractData).then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
                 }

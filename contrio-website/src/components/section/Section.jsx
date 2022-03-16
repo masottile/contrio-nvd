@@ -15,6 +15,7 @@ const Section = ({ title }) => {
 
   const RenderHeader = () => {
     let sectionTitle = title
+    console.log(contractContext)
     if ("title" in contractContext.currentContract) {
       sectionTitle = contractContext.currentContract.title
     }

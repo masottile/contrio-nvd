@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './element.css'
 import { ElementRender } from './ElementRender';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ComponentContext from '../ComponentContext';
 
-const Element = ({ id, section, name, desc, type, enf, deletable }) => {
+const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
   const context = useContext(ComponentContext);
   
   const handleClick = () => {
@@ -37,7 +37,7 @@ const Element = ({ id, section, name, desc, type, enf, deletable }) => {
     <div className='e-item' xs={12}>
       <div className='e-name' >{name}</div>
       <p className='e-desc'>{desc}</p>
-      <ElementRender name={name} id={id} type={type} enf={enf}/>
+      <ElementRender dbKey={dbKey} type={type} enf={enf}/>
       <RenderDeleteButton />
     </div>
   )

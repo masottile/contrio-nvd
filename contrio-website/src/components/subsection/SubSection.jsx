@@ -132,10 +132,11 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
         Object.entries(elements).map(item => {
             if (item[0] === currContext.currSection) {
                 Object.entries(item[1]).map(e => {
+                    const dbKey = e[0];
                     const element = e[1];
                     if (element.status === Status.active) {
                         arr.push(
-                            <Element className='c-element' key={element.id} id={element.id} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
+                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
                         )
                     }
                 });
