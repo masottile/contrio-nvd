@@ -23,7 +23,6 @@ function ViewContractsTable() {
     const [openDetailedContract, setOpenDetailedContract] = useState(false);
     const viewContext = useContext(ViewContext);
     const contracts = viewContext.listContracts;
-
     const handleViewContractClick = () => {
         setOpenDetailedContract(true);
     }
