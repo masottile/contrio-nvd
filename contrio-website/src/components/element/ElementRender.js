@@ -16,7 +16,7 @@ export const ElementRender = ({ type, dbKey }) => {
             return <input className='er-all er-tbs' placeholder='Enter Here' defaultValue={context.currentContract[dbKey]} onChange={handleOnChange} disabled={context.disableInput}></input>
         }
         else if (type === Type.tbl) {
-            return <input className='er-all er-tbl' placeholder='Enter Here'></input>
+            return <input className='er-all er-tbl' placeholder='Enter Here' defaultValue={context.currentContract[dbKey]} onChange={handleOnChange} disabled={context.disableInput}></input>
         }
         else if (type === Type.btn) {
             // todo

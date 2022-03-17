@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import './subsection.css'
 import { defaultElements, customElements } from '../element/elements';
@@ -40,21 +40,10 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
     //     }
     // });
 
-    // // runs whenever component is re-rendered
-    // const Customs = Object.entries(customElements).map(item => {
-    //     if (item[0] === currContext.currSection) {
-    //         Object.entries(item[1]).map(e => {
-    //             const element = e[1];
-    //             if (element.status === Status.active) {
-    //                 subsectionArray.push(
-    //                     <Element className='c-element' key={element.id} id={element.id} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={true} />)
-    //             }
-    //         });
-    //     }
-    // });
 
     const CustomElementCreationButton = () => {
-        const [anchorEl, setAnchorEl] = React.useState(null);
+        const [anchorEl, setAnchorEl] = useState(null);
+        const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
         const open = Boolean(anchorEl);
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
@@ -69,7 +58,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
             setAnchorEl(null);
 
             // const el = <Element className='c-element' key={newid} name={default_ComponentName} desc={default_ComponentDesc} type={elementType} enf={Enforce.none} />
-            const newObj = elements;
+            const newObj = {...elements};
             const newElement = {
                 id: newid,
                 status: Status.active,
@@ -90,8 +79,14 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
                 customElements[sectionName][newid] = newElement;
             }
 
-            setElements(newObj);
+            setElements(elements => ({ ...newObj}));
+            // componentContext.setElements(newObj);
             console.log(elements);
+            console.log(componentContext);
+            forceUpdate();
+
+            // re-render on addition
+
         }
 
         return (
