@@ -236,7 +236,7 @@ function ProjectsPage() {
             <DragDropContext
                 onDragEnd={onDragEnd}>
                 {Object.values(stages).map((stage) => (
-                    <Stage id={stage.id} title={stage.name} tasks={stage.tasks} taskIds={stage.taskIds} handleAddCard={handleAddCard} handleSaveCard={handleSaveCard} handleDeleteCard={handleDeleteCard}/>
+                    <Stage key={stage.id} id={stage.id} title={stage.name} tasks={stage.tasks} taskIds={stage.taskIds} handleAddCard={handleAddCard} handleSaveCard={handleSaveCard} handleDeleteCard={handleDeleteCard}/>
                 ))
                 }
             </DragDropContext>

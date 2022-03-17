@@ -13,7 +13,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
 import ContractComponent from "../contractComponent/ContractComponent";
 import { CONTRACT_STATES } from "./util";
-import ViewContext from '../ViewContext';
+import ViewContext from '../context/ViewContext';
 
 function ViewContractsTable() {
     const [anchorEl, setAnchorEl] = useState(null);

@@ -1,7 +1,6 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import './subsection.css'
-import { defaultElements, customElements } from '../element/elements';
 import { Status } from '../Status';
 import Element from '../element/Element';
 import Menu from '@mui/material/Menu';
@@ -14,18 +13,13 @@ import { Type } from '../Type';
 import { getID } from '../idGenerator/getID'
 import { Enforce } from '../Enforce';
 import newID from '../idGenerator/getID';
-import ComponentContext from '../ComponentContext';
+import ElementContext from '../context/ElementContext';
 
 const SubSection = ({ sectionName, sectionTitle, currContext }) => {
-    const [elements, setElements] = useState(defaultElements);
-    // const subsectionArray = [];
+    const elementContext = useContext(ElementContext);
     const default_ComponentName = "Component Name";
     const default_ComponentDesc = "Component Description";
 
-    const componentContext = {
-        componentElements: elements,
-        setElements
-    }
 
     // // runs whenever component is re-rendered
     // const Defaults = Object.entries(defaultElements).map(item => {
@@ -43,7 +37,6 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
 
     const CustomElementCreationButton = () => {
         const [anchorEl, setAnchorEl] = useState(null);
-        const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
         const open = Boolean(anchorEl);
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
@@ -58,7 +51,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
             setAnchorEl(null);
 
             // const el = <Element className='c-element' key={newid} name={default_ComponentName} desc={default_ComponentDesc} type={elementType} enf={Enforce.none} />
-            const newObj = {...elements};
+            const newObj = {...elementContext.currentElements};
             const newElement = {
                 id: newid,
                 status: Status.active,
@@ -71,21 +64,9 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
             newObj[sectionName][newid] = newElement
             // console.log(newObj[sectionName][newid]);
 
-            if (sectionName in customElements) {
-                customElements[sectionName][newid] = newElement;
-            }
-            else {
-                customElements[sectionName] = {}; // must initialize new object first
-                customElements[sectionName][newid] = newElement;
-            }
+            elementContext.setElements(elements => ({ ...newObj}));
+            console.log(elementContext.currentElements);
 
-            setElements(elements => ({ ...newObj}));
-            // componentContext.setElements(newObj);
-            console.log(elements);
-            console.log(componentContext);
-            forceUpdate();
-
-            // re-render on addition
 
         }
 
@@ -124,7 +105,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
     const printElements = () => {
         const arr = [];
 
-        Object.entries(elements).map(item => {
+        Object.entries(elementContext.currentElements).map(item => {
             if (item[0] === currContext.currSection) {
                 Object.entries(item[1]).map(e => {
                     const dbKey = e[0];
@@ -158,9 +139,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
     return <Grid item className='c-item' xs={12}>
         <h2 className='c-title'>{sectionTitle}</h2>
         {/* {subsectionArray} */}
-        <ComponentContext.Provider value={componentContext}>
-            {printElements()}
-        </ComponentContext.Provider>
+        {printElements()}
         {/* {elements} */}
         <CustomElementCreationButton />
     </Grid>

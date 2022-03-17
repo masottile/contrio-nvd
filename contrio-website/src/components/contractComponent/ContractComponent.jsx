@@ -6,10 +6,11 @@ import axios from 'axios';
 
 import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
 import ComponentDisplay from '../contractComponentDisplay/ContractComponentDisplay'
+import {defaultElements, customElements} from '../element/elements';
 
-import AppContext from '../AppContext';
-import ContractContext from '../ContractContext';
-import ViewContext from '../ViewContext';
+import AppContext from '../context/AppContext';
+import ContractContext from '../context/ContractContext';
+import ElementContext from '../context/ElementContext';
 
 /*
  * Main 'contract-creation' component that creates the contract and component displays 
@@ -20,6 +21,7 @@ import ViewContext from '../ViewContext';
 const ContractComponent = ({open, handleClose, contractObj}) => {
     const [section, setSection] = useState('DEFAULT');
     const [contract, setContract] = useState({});
+    const [elements, setElements] = useState({});
     const [view, setView] = useState(false);
     const [user, setUser] = useState(null);
 
@@ -40,7 +42,12 @@ const ContractComponent = ({open, handleClose, contractObj}) => {
             setView(contractObj.signed);
         }
 
-    }, [])
+        //TODO: reset the current elements to reflect either the default or what is part of this contract
+        // coping the defaultElements object keeps updates to setElements from affecting the stored value of defaultElements
+        const copyDefault = JSON.parse(JSON.stringify(defaultElements));
+        setElements(copyDefault);
+
+    }, []);
 
     const contractContext = {
         currentContract: contract,
@@ -51,6 +58,11 @@ const ContractComponent = ({open, handleClose, contractObj}) => {
     const appContext = {
         currSection: section,
         setSection
+    }
+
+    const elementContext = {
+        currentElements: elements,
+        setElements
     }
 
     const handleContractSubmit = (event) => {
@@ -83,6 +95,7 @@ const ContractComponent = ({open, handleClose, contractObj}) => {
         <Dialog fullWidth maxWidth='xl' open={open} onClose={handleClose}>
             <ContractContext.Provider value={contractContext}>
             <AppContext.Provider value={appContext}>
+            <ElementContext.Provider value={elementContext}>
                 <Grid container spacing={2} sx={{ padding: 4 }}>
                     <Grid className='cc-template' item xs={8}>
                         <ContractDisplay />
@@ -96,8 +109,9 @@ const ContractComponent = ({open, handleClose, contractObj}) => {
                         </form>}  
                     </Grid>
                 </Grid>
+            </ElementContext.Provider>
             </AppContext.Provider>
-        </ContractContext.Provider>
+            </ContractContext.Provider>
         </Dialog>
 
     )

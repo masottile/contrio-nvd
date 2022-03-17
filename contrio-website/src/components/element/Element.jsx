@@ -3,23 +3,23 @@ import './element.css'
 import { ElementRender } from './ElementRender';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import ComponentContext from '../ComponentContext';
-import ContractContext from '../ContractContext';
+import ElementContext from '../context/ElementContext';
+import ContractContext from '../context/ContractContext';
 import { containerClasses } from '@mui/material';
 import { defaultElements, customElements } from '../element/elements';
 
 const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
-  const componentContext = useContext(ComponentContext);
+  const elementContext = useContext(ElementContext);
   const contractContext = useContext(ContractContext)
   
   const handleClick = () => {
-    // change the customElements to reflect
-    delete customElements[section][id];
+    // // change the customElements to reflect
+    // delete customElements[section][id];
 
-    // change the componentContext to reflect this
-    const prevElements = { ...componentContext.componentElements};
+    // change the elementContext to reflect this
+    const prevElements = { ...elementContext.currentElements};
     delete prevElements[section][id];
-    componentContext.setElements(elements => ({ ...prevElements}));
+    elementContext.setElements(elements => ({ ...prevElements}));
 
     //change the contractContext to reflect this
     const prevContract = contractContext.currentContract
@@ -27,7 +27,7 @@ const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
     contractContext.setContract(prevContract);
 
 
-    console.log(componentContext);
+    console.log(elementContext);
     console.log(contractContext);
   };
 

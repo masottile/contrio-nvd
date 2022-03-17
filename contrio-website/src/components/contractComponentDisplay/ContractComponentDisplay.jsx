@@ -4,7 +4,7 @@ import SubSection from "../subsection/SubSection"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import './contractComponentDisplay.css'
-import AppContext from "../AppContext";
+import AppContext from "../context/AppContext";
 import { sections } from '../section/sections';
 
 const ComponentDisplay = () => {

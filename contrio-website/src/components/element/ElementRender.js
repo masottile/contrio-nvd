@@ -1,6 +1,6 @@
 import { React, useContext } from 'react'
 import { Type } from '../Type'
-import ContractContext from '../ContractContext'
+import ContractContext from '../context/ContractContext'
 import './element.css'
 
 export const ElementRender = ({ type, dbKey }) => {

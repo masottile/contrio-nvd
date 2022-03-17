@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import Grid from '@mui/material/Grid';
 import './section.css'
-import AppContext from '../AppContext';
-import ContractContext from '../ContractContext'
+import AppContext from '../context/AppContext';
+import ContractContext from '../context/ContractContext'
 
 const Section = ({ title }) => {
   // const [values, setValues] = useState({}); <------------ TODO: will most likely need to use state to update values inside section

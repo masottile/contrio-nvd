@@ -1,12 +1,11 @@
 import { Button, Paper, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import Form from '../components/Form'
 import ContractComponent from '../components/contractComponent/ContractComponent'
 import ViewContractsTable from "../components/viewContracts/ViewContractsTable";
-import ViewContext from '../components/ViewContext';
+import ViewContext from '../components/context/ViewContext';
 import axios from 'axios';
 
-// const ViewPage = () => 
 function ContractsPage() {
     const [openCreateForm, setCreateForm] = useState(false);
     const [contract, setContract] = useState({});
