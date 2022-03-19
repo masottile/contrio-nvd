@@ -2,18 +2,18 @@
 import Grid from '@mui/material/Grid';
 import Section from '../section/Section';
 import './contractSectionDisplay.css';
-import { sections } from '../section/sections';
+import { defaultSections, customSections } from '../section/sections';
 
 const ContractDisplay = () => {
   return (
     <Grid container className='cts-container'>
       <Section
         key={"header"}
-        title={sections.header}
+        title={defaultSections.header}
       />
       <Section
         key={"agreement"}
-        title={sections.agreement}
+        title={defaultSections.agreement}
       />
     </Grid>
     )

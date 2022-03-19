@@ -1,8 +1,11 @@
 // list of sections provided to users
 // does not mean all sections are visible to users initially
 
-export var sections = {
-    default: 'DEFAULT',
+export const defaultSections = {
     header: 'HEADER',
-    agreement: 'AGREEMENT'
+    agreement: 'AGREEMENT',
+}
+
+export const customSections = {
+
 }

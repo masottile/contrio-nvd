@@ -60,7 +60,42 @@ export const defaultElements = {
         }
     },
     "AGREEMENT": {
-        
+        service: {
+            id: 6,
+            status: Status.active,
+            name: "Overview of Services Provided",
+            desc: "General description of services provided by the freelancer",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        service_detail: {
+            id: 7,
+            status: Status.active,
+            name: "List of detailed services",
+            desc: "A detailed list of all services provided by freelancer",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        compensation: {
+            id: 8,
+            status: Status.active,
+            name: "Total Compensation",
+            desc: "Total Compensation Provided by Client",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        compensation_detail: {
+            id: 9,
+            status: Status.active,
+            name: "Detailed Compensation",
+            desc: "Should outline when and how much the payout will be under what circumstances",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: false
+        }
     }
 }
 

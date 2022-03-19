@@ -29,10 +29,6 @@ const Section = ({ title }) => {
     <Grid item className='s-item' onClick={() => {context.setSection(title)}} xs={12}>
       {title === "HEADER" && (
           <RenderHeader />
-          // <h2 className='s-title'>{title}
-          //   {/* {"title" in contractContext.currentContract && contractContext.currentContract.title}
-          //   {!("title" in contractContext.currentContract) && title} */}
-          // </h2>
       )}
       {title === "AGREEMENT" && (
         <div>

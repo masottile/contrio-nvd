@@ -20,21 +20,6 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
     const default_ComponentName = "Component Name";
     const default_ComponentDesc = "Component Description";
 
-
-    // // runs whenever component is re-rendered
-    // const Defaults = Object.entries(defaultElements).map(item => {
-    //     if (item[0] === currContext.currSection) {
-    //         Object.entries(item[1]).map(e => {
-    //             const element = e[1];
-    //             if (element.status === Status.active) {
-    //                 subsectionArray.push(
-    //                     <Element className='c-element' key={element.id} id={element.id} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={false} />)
-    //             }
-    //         });
-    //     }
-    // });
-
-
     const CustomElementCreationButton = () => {
         const [anchorEl, setAnchorEl] = useState(null);
         const open = Boolean(anchorEl);
@@ -66,8 +51,6 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
 
             elementContext.setElements(elements => ({ ...newObj}));
             console.log(elementContext.currentElements);
-
-
         }
 
         return (
@@ -121,20 +104,6 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
 
         return arr
     }
-    // const SubSection = ({ sectionName, currContext }) => {
-    //     const subsectionArray = [];
-        
-    //     const Defaults = Object.entries(defaultElements).map(item => {
-    //         if (item[0] === currContext.currSection) {
-    //             Object.entries(item[1]).map(e => {
-    //                 const name = e[0];
-    //                 const element = e[1];
-    //                 if (element.status === Status.active) {
-                        
-    //                     subsectionArray.push(
-    //                         <Element className='c-element' key={element.id} name={element.name} id={name} desc={element.desc} type={element.type} enf={element.enf} />)
-    //                 }
-    //             });
 
     return <Grid item className='c-item' xs={12}>
         <h2 className='c-title'>{sectionTitle}</h2>
