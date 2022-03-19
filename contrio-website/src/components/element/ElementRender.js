@@ -1,21 +1,22 @@
 import { React, useContext } from 'react'
 import { Type } from '../Type'
-import ContractContext from '../ContractContext'
+import ContractContext from '../context/ContractContext'
 import './element.css'
 
-export const ElementRender = ({ type, id }) => {
+export const ElementRender = ({ type, dbKey }) => {
     const context = useContext(ContractContext);
 
     const handleOnChange = ( event ) => {
-        context.currentContract[id] = event.target.value;
+        context.currentContract[dbKey] = event.target.value;
+        console.log(context.currentContract)
     }
 
     const RenderElement = () => {
         if (type === Type.tbs) {
-            return <input className='er-all er-tbs' placeholder='Enter Here' defaultValue={context.currentContract[id]} onChange={handleOnChange} disabled={context.disableInput}></input>
+            return <input className='er-all er-tbs' placeholder='Enter Here' defaultValue={context.currentContract[dbKey]} onChange={handleOnChange} disabled={context.disableInput}></input>
         }
         else if (type === Type.tbl) {
-            return <input className='er-all er-tbl' placeholder='Enter Here'></input>
+            return <input className='er-all er-tbl' placeholder='Enter Here' defaultValue={context.currentContract[dbKey]} onChange={handleOnChange} disabled={context.disableInput}></input>
         }
         else if (type === Type.btn) {
             // todo

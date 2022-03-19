@@ -22,7 +22,7 @@ const ProjectMenuBar = (props) => {
         Projects.forEach(p => {
             if (p.status !== Status.project_terminated && p.status !== Status.project_closed) {
                 menuItemList.push(
-                    <MenuItem value={p.id}>{p.name}</MenuItem>)
+                    <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)
             }
         });
     }

@@ -3,8 +3,9 @@
 //     status:         // active/disabled/conditional
 //     name:           // the name
 //     desc:           // give a brief desc of what this component is (hover to view) 
-//     type:      // e.g. textbox (short), textbox (long), button, toggle, etc.  
+//     type:           // e.g. textbox (short), textbox (long), button, toggle, etc.  
 //     enf:            // any enforcement of datatype? (e.g. $ should be a number only)
+//     canDelete:      // flag to indicate whether the element is removable by user
 // },
 import { Type } from "../Type";
 import { Status } from "../Status";
@@ -18,7 +19,8 @@ export const defaultElements = {
             name: "Contract Title",
             desc: "The name of this contract",
             type: Type.tbs,
-            enf: Enforce.none
+            enf: Enforce.none,
+            canDelete: false
         },
         client: {
             id: 2,
@@ -26,7 +28,8 @@ export const defaultElements = {
             name: "Client's Name",
             desc: "Name of the client (e.g. Apple Inc.)",
             type: Type.tbs,
-            enf: Enforce.none
+            enf: Enforce.none,
+            canDelete: false
         },
         freelancer: {
             id: 3,
@@ -34,7 +37,8 @@ export const defaultElements = {
             name: "Freelancer's Name",
             desc: "Name of the freelancer (e.g. John Doe)",
             type: Type.tbs,
-            enf: Enforce.none
+            enf: Enforce.none,
+            canDelete: false
         },
         date: {
             id: 4,
@@ -42,7 +46,8 @@ export const defaultElements = {
             name: "Agreement Date",
             desc: "Date of signing",
             type: Type.tbs,
-            enf: Enforce.date
+            enf: Enforce.date,
+            canDelete: false
         },
         notes: {
             id: 5,
@@ -50,7 +55,8 @@ export const defaultElements = {
             name: "Notes",
             desc: "Additional Notes",
             type: Type.tbl,
-            enf: Enforce.none
+            enf: Enforce.none,
+            canDelete: false
         }
     },
     "AGREEMENT": {
@@ -58,6 +64,4 @@ export const defaultElements = {
     }
 }
 
-export const customElements = {
-
-}
+export const customElements = {}

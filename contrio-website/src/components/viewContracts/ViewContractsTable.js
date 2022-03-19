@@ -13,7 +13,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
 import ContractComponent from "../contractComponent/ContractComponent";
 import { CONTRACT_STATES } from "./util";
-import ViewContext from '../ViewContext';
+import ViewContext from '../context/ViewContext';
 
 function ViewContractsTable() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -29,7 +29,7 @@ function ViewContractsTable() {
 
     const handleClose = () => {
         setAnchorEl(null);
-        viewContext.setContractID("");
+        viewContext.setContract({});
     };
     
 
@@ -87,7 +87,7 @@ function ViewContractsTable() {
                         <TableRow>
                             <TableCell align="center">Title</TableCell>
                             <TableCell align="center">Client</TableCell>
-                            <TableCell align="center">Agreement Date</TableCell>
+                            <TableCell align="center">Signature Date</TableCell>
                             <TableCell align="center">State</TableCell>
                             <TableCell align="center" />
                         </TableRow>
@@ -119,7 +119,7 @@ function ViewContractsTable() {
                                             variant="contained"
                                             disableElevation
                                             onClick={(e) => {setAnchorEl(e.currentTarget);
-                                                viewContext.currentContract = row}}
+                                                viewContext.setContract(row)}}
                                             endIcon={<KeyboardArrowDownIcon />}
                                         >
                                             Options
@@ -133,10 +133,10 @@ function ViewContractsTable() {
                                             open={open}
                                             onClose={handleClose}
                                         >
-                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} view={viewContext.currentContract.signed} contractObj={JSON.parse(JSON.stringify(viewContext.currentContract))}/>}
+                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} contractObj={viewContext.currContract}/>}
                                             <MenuItem onClick={handleViewContractClick} disableRipple>
                                                 <PreviewIcon />
-                                                {viewContext.currentContract.signed ? "View Contract" : "Edit Contract"}
+                                                {viewContext.currContract.signed ? "View Contract" : "Edit Contract"}
                                             </MenuItem>
                                             <MenuItem onClick={handleClose} disableRipple>
                                                 <AssessmentIcon />
