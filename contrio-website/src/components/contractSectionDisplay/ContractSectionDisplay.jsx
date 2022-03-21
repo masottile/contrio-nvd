@@ -15,6 +15,14 @@ const ContractDisplay = () => {
         key={"agreement"}
         title={defaultSections.agreement}
       />
+      <Section
+        key={"projectScope"}
+        title={defaultSections.projectScope}
+      />
+      <Section
+        key={"compensation"}
+        title={defaultSections.compensation}
+      />
     </Grid>
     )
 };

@@ -13,10 +13,13 @@ const ComponentDisplay = () => {
     return (
         <Grid container className='ces-container'>
             {context.currSection === defaultSections.header && (
-                <SubSection className='ces-header' key={"HEADER"} sectionName={defaultSections.header} sectionTitle={"Header Section"} currContext={context} />
+                <SubSection className='ces-header' key={"HEADER"} sectionName={defaultSections.header} sectionTitle={"Header Section"} currContext={context} allowCustomInputs={false}/>
             )}
             {context.currSection === defaultSections.agreement && (
-                <SubSection className='ces-agreement' key={"AGREEMENT"} sectionName={defaultSections.agreement} sectionTitle={"Agreement Section"} currContext={context} />
+                <SubSection className='ces-agreement' key={"AGREEMENT"} sectionName={defaultSections.agreement} sectionTitle={"Agreement Section"} currContext={context} allowCustomInputs={false}/>
+            )}
+            {context.currSection === defaultSections.compensation && (
+                <SubSection className='ces-agreement' key={"COMPENSATION"} sectionName={defaultSections.compensation} sectionTitle={"Compensation Section"} currContext={context} allowCustomInputs={false}/>
             )}
         </Grid>
     )

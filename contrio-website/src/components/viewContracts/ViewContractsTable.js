@@ -105,7 +105,6 @@ function ViewContractsTable() {
                                     <TableCell align="center">{row.contract.client}</TableCell>
                                     <TableCell align="center">{row.contract.date}</TableCell>
                                     <TableCell align="center">
-                                        {/* <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} /> */}
                                         <Chip size='small' label={CONTRACT_STATES[parseInt(row.state)].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.state].color}`, color: '#FFF' }} />
                                     </TableCell>
 

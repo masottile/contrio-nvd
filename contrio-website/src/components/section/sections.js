@@ -4,6 +4,8 @@
 export const defaultSections = {
     header: 'HEADER',
     agreement: 'AGREEMENT',
+    compensation: 'COMPENSATION',
+    projectScope: 'PROJECT_SCOPE',
 }
 
 export const customSections = {

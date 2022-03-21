@@ -4,4 +4,5 @@ export const Type = {
     btn: "button",             
     img: "image",
     blp: "bulletPoint",
+    comp: "compensation",
 }

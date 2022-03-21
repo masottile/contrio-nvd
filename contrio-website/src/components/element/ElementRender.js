@@ -18,12 +18,6 @@ export const ElementRender = ({ type, dbKey }) => {
         else if (type === Type.tbl) {
             return <input className='er-all er-tbl' placeholder='Enter Here' defaultValue={context.currentContract[dbKey]} onChange={handleOnChange} disabled={context.disableInput}></input>
         }
-        else if (type === Type.btn) {
-            // todo
-        }
-        else if (type === Type.img) {
-            // todo
-        }
         else {
             return 'ERROR - No Proper Input type Considered'
         }

@@ -1,5 +1,5 @@
 .s-item {
-    height: 300px;
+    height: fit-content;
     width: 80%;
     background: #f2f2f2;
     overflow: hidden;
@@ -22,8 +22,6 @@
     overflow: hidden;
     border-radius: 10px;
     justify-content: center;
-    padding: 10px;
-    margin: 5px;
 }
 
 .s-title {

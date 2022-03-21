@@ -78,25 +78,7 @@ export const defaultElements = {
             enf: Enforce.none,
             canDelete: false
         },
-        compensation: {
-            id: 8,
-            status: Status.active,
-            name: "Total Compensation",
-            desc: "Total Compensation Provided by Client",
-            type: Type.tbl,
-            enf: Enforce.none,
-            canDelete: false
-        },
-        compensation_detail: {
-            id: 9,
-            status: Status.active,
-            name: "Detailed Compensation",
-            desc: "Should outline when and how much the payout will be under what circumstances",
-            type: Type.tbl,
-            enf: Enforce.none,
-            canDelete: false
-        }
-    }
+    },
 }
 
 export const customElements = {}
