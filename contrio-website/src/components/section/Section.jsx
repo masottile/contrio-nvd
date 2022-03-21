@@ -15,7 +15,6 @@ const Section = ({ title }) => {
 
   const RenderHeader = () => {
     let sectionTitle = title
-    console.log(contractContext)
     if ("title" in contractContext.currentContract) {
       sectionTitle = contractContext.currentContract.title
     }
@@ -41,23 +40,5 @@ const Section = ({ title }) => {
     
   )
 }
-
-
-// return <Grid item className='c-item' xs={12}>
-//         <h2 className='s-title'>{sectionName}</h2>
-//         {subsectionArray}
-//     </Grid>
-
-// return (
-//   <Grid container className='ces-container'>
-//       {context.currSection === "HEADER" && (
-//           <SubSection className='ces-header' key={"element"} sectionName={"Header Section"} currContext={context} />
-//       )}
-//       {context.currSection === "AGREEMENT" && (
-//           <SubSection className='ces-agreement' key={"element"} sectionName={"Agreement Section"} currContext={context} />
-//       )}
-
-//   </Grid>
-// )
 
 export default Section

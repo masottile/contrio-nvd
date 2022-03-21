@@ -46,6 +46,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
                 enf: Enforce.none,
                 canDelete: true,
             };
+            console.log(sectionName);
             newObj[sectionName][newid] = newElement
             // console.log(newObj[sectionName][newid]);
 
