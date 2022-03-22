@@ -19,6 +19,7 @@ const ComponentDisplay = () => {
                 arr.push(
                     <SubSection className={`ces-${item[0]}`}
                         key={item[1].id}
+                        sectionName={item[1].title}
                         sectionTitle={item[1].component_title} 
                         currContext={context} />
                 );
