@@ -13,9 +13,6 @@ const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
   const contractContext = useContext(ContractContext)
   
   const handleClick = () => {
-    // // change the customElements to reflect
-    // delete customElements[section][id];
-
     // change the elementContext to reflect this
     const prevElements = { ...elementContext.currentElements};
     delete prevElements[section][id];
@@ -26,9 +23,8 @@ const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
     delete prevContract[id];
     contractContext.setContract(prevContract);
 
-
-    console.log(elementContext);
-    console.log(contractContext);
+    // console.log(elementContext);
+    // console.log(contractContext);
   };
 
   const RenderDeleteButton = () => {

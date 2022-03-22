@@ -90,6 +90,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
         const arr = [];
 
         Object.entries(elementContext.currentElements).map(item => {
+            console.log(item);
             if (item[0] === currContext.currSection) {
                 Object.entries(item[1]).map(e => {
                     const dbKey = e[0];

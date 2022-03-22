@@ -14,13 +14,11 @@ const ComponentDisplay = () => {
         const arr = [];
 
         Object.entries(defaultSections).map(item => {
-            
             if (context.currSection === item[1].title) {
                 console.log(item);
                 arr.push(
                     <SubSection className={`ces-${item[0]}`}
                         key={item[1].id}
-                        sectionName={item[1].title} 
                         sectionTitle={item[1].component_title} 
                         currContext={context} />
                 );
