@@ -11,10 +11,10 @@ import IconButton from '@mui/material/IconButton';
 import { Type } from '../Type';
 import { v4 as uuidv4 } from 'uuid';
 import { Enforce } from '../Enforce';
-import ElementContext from '../context/ElementContext';
+import CustomContext from '../context/CustomContext';
 
 const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs }) => {
-    const elementContext = useContext(ElementContext);
+    const customContext = useContext(CustomContext);
     const default_ComponentName = "Component Name";
     const default_ComponentDesc = "Component Description";
 
@@ -34,7 +34,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
             setAnchorEl(null);
 
             // const el = <Element className='c-element' key={newid} name={default_ComponentName} desc={default_ComponentDesc} type={elementType} enf={Enforce.none} />
-            const newObj = { ...elementContext.currentElements };
+            const newObj = { ...customContext.currentElements };
             const newElement = {
                 id: newid,
                 status: Status.active,
@@ -44,11 +44,11 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
                 enf: Enforce.none,
                 canDelete: true,
             };
+            console.log(newObj[sectionName]);
             newObj[sectionName][newid] = newElement
-            // console.log(newObj[sectionName][newid]);
 
-            elementContext.setElements(elements => ({ ...newObj }));
-            console.log(elementContext.currentElements);
+            customContext.setElements(elements => ({ ...newObj }));
+            console.log(customContext.currentElements);
         }
 
         return (
@@ -87,7 +87,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
     const printElements = () => {
         const arr = [];
 
-        Object.entries(elementContext.currentElements).forEach(item => {
+        Object.entries(customContext.currentElements).forEach(item => {
             if (item[0] === currContext.currSection) {
                 Object.entries(item[1]).forEach(e => {
                     const dbKey = e[0];
@@ -192,8 +192,8 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
                 newObj[sectionName][newElement.id] = newElement
             });
     
-            elementContext.setElements(() => ({ ...newObj }));
-            console.log(elementContext.currentElements);
+            customContext.setElements(() => ({ ...newObj }));
+            console.log(customContext.currentElements);
         }
 
         return (

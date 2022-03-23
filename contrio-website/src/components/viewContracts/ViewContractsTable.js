@@ -78,7 +78,6 @@ function ViewContractsTable() {
         },
     }));
 
-    // console.log(allContracts)
     return (
         <Paper>
             <TableContainer component={Paper}>

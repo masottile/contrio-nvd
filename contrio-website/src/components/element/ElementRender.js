@@ -8,7 +8,6 @@ export const ElementRender = ({ type, dbKey }) => {
 
     const handleOnChange = ( event ) => {
         context.currentContract[dbKey] = event.target.value;
-        console.log(context.currentContract)
     }
 
     const RenderElement = () => {

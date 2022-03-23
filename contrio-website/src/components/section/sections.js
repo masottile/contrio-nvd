@@ -24,26 +24,26 @@ export const defaultSections = {
         title: 'Compensation Section',
         allowCustom: false
     },
-    phases: {
-        id: 'PHASES',
-        title: 'Project Phases',
-        allowCustom: true
-    },
-    confidential: {
-        id: 'CONFIDENTIAL',
-        title: 'Confidentiality Section',
-        allowCustom: true
-    },
-    termination: {
-        id: 'TERMINATION',
-        title: 'Termination Section',
-        allowCustom: true
-    },
-    remedy: {
-        id: 'REMEDY',
-        title: 'Remedy Section',
-        allowCustom: true
-    }
+    // phases: {
+    //     id: 'PHASES',
+    //     title: 'Project Phases',
+    //     allowCustom: true
+    // },
+    // confidential: {
+    //     id: 'CONFIDENTIAL',
+    //     title: 'Confidentiality Section',
+    //     allowCustom: true
+    // },
+    // termination: {
+    //     id: 'TERMINATION',
+    //     title: 'Termination Section',
+    //     allowCustom: true
+    // },
+    // remedy: {
+    //     id: 'REMEDY',
+    //     title: 'Remedy Section',
+    //     allowCustom: true
+    // }
 }
 
 export const customSections = {

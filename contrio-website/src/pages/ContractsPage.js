@@ -40,8 +40,6 @@ function ContractsPage() {
             }
         })
     }, []);
-
-    console.log(allContracts)
     
     return (
         <ViewContext.Provider value={viewContext}>

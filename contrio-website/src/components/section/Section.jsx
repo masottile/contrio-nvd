@@ -3,20 +3,27 @@ import Grid from '@mui/material/Grid';
 import './section.css'
 import AppContext from '../context/AppContext';
 import ContractContext from '../context/ContractContext'
+import { defaultSections, customSections } from '../section/sections';
+import SectionRender from './SectionRender';
 
-const Section = ({ title }) => {
+const Section = ({ id, title }) => {
   // const [values, setValues] = useState({}); <------------ TODO: will most likely need to use state to update values inside section
 
   const context = useContext(AppContext);
   const contractContext = useContext(ContractContext);
 
-  // todo ----- will need to iterate through the state (javascript object)
-  // console.log("title" in contractContext.currentContract);
+  const isDefault = () => {
+    // is this section one of the default sections?
+    Object.entries(defaultSections).forEach(item => {
+      if (id === item[1].id){
+        return true;
+      }
+    })
+    return false;
+  }
 
-  debugger;
   const RenderHeader = () => {
     let sectionTitle = title
-    console.log(contractContext)
     if ("title" in contractContext.currentContract) {
       sectionTitle = contractContext.currentContract.title
     }
@@ -28,52 +35,50 @@ const Section = ({ title }) => {
     </div>
   }
 
+  const createCustomSections = () => {
+    return (
+      <div>
+        <h2 className='s-title'>{title}</h2>
+        {/* <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p> */}
+      </div>
+    )
+  }
+
+  // const handleClick = () => {
+  //   // change the elementContext to reflect this
+  //   const prevElements = { ...elementContext.currentElements};
+  //   delete prevElements[section][id];
+  //   elementContext.setElements(elements => ({ ...prevElements}));
+
+  //   //change the contractContext to reflect this
+  //   const prevContract = contractContext.currentContract
+  //   delete prevContract[id];
+  //   contractContext.setContract(prevContract);
+  // };
+
+  // const RenderDeleteButton = () => {
+  //   if (deletable) {
+  //     return (
+  //       <IconButton
+  //         onClick={handleClick}
+  //         size="small"
+  //         sx={{ ml: 2 }}
+  //       >
+  //         <DeleteIcon sx={{ width: 32, height: 32 }} />
+  //       </IconButton>
+  //     )
+  //   }
+  //   else return null;
+  // }
+
   return (
-    <Grid item className='s-item' onClick={() => {context.setSection(title)}} xs={12}>
-      {title === "HEADER" && (
-          <RenderHeader />
+    <Grid item className='s-item' onClick={() => { context.setSelectedSection(title) }} xs={12}>
+      {isDefault && (
+        <SectionRender id={id} />
       )}
-      {title === "AGREEMENT" && (
-        <div>
-          <h2 className='s-title'>1. Services</h2>
-          <p>Independent Contract shall provide the following services to to Client (the "Services"): {}. In addition, Independent Contractor shall perform such other duties and tasks, or changes
-            to the Services, as may be agreed upon by the Parties.
-          </p>
-        </div>
-      )}
-      {title === "PROJECT_SCOPE" && (
-        <div>
-          <h2 className='s-title'>2. Project Scope</h2>
-          <p>Inconsideration for Independent Contractor's performance of the Services, Client shall pay Independent Contractor:
-          </p>
-        </div>
-      )}
-      {title === "COMPENSATION" && (
-        <div>
-          <h2 className='s-title'>3. Compensation</h2>
-          <p>Inconsideration for Independent Contractor's performance of the Services, Client shall pay Independent Contractor:
-            {/* Fixed Contract Output */}
-            { (contractContext.currentContract["fe-amount"] !== undefined && contractContext.currentContract["fe-amount"] !== undefined) &&
-              <p>A Set Fee. The Client shall pay the Independent Contract ${contractContext.currentContract["fe-amount"] + " "} 
-              after the Independent Contractor completes the Services. After the Independent Contractor sends Client an invoice. 
-              Client shall pay Independent Contractor within {contractContext.currentContract["fe-payment-buffer"]} days.
-              </p>
-            }
-            {/* Hourly Wage Contract Output */}
-            { (contractContext.currentContract["hw-amount"] !== undefined || contractContext.currentContract["hw-pay-interval"] !== undefined) && 
-            <p>
-                A Fixed Wage. The Client shall pay the Independent Contract ${contractContext.currentContract["hw-amount"]} per hour. The Independent 
-                Contractor will be paid {contractContext.currentContract["hw-pay-interval"]}. Independent Contractor will be paid on 
-                {(contractContext.currentContract["hw-pay-interval"] === ("weekly") ? `${contractContext.currentContract["hw-pay-schduled-date"]} of every week.` : 
-              (contractContext.currentContract["hw-pay-interval"] === ("biweekly") ? `${contractContext.currentContract["hw-pay-schduled-date"]} of every two weeks.` :
-              (contractContext.currentContract["hw-pay-interval"] === ("monthly") ? `${contractContext.currentContract["hw-pay-schduled-date"]} of every month.` : "")
-              ))} After the Independent Contractor sends Client an invoice. Client shall pay Independent Contractor 
-              within {contractContext.currentContract["hw-payment-buffer"]} days.
-            </p>
-            }
-          </p>
-        </div>
-      )}
+
+      
+      {!isDefault() ? createCustomSections() : null}
     </Grid>
 
   )
