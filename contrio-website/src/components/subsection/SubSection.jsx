@@ -46,12 +46,10 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
                 enf: Enforce.none,
                 canDelete: true,
             };
-            console.log(sectionName);
+            console.log(newObj[sectionName]);
             newObj[sectionName][newid] = newElement
-            // console.log(newObj[sectionName][newid]);
 
             elementContext.setElements(elements => ({ ...newObj}));
-            console.log(elementContext.currentElements);
         }
 
         return (
@@ -90,8 +88,8 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
         const arr = [];
 
         Object.entries(elementContext.currentElements).map(item => {
-            console.log(item);
-            if (item[0] === currContext.currSection) {
+            console.log(elementContext);
+            if (item[0] === currContext.currSelectedSection) {
                 Object.entries(item[1]).map(e => {
                     const dbKey = e[0];
                     const element = e[1];

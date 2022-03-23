@@ -21,20 +21,29 @@ const Section = ({ title }) => {
     </div>
   }
 
+  const createCustomSections = () => {
+    return (
+      <div>
+        <h2 className='s-title'>{title}</h2>
+        {/* <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p> */}
+      </div>
+    )
+  }
+
   return (
-    <Grid item className='s-item' onClick={() => {context.setSection(title)}} xs={12}>
+    <Grid item className='s-item' onClick={() => { context.setSelectedSection(title) }} xs={12}>
       {title === "HEADER" && (
-          <RenderHeader />
+        <RenderHeader />
       )}
       {title === "AGREEMENT" && (
         <div>
           <h2 className='s-title'>{"agreement section"}</h2>
-          <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p>
+          {/* <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p> */}
         </div>
       )}
-      
+      {(title !== "HEADER" && title !== "AGREEMENT") ? createCustomSections() : null}
     </Grid>
-    
+
   )
 }
 

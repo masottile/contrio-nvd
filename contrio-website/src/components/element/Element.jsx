@@ -22,9 +22,6 @@ const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
     const prevContract = contractContext.currentContract
     delete prevContract[id];
     contractContext.setContract(prevContract);
-
-    // console.log(elementContext);
-    // console.log(contractContext);
   };
 
   const RenderDeleteButton = () => {

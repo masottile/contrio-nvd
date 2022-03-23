@@ -14,8 +14,7 @@ const ComponentDisplay = () => {
         const arr = [];
 
         Object.entries(defaultSections).map(item => {
-            if (context.currSection === item[1].title) {
-                console.log(item);
+            if (context.currSelectedSection === item[1].title) {
                 arr.push(
                     <SubSection className={`ces-${item[0]}`}
                         key={item[1].id}

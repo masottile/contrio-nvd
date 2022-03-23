@@ -8,34 +8,35 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import newID from '../idGenerator/getID';
+import SectionContext from '../context/SectionContext';
 
 const ContractDisplay = () => {
+  const sectionContext = useContext(SectionContext);
   const [section, setSection] = useState({});
-  const defaultSectionTitle = "Component Name";
-  const defaultComponentTitle = "Component Description";
+  const defaultSectionTitle = "Section Name";
+  const defaultComponentTitle = "Section Description";
 
   const CustomSectionCreationButton = () => {
     const addToSubsectionArray = () => {
-      // const newid = newID();
+      const newid = newID();
 
-      // const newObj = {...elementContext.currentElements}; 
-      // const newSection = {
-      //   id: newid,
-      //   title: defaultSectionTitle,
-      //   component_title: defaultComponentTitle
-      // };
+      const newObj = { ...section };
+      const newSection = {
+        id: newid,
+        title: defaultSectionTitle,
+        component_title: defaultComponentTitle
+      };
+      defaultSections[defaultSectionTitle + newid] = newSection;
+      newObj[defaultSectionTitle + newid] = newSection;
 
-      // newObj[sectionName][newid] = newElement
-
-      // elementContext.setElements(elements => ({ ...newObj }));
-      // console.log(elementContext.currentElements);
+      setSection(elements => ({ ...newObj }));
     }
 
     return (
       <>
         <Tooltip title="Create New Section">
           <IconButton
-            onClick={addToSubsectionArray()}
+            onClick={() => addToSubsectionArray()}
             size="small"
             sx={{ ml: 2 }}
           >
@@ -45,6 +46,22 @@ const ContractDisplay = () => {
       </>
     )
   }
+
+  // function to create components from current state:
+  // const printElements = () => {
+  //   const arr = [];
+
+  //   Object.entries(section).map(item => {
+  //     arr.push(
+  //       <Section
+  //         key={item[1].id}
+  //         title={item[1].title}
+  //       />
+  //     )
+  //   });
+
+  //   return arr
+  // }
 
   const createSections = () => {
     const arr = [];
@@ -57,13 +74,14 @@ const ContractDisplay = () => {
         />
       );
     });
-    
+
     return arr
   }
 
   return (
     <Grid container className='cts-container'>
       {createSections()}
+      {/* {printElements()} */}
       <CustomSectionCreationButton />
     </Grid>
   )

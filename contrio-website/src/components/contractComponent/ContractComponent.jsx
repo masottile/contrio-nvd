@@ -11,13 +11,15 @@ import { defaultElements, customElements } from '../element/elements';
 import AppContext from '../context/AppContext';
 import ContractContext from '../context/ContractContext';
 import ElementContext from '../context/ElementContext';
+import SectionContext from '../context/SectionContext';
 
 /*
  * Main 'contract-creation' component that creates the contract and component displays 
  */
 
 const ContractComponent = ({ open, handleClose, contractObj }) => {
-    const [section, setSection] = useState('DEFAULT');
+    const [selectedSection, setSelectedSection] = useState('DEFAULT');
+    const [section, setSection] = useState({});
     const [contract, setContract] = useState({});
     const [elements, setElements] = useState({});
     const [view, setView] = useState(false);
@@ -54,8 +56,8 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
     }
 
     const appContext = {
-        currSection: section,
-        setSection
+        currSelectedSection: selectedSection,
+        setSelectedSection
     }
 
     const elementContext = {
@@ -63,11 +65,14 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
         setElements
     }
 
+    const sectionContext = {
+        currSection: section,
+        setSection
+    }
+
     // submit contract details to backend
     const handleContractSubmit = (event) => {
         event.preventDefault();
-        console.log(contract);
-        console.log(contractContext.currentContract)
         const contractData = contractContext.currentContract;
 
         alert('Creating contract ' + contractData.title + ' between ' + contractData.freelancer + ' and ' + contractData.client);
@@ -93,21 +98,23 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
         <Dialog fullWidth maxWidth='xl' open={open} onClose={handleClose}>
             <ContractContext.Provider value={contractContext}>
                 <AppContext.Provider value={appContext}>
-                    <ElementContext.Provider value={elementContext}>
-                        <Grid container spacing={2} sx={{ padding: 4 }}>
-                            <Grid className='cc-template' item xs={8}>
-                                <ContractDisplay />
+                    <SectionContext.Provider value={sectionContext}>
+                        <ElementContext.Provider value={elementContext}>
+                            <Grid container spacing={2} sx={{ padding: 4 }}>
+                                <Grid className='cc-template' item xs={8}>
+                                    <ContractDisplay />
+                                </Grid>
+                                <Grid className='cc-component' item xs={4}>
+                                    <ComponentDisplay />
+                                </Grid>
+                                <Grid className='cc-button' item xs={2}>
+                                    {!view && <form onSubmit={handleContractSubmit}>
+                                        <input type='submit' value='Submit' />
+                                    </form>}
+                                </Grid>
                             </Grid>
-                            <Grid className='cc-component' item xs={4}>
-                                <ComponentDisplay />
-                            </Grid>
-                            <Grid className='cc-button' item xs={2}>
-                                {!view && <form onSubmit={handleContractSubmit}>
-                                    <input type='submit' value='Submit' />
-                                </form>}
-                            </Grid>
-                        </Grid>
-                    </ElementContext.Provider>
+                        </ElementContext.Provider>
+                    </SectionContext.Provider>
                 </AppContext.Provider>
             </ContractContext.Provider>
         </Dialog>
