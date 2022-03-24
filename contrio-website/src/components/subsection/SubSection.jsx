@@ -13,6 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Enforce } from '../Enforce';
 import CustomContext from '../context/CustomContext';
 
+import {feCompensationElements, hwCompensationElements} from '../element/compensationElements'
+
 const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs }) => {
     const customContext = useContext(CustomContext);
     const default_ComponentName = "Component Name";
@@ -121,80 +123,12 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
         const addCompensationOption = (isSetFee) => {
             const newObj = {};
             newObj[sectionID] = {};
-            let newElements = [];
+  
             if (isSetFee) {
-                newElements = [
-                    {
-                    id: 'fe-amount',
-                    status: Status.active,
-                    name: 'Set Fee Amount',
-                    desc: 'Dollar Figure Amount',
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                {
-                    id: 'fe-payment-buffer',
-                    status: Status.active,
-                    name: "Invoice Payment Buffer",
-                    desc: "e.g. Independent Contract will be paid with in [X] Days after an invoice is submitted.",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-            ];
+                newObj[sectionID] = feCompensationElements
             } else {
-                newElements = [{
-                    id: 'hw-amount',
-                    status: Status.active,
-                    name: "Hourly Wage",
-                    desc: "Set Hourly Wage Amount",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                {
-                    id: 'hw-pay-interval',
-                    status: Status.active,
-                    name: "Pay Schedule Interval",
-                    desc: "e.g. pick weekly, biweekly, or monthly",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                {
-                    id: 'hw-pay-schduled-date',
-                    status: Status.active,
-                    name: "Pay Schedule Date",
-                    desc: "pick date or day. e.g. Saturday or 1st",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                {
-                    id: 'hw-invoice-scheduled-date',
-                    status: Status.active,
-                    name: "Invoice Schedule Interval",
-                    desc: "e.g. Will Invoice weekly/bi-weekly/month",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                {
-                    id: 'hw-payment-buffer',
-                    status: Status.active,
-                    name: "Invoice Payment Buffer",
-                    desc: "e.g. Independent Contract will be paid with in [X] Days after an invoice is submitted.",
-                    type: Type.tbs,
-                    enf: Enforce.none,
-                    canDelete: false,
-                },
-                ]
+                newObj[sectionID] = hwCompensationElements
             }
-            
-            newElements.forEach((newElement) => { 
-                newObj[sectionID][newElement.id] = newElement
-            });
     
             customContext.setElements(() => ({ ...newObj }));
             console.log(customContext.currentElements);
@@ -236,7 +170,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
         {/* {subsectionArray} */}
         {printElements()}
         {/* {elements} */}
-        {/* <CompensationOptionAddButton /> */}
+        <CompensationOptionAddButton />
 
         <CustomElementCreationButton />
     </Grid>

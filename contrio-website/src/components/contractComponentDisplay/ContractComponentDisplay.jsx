@@ -11,7 +11,7 @@ import { defaultSections, customSections } from '../section/sections';
 const ComponentDisplay = () => {
     const context = useContext(AppContext);
     const customContext = useContext(CustomContext);
-    console.log(context.currSelectedSection)
+    // console.log(context.currSelectedSection)
 
     const createSubSection = () => {
         const arr = [];

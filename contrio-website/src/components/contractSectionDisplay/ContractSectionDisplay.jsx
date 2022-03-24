@@ -53,7 +53,7 @@ const ContractDisplay = () => {
   const createSections = () => {
     const arr = [];
 
-    console.log(customContext.currentSections)
+    // console.log(customContext.currentSections)
     Object.entries(customContext.currentSections).forEach(item => {
       arr.push(
         <Section
