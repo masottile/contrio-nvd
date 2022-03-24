@@ -44,7 +44,10 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
                 enf: Enforce.none,
                 canDelete: true,
             };
-            console.log(newObj[sectionID]);
+
+            if (newObj[sectionID] === undefined || newObj[sectionID] === null) {
+                newObj[sectionID] = {};
+            }
             newObj[sectionID][newid] = newElement
 
             customContext.setElements(elements => ({ ...newObj }));
@@ -87,8 +90,6 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
     const printElements = () => {
         const arr = [];
 
-        console.log(currContext.currSelectedSection)
-        console.log(customContext.currentElements)
         Object.entries(customContext.currentElements).forEach(item => {
             if (item[0] === currContext.currSelectedSection) {
                 Object.entries(item[1]).forEach(e => {
@@ -102,7 +103,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
                 });
             }
         })
-        console.log(arr)
+        // console.log(arr)
 
         return arr
     }
