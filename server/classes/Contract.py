@@ -6,23 +6,23 @@ class Contract:
         self.id = uuid.uuid4()
         self.userid = contract_json['userid']
         self.contract = contract_json['contract']
-        self.state = State.CREATED
+        self.contract_state = State.CREATED
 
     def get_json(self):
         return {'id' : str(self.id),
                 'userid': str(self.userid),
                 'contract' : self.contract,
-                'contract_state': self.state}
+                'contract_state': self.contract_state}
 
     def get_id(self):
         return self.id
     
     def get_state(self):
-        return self.state
+        return self.contract_state
     
     def set_state(self, state):
         if isinstance(state, State):
-            self.state = state
+            self.contract_state = state
 
 def create_contract(user_id, contract_json):
     return {'id' : str(uuid.uuid4()),

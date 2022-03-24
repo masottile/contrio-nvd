@@ -134,7 +134,6 @@ def sign_contract(user_id, contract_id):
                 },
                 ReturnValues="UPDATED_NEW"
         )
-        print(db_response)
         if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
             http_response = make_response(jsonify(db_response), 200)
         else:
@@ -185,7 +184,6 @@ def submit_deliverable(freelancer_id, contract_id):
             },
             ReturnValues="UPDATED_NEW"
         )
-        print(db_response)
         if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
             http_response = make_response(jsonify(db_response), 200)
         return http_response;
@@ -205,7 +203,6 @@ def approve_deliverable(freelancer_id, contract_id):
             },
             ReturnValues="UPDATED_NEW"
         )
-        print(db_response)
         if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
             http_response = make_response(jsonify(db_response), 200)
         return http_response;
