@@ -8,21 +8,28 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import Divider from '@mui/material/Divider';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import PreviewIcon from '@mui/icons-material/Preview';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import PublishIcon from '@mui/icons-material/Publish';
+import StartIcon from '@mui/icons-material/Start';
+import EditIcon from '@mui/icons-material/Edit';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Chip, TableHead, TableBody, Table, TableContainer, TableCell, TableRow, TablePagination } from "@mui/material";
 import ContractComponent from "../contractComponent/ContractComponent";
 import { CONTRACT_STATES } from "./util";
 import ViewContext from '../context/ViewContext';
+import axios from "axios";
+import { Box } from "@mui/system";
 
-function ViewContractsTable() {
+
+function ViewContractsTable({ user }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [page, setPage] = useState(0);
     const rowsPerPage = 10;
     const [openDetailedContract, setOpenDetailedContract] = useState(false);
     const viewContext = useContext(ViewContext);
-    const contracts = viewContext.listContracts;
+    const [selectedFile, setSelectedFile] = useState(null);
+    let contracts = viewContext.listContracts;
     const handleViewContractClick = () => {
         setOpenDetailedContract(true);
     }
@@ -31,7 +38,65 @@ function ViewContractsTable() {
         setAnchorEl(null);
         viewContext.setContract({});
     };
-    
+    const importData = () => {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = _ => {
+            // you can use this method to get file and perform respective operations
+            let files = Array.from(input.files);
+            setSelectedFile(files)
+            handleSubmitContract();
+        };
+        input.click();
+    }
+
+    const handleSignContract = () => {
+        axios.put(`http://127.0.0.1:5000/api/contracts/sign/${user.Username}/${viewContext.currContract.id}`).then((response) => {
+            if (response.status === 200) {
+                updateListedContracts(response);
+            }
+        })
+        handleClose();
+    }
+
+    const handleStartContract = () => {
+        axios.put(`http://127.0.0.1:5000/api/contracts/start/${user.Username}/${viewContext.currContract.id}`).then((response) => {
+            if (response.status === 200) {
+                updateListedContracts(response);
+            }
+        });
+        handleClose();
+    }
+    const handleSubmitContract = () => {
+        axios.put(`http://127.0.0.1:5000/api/contracts/submit/${user.Username}/${viewContext.currContract.id}`).then((response) => {
+            if (response.status === 200) {
+                updateListedContracts(response);
+            }
+        });
+        handleClose();
+    }
+    const handleApprove = () => {
+        axios.put(`http://127.0.0.1:5000/api/contracts/approve/${user.Username}/${viewContext.currContract.id}`).then((response) => {
+            if (response.status === 200) {
+                updateListedContracts(response);
+            }
+        });
+        handleClose();
+    }
+
+    const updateListedContracts = (response) => {
+        const newContractsList = viewContext.listContracts.map((contract) => {
+            if (contract.id === viewContext.currContract.id) {
+                Object.keys(response.data['Attributes']).forEach((key) => {
+                    contract[key] = response.data['Attributes'][key]
+                });
+            }
+            return contract
+        });
+        viewContext.setAllContracts(newContractsList);
+        contracts = newContractsList;
+    }
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -93,9 +158,9 @@ function ViewContractsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { 
+                        {
                             contracts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-            
+
                                 <TableRow
                                     key={row.id}
                                     value={row.contract}
@@ -105,8 +170,7 @@ function ViewContractsTable() {
                                     <TableCell align="center">{row.contract.client}</TableCell>
                                     <TableCell align="center">{row.contract.date}</TableCell>
                                     <TableCell align="center">
-                                        {/* <Chip size='small' label={row.state.label} style={{ marginTop: '0.5rem', backgroundColor: `${row.state.color}`, color: '#FFF' }} /> */}
-                                        <Chip size='small' label={CONTRACT_STATES[parseInt(row.state)].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.state].color}`, color: '#FFF' }} />
+                                        <Chip size='small' label={CONTRACT_STATES[parseInt(row.contract_state)].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.contract_state].color}`, color: '#FFF' }} />
                                     </TableCell>
 
                                     <TableCell align="center">
@@ -118,8 +182,10 @@ function ViewContractsTable() {
                                             aria-expanded={open ? 'true' : undefined}
                                             variant="contained"
                                             disableElevation
-                                            onClick={(e) => {setAnchorEl(e.currentTarget);
-                                                viewContext.setContract(row)}}
+                                            onClick={(e) => {
+                                                setAnchorEl(e.currentTarget);
+                                                viewContext.setContract(row)
+                                            }}
                                             endIcon={<KeyboardArrowDownIcon />}
                                         >
                                             Options
@@ -133,24 +199,50 @@ function ViewContractsTable() {
                                             open={open}
                                             onClose={handleClose}
                                         >
-                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => {setOpenDetailedContract(false)}} contractObj={viewContext.currContract}/>}
+                                            {openDetailedContract && <ContractComponent open={openDetailedContract} handleClose={() => { setOpenDetailedContract(false) }} contractObj={viewContext.currContract} />}
                                             <MenuItem onClick={handleViewContractClick} disableRipple>
                                                 <PreviewIcon />
                                                 {viewContext.currContract.signed ? "View Contract" : "Edit Contract"}
                                             </MenuItem>
-                                            <MenuItem onClick={handleClose} disableRipple>
+
+                                            {viewContext.currContract.contract_state === '1' && (
+                                                <MenuItem onClick={handleStartContract} disableRipple>
+                                                    <StartIcon />
+                                                    Start Project
+                                                </MenuItem>)
+                                            }
+                                            {viewContext.currContract.contract_state === '2' && (
+                                                <MenuItem onClick={importData} disableRipple>
+                                                    <PublishIcon />
+                                                    Submit Deliverable
+                                                </MenuItem>)
+                                            }
+                                            {viewContext.currContract.contract_state === '3' && (
+                                                <MenuItem onClick={handleApprove} disableRipple>
+                                                    <CheckCircleIcon />
+                                                    Approve
+                                                </MenuItem>)
+                                            }
+                                            {!viewContext.currContract.signed && (
+                                                <MenuItem onClick={handleSignContract} disableRipple>
+                                                    <EditIcon />
+                                                    Sign Contract
+                                                </MenuItem>)
+                                            }
+                                            {viewContext.currContract.signed && (<MenuItem onClick={handleClose} disableRipple>
                                                 <AssessmentIcon />
                                                 Generate Kanban Board
-                                            </MenuItem>
-                                            <Divider sx={{ my: 0.5 }} />
-                                            <MenuItem onClick={handleClose} disableRipple>
-                                                <ArchiveIcon />
-                                                Archive
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose} disableRipple>
-                                                <MoreHorizIcon />
-                                                More
-                                            </MenuItem>
+                                            </MenuItem>)
+                                            }
+                                            {viewContext.currContract.contract_state === '4' && (
+                                                <Box>
+                                                    <Divider sx={{ my: 0.5 }} />
+                                                    <MenuItem onClick={handleClose} disableRipple>
+                                                        <ArchiveIcon />
+                                                        Archive
+                                                    </MenuItem>
+                                                </Box>)
+                                            }
                                         </StyledMenu>
                                     </TableCell>
                                 </TableRow>

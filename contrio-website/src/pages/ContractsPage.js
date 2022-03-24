@@ -7,6 +7,7 @@ import ViewContext from '../components/context/ViewContext';
 import axios from 'axios';
 
 function ContractsPage() {
+    const [user, setUser] = useState();
     const [openCreateForm, setCreateForm] = useState(false);
     const [contract, setContract] = useState({});
     const [allContracts, setAllContracts] = useState([]);
@@ -18,7 +19,8 @@ function ContractsPage() {
     const viewContext = {
         currContract: contract,
         setContract,
-        listContracts: allContracts
+        listContracts: allContracts,
+        setAllContracts,
     }
 
     useEffect(() => {
@@ -29,6 +31,7 @@ function ContractsPage() {
     
           if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
             userData = JSON.parse(localStorage.getItem(key));
+            setUser(userData);
           }
         })
         // retrieve all of that user's contracts
@@ -51,7 +54,7 @@ function ContractsPage() {
             <Typography style={{ textAlign:'left', float: 'left', fontSize: '25px', fontWeight: 'bold', margin :'1rem 0 0 1rem',}}>
                 Contracts
             </Typography>
-            <ViewContractsTable />
+            <ViewContractsTable user={user}/>
         </Paper>
         </ViewContext.Provider>
     );
