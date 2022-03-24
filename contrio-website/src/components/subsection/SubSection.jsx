@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Enforce } from '../Enforce';
 import CustomContext from '../context/CustomContext';
 
-const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs }) => {
+const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs }) => {
     const customContext = useContext(CustomContext);
     const default_ComponentName = "Component Name";
     const default_ComponentDesc = "Component Description";
@@ -44,8 +44,8 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
                 enf: Enforce.none,
                 canDelete: true,
             };
-            console.log(newObj[sectionName]);
-            newObj[sectionName][newid] = newElement
+            console.log(newObj[sectionID]);
+            newObj[sectionID][newid] = newElement
 
             customContext.setElements(elements => ({ ...newObj }));
             console.log(customContext.currentElements);
@@ -87,19 +87,22 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
     const printElements = () => {
         const arr = [];
 
+        console.log(currContext.currSelectedSection)
+        console.log(customContext.currentElements)
         Object.entries(customContext.currentElements).forEach(item => {
-            if (item[0] === currContext.currSection) {
+            if (item[0] === currContext.currSelectedSection) {
                 Object.entries(item[1]).forEach(e => {
                     const dbKey = e[0];
                     const element = e[1];
                     if (element.status === Status.active) {
                         arr.push(
-                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
+                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} section={sectionID} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
                         )
                     }
                 });
             }
         })
+        console.log(arr)
 
         return arr
     }
@@ -116,7 +119,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
 
         const addCompensationOption = (isSetFee) => {
             const newObj = {};
-            newObj[sectionName] = {};
+            newObj[sectionID] = {};
             let newElements = [];
             if (isSetFee) {
                 newElements = [
@@ -189,7 +192,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
             }
             
             newElements.forEach((newElement) => { 
-                newObj[sectionName][newElement.id] = newElement
+                newObj[sectionID][newElement.id] = newElement
             });
     
             customContext.setElements(() => ({ ...newObj }));
@@ -197,7 +200,7 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
         }
 
         return (
-            sectionName === 'COMPENSATION' &&
+            sectionID === 'COMPENSATION' &&
             <>
                 <Tooltip title="Select Payment Option">
                     <IconButton
@@ -228,11 +231,11 @@ const SubSection = ({ sectionName, sectionTitle, currContext, allowCustomInputs 
     }
 
     return <Grid item className='c-item' xs={12}>
-        <h2 className='c-title'>{sectionTitle}</h2>
+        {/* <h2 className='c-title'>{sectionTitle}</h2> */}
         {/* {subsectionArray} */}
         {printElements()}
         {/* {elements} */}
-        <CompensationOptionAddButton />
+        {/* <CompensationOptionAddButton /> */}
 
         <CustomElementCreationButton />
     </Grid>

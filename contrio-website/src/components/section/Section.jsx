@@ -12,28 +12,8 @@ const Section = ({ id, title }) => {
   const context = useContext(AppContext);
   const contractContext = useContext(ContractContext);
 
-  const isDefault = () => {
-    // is this section one of the default sections?
-    Object.entries(defaultSections).forEach(item => {
-      if (id === item[1].id){
-        return true;
-      }
-    })
-    return false;
-  }
-
-  const RenderHeader = () => {
-    let sectionTitle = title
-    if ("title" in contractContext.currentContract) {
-      sectionTitle = contractContext.currentContract.title
-    }
-    return <div className='s-subitem' xs={12}>
-      <h2 className='s-title'>{sectionTitle}</h2>
-      <p>This Freelance Contract (this "Agreement") is made as of {contractContext.currentContract.date} (the "Effective Date") by and between {contractContext.currentContract.client} (Client) and {contractContext.currentContract.freelancer} (Independent Contractor).
-      Client and Independent Contractor may each be referred to in this Agreement as a "Party" and collectively as the "Parties".
-      </p>
-    </div>
-  }
+  // is this a default section or a custom section? (for rendering purposes)
+  const isDefault = Object.entries(defaultSections).reduce((prev, curr) => {return (prev || (id===curr[1].id))}, false)
 
   const createCustomSections = () => {
     return (
@@ -72,13 +52,11 @@ const Section = ({ id, title }) => {
   // }
 
   return (
-    <Grid item className='s-item' onClick={() => { context.setSelectedSection(title) }} xs={12}>
+    <Grid item className='s-item' onClick={() => { context.setSelectedSection(id) }} xs={12}>
       {isDefault && (
         <SectionRender id={id} />
       )}
-
-      
-      {!isDefault() ? createCustomSections() : null}
+      {!isDefault && createCustomSections() }
     </Grid>
 
   )

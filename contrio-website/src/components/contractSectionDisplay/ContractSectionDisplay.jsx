@@ -13,10 +13,12 @@ import CustomContext from '../context/CustomContext';
 
 const ContractDisplay = () => {
   const customContext = useContext(CustomContext);
+  const [section, setSection] = useState({});
   const defaultSectionTitle = "Section Name";
   const defaultComponentTitle = "Section Description";
 
   const CustomSectionCreationButton = () => {
+
     const addToSubsectionArray = () => {
       const newid = uuidv4();
 
@@ -24,13 +26,13 @@ const ContractDisplay = () => {
       const newSection = {
         id: newid,
         title: defaultSectionTitle,
-        component_title: defaultComponentTitle
+        allowCustom: true
       };
       // defaultSections[defaultSectionTitle + newid] = newSection;
       newObj[defaultSectionTitle + newid] = newSection;
-      console.log(newObj)
-      customContext.setSections(sections => ({ ...newObj }));
-
+      customContext.setSections(elements => ({ ...newObj }));
+      setSection(newObj)
+      console.log(customContext.currentSections);
     }
 
     return (
@@ -51,6 +53,7 @@ const ContractDisplay = () => {
   const createSections = () => {
     const arr = [];
 
+    console.log(customContext.currentSections)
     Object.entries(customContext.currentSections).forEach(item => {
       arr.push(
         <Section

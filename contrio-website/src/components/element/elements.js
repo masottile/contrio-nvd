@@ -14,7 +14,7 @@ import { Enforce } from "../Enforce"
 export const defaultElements = {
     "HEADER": {
         title: {
-            id: 1,
+            id: 11,
             status: Status.active,
             name: "Contract Title",
             desc: "The name of this contract",
@@ -23,7 +23,7 @@ export const defaultElements = {
             canDelete: false
         },
         client: {
-            id: 2,
+            id: 12,
             status: Status.active,
             name: "Client's Name",
             desc: "Name of the client (e.g. Apple Inc.)",
@@ -32,7 +32,7 @@ export const defaultElements = {
             canDelete: false
         },
         freelancer: {
-            id: 3,
+            id: 13,
             status: Status.active,
             name: "Freelancer's Name",
             desc: "Name of the freelancer (e.g. John Doe)",
@@ -41,7 +41,7 @@ export const defaultElements = {
             canDelete: false
         },
         date: {
-            id: 4,
+            id: 14,
             status: Status.active,
             name: "Agreement Date",
             desc: "Date of signing",
@@ -50,35 +50,76 @@ export const defaultElements = {
             canDelete: false
         },
         notes: {
-            id: 5,
+            id: 15,
             status: Status.active,
             name: "Notes",
             desc: "Additional Notes",
             type: Type.tbl,
             enf: Enforce.none,
+            canDelete: true
+        }
+    },
+    "WORK": {
+        workDescription: {
+            id: 21,
+            status: Status.active,
+            name: "Work Description",
+            desc: "Short description of work or services provided",
+            type: Type.tbl,
+            enf: Enforce.none,
             canDelete: false
+        },
+        revisions: {
+            id: 22,
+            status: Status.active,
+            name: "Revisions",
+            desc: "Number of requested revisions allowed",
+            type: Type.tbs,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        notes: {
+            id: 23,
+            status: Status.active,
+            name: "Notes",
+            desc: "Additional Notes",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: true
+        }
+    },
+    "COMPENSATION": {
+        paymentAmount: {
+            id: 31,
+            status: Status.active,
+            name: "Payment Amount",
+            desc: "Total project payment in CAD",
+            type: Type.tbs,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        revisions: {
+            id: 32,
+            status: Status.active,
+            name: "Payment Schedule",
+            desc: "Short description of when payments must be made during the project",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: false
+        },
+        notes: {
+            id: 33,
+            status: Status.active,
+            name: "Notes",
+            desc: "Additional Notes",
+            type: Type.tbl,
+            enf: Enforce.none,
+            canDelete: true
         }
     },
     "AGREEMENT": {
-        service: {
-            id: 6,
-            status: Status.active,
-            name: "Overview of Services Provided",
-            desc: "General description of services provided by the freelancer",
-            type: Type.tbl,
-            enf: Enforce.none,
-            canDelete: false
-        },
-        service_detail: {
-            id: 7,
-            status: Status.active,
-            name: "List of detailed services",
-            desc: "A detailed list of all services provided by freelancer",
-            type: Type.tbl,
-            enf: Enforce.none,
-            canDelete: false
-        },
-    },
+        
+    }
 }
 
 export const customElements = {}
