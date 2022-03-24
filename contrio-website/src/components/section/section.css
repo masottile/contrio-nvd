@@ -22,6 +22,8 @@
     overflow: hidden;
     border-radius: 10px;
     justify-content: center;
+    padding: 10px;
+    margin: 5px;
 }
 
 .s-title {

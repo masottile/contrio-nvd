@@ -16,12 +16,33 @@ const Section = ({ id, title }) => {
   const isDefault = Object.entries(defaultSections).reduce((prev, curr) => {return (prev || (id===curr[1].id))}, false)
 
   const createCustomSections = () => {
-    return (
-      <div>
-        <h2 className='s-title'>{title}</h2>
-        {/* <p>{contractContext.currentContract.title ? `${contractContext.currentContract.title}` : ""} </p> */}
-      </div>
-    )
+    // If there are no elements, or the elements don't have stored values, then there is nothing to display
+    if (contractContext.currentContract[id] === undefined || contractContext.currentContract[id] === null) {
+      return (
+        <div className='s-subitem' xs={12}>
+          <h2 className='s-title'>{title}</h2>
+        </div>
+      )
+    }
+    // If there are elements, then we can display them
+    else {
+      let arr = [];
+
+      console.log(contractContext.currentContract[id])
+      Object.entries(contractContext.currentContract[id]).forEach(item => {
+        arr.push(
+          <p key={item[0]}>{item[1].name}: {item[1].value}</p>
+        )
+      })
+      
+      return (
+        <div className='s-subitem' xs={12}>
+          <h2 className='s-title'>{title}</h2>
+          {arr}
+        </div>
+      )
+      
+    }
   }
 
   // const handleClick = () => {

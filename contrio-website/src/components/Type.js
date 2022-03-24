@@ -5,4 +5,5 @@ export const Type = {
     img: "image",
     blp: "bulletPoint",
     comp: "compensation",
+    cust: "custom"
 }

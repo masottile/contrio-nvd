@@ -28,7 +28,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
             setAnchorEl(null);
         };
 
-        const addToSubsectionArray = (elementType) => {
+        const addToSubsectionArray = () => {
             const newid = uuidv4();
 
             setAnchorEl(null);
@@ -40,7 +40,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
                 status: Status.active,
                 name: default_ComponentName,
                 desc: default_ComponentDesc,
-                type: elementType,
+                type: Type.cust,
                 enf: Enforce.none,
                 canDelete: true,
             };
@@ -97,7 +97,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
                     const element = e[1];
                     if (element.status === Status.active) {
                         arr.push(
-                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} section={sectionID} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
+                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} sectionID={sectionID} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
                         )
                     }
                 });

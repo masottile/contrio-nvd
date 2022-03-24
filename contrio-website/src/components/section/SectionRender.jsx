@@ -15,11 +15,13 @@ const SectionRender = ({id}) =>  {
 
 
     const RenderHeader = () => {
-        let sectionTitle = ("title" in contractContext.currentContract ? contractContext.currentContract.title: "Header Section");
-        let client = ("client" in contractContext.currentContract ? contractContext.currentContract.client: shortBlank);
-        let freelancer = ("freelancer" in contractContext.currentContract ? contractContext.currentContract.freelancer: shortBlank);
-        let date = ("date" in contractContext.currentContract ? contractContext.currentContract.date: shortBlank);
-        let notes = ("notes" in contractContext.currentContract ? contractContext.currentContract.notes: "");
+        let inContract = ("HEADER" in contractContext.currentContract)
+
+        let sectionTitle = (inContract && "title" in contractContext.currentContract.HEADER ? contractContext.currentContract.HEADER.title: "Header Section");
+        let client = (inContract && "client" in contractContext.currentContract.HEADER ? contractContext.currentContract.HEADER.client: shortBlank);
+        let freelancer = (inContract && "freelancer" in contractContext.currentContract.HEADER ? contractContext.currentContract.HEADER.freelancer: shortBlank);
+        let date = (inContract && "date" in contractContext.currentContract.HEADER ? contractContext.currentContract.HEADER.date: shortBlank);
+        let notes = (inContract && "notes" in contractContext.currentContract.HEADER ? contractContext.currentContract.HEADER.notes: "");
     
         return <div className='s-subitem' xs={12}>
             <h2 className='s-title'>{sectionTitle}</h2>
@@ -59,7 +61,7 @@ const SectionRender = ({id}) =>  {
 
     const RenderCompensation = () => {
         return (
-            <div>
+            <div className='s-subitem' xs={12}>
               <h2 className='s-title'>Compensation</h2>
               <p>Inconsideration for Independent Contractor's performance of the Services, Client shall pay Independent Contractor:
                 {/* Fixed Contract Output */}
