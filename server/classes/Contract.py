@@ -12,7 +12,7 @@ class Contract:
         return {'id' : str(self.id),
                 'userid': str(self.userid),
                 'contract' : self.contract,
-                'state': self.state}
+                'contract_state': self.state}
 
     def get_id(self):
         return self.id
@@ -29,11 +29,11 @@ def create_contract(user_id, contract_json):
             'userid': str(user_id),
             'signed' : False,
             'contract' : contract_json,
-            'state': State.CREATED}
+            'contract_state': State.CREATED}
 
 def edit_contract(user_id, contract_id, contract_json):
     return {'id' : str(contract_id),
             'userid': str(user_id),
             'signed' : False,
             'contract' : contract_json,
-            'state': State.CREATED}
+            'contract_state': State.CREATED}

@@ -127,14 +127,16 @@ def sign_contract(user_id, contract_id):
         # Find Contract using contract_id
         db_response = table.update_item(
             Key={'userid': str(user_id), 'id': str(contract_id)},
-            UpdateExpression="set signed=:signed",
+            UpdateExpression="set signed=:signed, contract_state=:contract_state",
             ExpressionAttributeValues={
-                ':signed' : True   
+                ':signed' : True,
+                ':contract_state': State.FUNDED,
                 },
                 ReturnValues="UPDATED_NEW"
         )
+        print(db_response)
         if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
-            http_response = make_response("Contract Signed", 200)
+            http_response = make_response(jsonify(db_response), 200)
         else:
             http_response = make_response("Database Error Encountered", db_response['ResponseMetadata']['HTTPStatusCode'])
 
@@ -144,19 +146,69 @@ def sign_contract(user_id, contract_id):
         return make_response("Encountered Error", 500)
 
 
-@app.route(BASE_ROUTE + "/submit/<freelancer_id>/<contract_id>", methods=["GET", "PUT"])
+@app.route(BASE_ROUTE + "/start/<user_id>/<contract_id>", methods=["PUT"])
+def start_contract(user_id, contract_id):
+    ''' "sign" the given contract. Contract will be signed by the user 
+        and assumed signed by the second party for demo purposes
+    '''
+    try:
+        # Find Contract using contract_id
+        db_response = table.update_item(
+            Key={'userid': str(user_id), 'id': str(contract_id)},
+            UpdateExpression="set contract_state=:contract_state",
+            ExpressionAttributeValues={
+                ':contract_state': State.IN_PROGRESS,
+                },
+                ReturnValues="UPDATED_NEW"
+        )
+        print(db_response)
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response(jsonify(db_response), 200)
+        else:
+            http_response = make_response("Database Error Encountered", db_response['ResponseMetadata']['HTTPStatusCode'])
+
+        return http_response
+    except Exception as e:
+        print(e)
+        return make_response("Encountered Error", 500)
+
+
+@app.route(BASE_ROUTE + "/submit/<freelancer_id>/<contract_id>", methods=["PUT"])
 def submit_deliverable(freelancer_id, contract_id):
     try:
-        response = table.update_item(Key={
-            'id': str(contract_id)
+        db_response = table.update_item(
+            Key={'userid': str(freelancer_id), 'id':str(contract_id)
         },
-        UpdateExpression="set contract_state=:s",
+        UpdateExpression="set contract_state=:contract_state",
         ExpressionAttributeValues={
-            ':s' : str(State.IN_REVIEW)        
+            ':contract_state' : State.IN_REVIEW        
             },
             ReturnValues="UPDATED_NEW"
         )
-        return response
+        print(db_response)
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response(jsonify(db_response), 200)
+        return http_response;
+    except Exception as e:
+        print(e)
+        return "Error"
+
+@app.route(BASE_ROUTE + "/approve/<freelancer_id>/<contract_id>", methods=["PUT"])
+def approve_deliverable(freelancer_id, contract_id):
+    try:
+        db_response = table.update_item(
+            Key={'userid': str(freelancer_id), 'id':str(contract_id)
+        },
+        UpdateExpression="set contract_state=:contract_state",
+        ExpressionAttributeValues={
+            ':contract_state' : State.COMPLETED        
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+        print(db_response)
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response(jsonify(db_response), 200)
+        return http_response;
     except Exception as e:
         print(e)
         return "Error"
