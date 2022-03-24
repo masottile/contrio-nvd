@@ -18,6 +18,7 @@ import ContractComponent from "../contractComponent/ContractComponent";
 import { CONTRACT_STATES } from "./util";
 import ViewContext from '../context/ViewContext';
 import axios from "axios";
+import { Box } from "@mui/system";
 
 
 function ViewContractsTable({ user }) {
@@ -234,13 +235,13 @@ function ViewContractsTable({ user }) {
                                             </MenuItem>)
                                             }
                                             {viewContext.currContract.contract_state === '4' && (
-                                                <>
+                                                <Box>
                                                     <Divider sx={{ my: 0.5 }} />
                                                     <MenuItem onClick={handleClose} disableRipple>
                                                         <ArchiveIcon />
                                                         Archive
                                                     </MenuItem>
-                                                </>)
+                                                </Box>)
                                             }
                                         </StyledMenu>
                                     </TableCell>
