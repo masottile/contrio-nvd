@@ -29,7 +29,7 @@ const ContractDisplay = () => {
         allowCustom: true
       };
       // defaultSections[defaultSectionTitle + newid] = newSection;
-      newObj[defaultSectionTitle + newid] = newSection;
+      newObj[newid] = newSection;
       customContext.setSections(elements => ({ ...newObj }));
       setSection(newObj)
       console.log(customContext.currentSections);

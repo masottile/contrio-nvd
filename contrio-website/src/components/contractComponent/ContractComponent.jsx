@@ -8,6 +8,9 @@ import ContractDisplay from '../contractSectionDisplay/ContractSectionDisplay'
 import ComponentDisplay from '../contractComponentDisplay/ContractComponentDisplay'
 import { defaultSections, customSections } from '../section/sections';
 import { defaultElements, customElements } from '../element/elements';
+import { Type } from '../Type';
+import { Status } from '../Status';
+import { Enforce } from '../Enforce';
 
 // App Context keeps track of what section has been selected for a detailed view/edit
 import AppContext from '../context/AppContext';
@@ -56,6 +59,45 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
             setView(contractObj.signed);
 
             //TODO: add any stored custom elements/sections to our current elements
+
+            // if there are sections in the contractObj that are not in defaultSections, we want to add them
+            // if there are elements that are not in default elements, we need to add them
+            Object.entries(contractObj.contract).forEach(item => {
+               if (Object.entries(defaultSections).reduce((prev, curr) => {return (prev && (item[0]!==curr[1].id))}, true)){
+                   const newSection = {
+                        id: item[0],
+                        title: "defaultSectionTitle",
+                        allowCustom: true
+                    };
+                    copyDefaultSections[item[0]] = newSection;
+                    copyDefaultElements[item[0]] = {};
+
+                    // if the section is custom, then all the elements will be custom too
+                    Object.entries(contractObj.contract[item[0]]).forEach(jtem => {
+                        console.log(jtem)
+                        const newElement = {
+                            id: jtem[0],
+                            status: Status.active,
+                            name: "default_ComponentName",
+                            desc: "default_ComponentDesc",
+                            type: Type.cust,
+                            enf: Enforce.none,
+                            canDelete: true,
+                        };
+                        copyDefaultElements[item[0]][jtem[0]] = newElement;
+                        // the first of these might be the section title, but the rest of these will need to be added to defaultElements
+                    })
+               }
+            })
+            setSections(copyDefaultSections)
+            setElements(copyDefaultElements)
+
+            // we need to parse if the compensation is fixed fee or hourly wage
+
+            // if there are elements that are not in default elements, we need to add them
+
+            // if the notes elements are unused, then we want to delete them, but only if this is view mode
+
         }
 
     }, []);
@@ -78,10 +120,6 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
         setSections
     }
 
-    // const sectionContext = {
-    //     currSection: section,
-    //     setSection
-    // }
 
     // submit contract details to backend
     const handleContractSubmit = (event) => {
