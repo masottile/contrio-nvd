@@ -121,7 +121,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
         };
 
         const addCompensationOption = (isSetFee) => {
-            const newObj = {};
+            const newObj = { ...customContext.currentElements };
             newObj[sectionID] = {};
   
             if (isSetFee) {

@@ -11,6 +11,10 @@ import IconButton from '@mui/material/IconButton';
 import { v4 as uuidv4 } from 'uuid';
 import CustomContext from '../context/CustomContext';
 
+import { Status } from '../Status';
+import { Type } from '../Type';
+import { Enforce } from '../Enforce';
+
 const ContractDisplay = () => {
   const customContext = useContext(CustomContext);
   const [section, setSection] = useState({});
@@ -33,6 +37,24 @@ const ContractDisplay = () => {
       customContext.setSections(elements => ({ ...newObj }));
       setSection(newObj)
       console.log(customContext.currentSections);
+
+      // Add element for editing the section title
+      const newElemID = uuidv4();
+      const newElems = { ...customContext.currentElements };
+      const newElement = {
+          id: newElemID,
+          status: Status.active,
+          name: "Section Title",
+          desc: "The title for this contract section",
+          type: Type.tbs,
+          enf: Enforce.none,
+          canDelete: false,
+      };
+
+      newElems[newid] = {};
+      newElems[newid]["sectionTitle"] = newElement;
+      customContext.setElements(elements => ({ ...newElems }));
+      console.log(customContext.currentElements);
     }
 
     return (

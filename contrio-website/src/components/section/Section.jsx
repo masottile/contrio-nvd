@@ -27,17 +27,20 @@ const Section = ({ id, title }) => {
     // If there are elements, then we can display them
     else {
       let arr = [];
+      let sectionTitle = ("sectionTitle" in contractContext.currentContract[id] ? contractContext.currentContract[id]["sectionTitle"]: title);
 
-      console.log(contractContext.currentContract[id])
+      // console.log(contractContext.currentContract[id])
       Object.entries(contractContext.currentContract[id]).forEach(item => {
-        arr.push(
-          <p key={item[0]}>{item[1].name}: {item[1].value}</p>
-        )
+        if (item[0] !== "sectionTitle"){
+          arr.push(
+            <p key={item[0]}>{item[1].name}: {item[1].value}</p>
+          )
+        }
       })
       
       return (
         <div className='s-subitem' xs={12}>
-          <h2 className='s-title'>{title}</h2>
+          <h2 className='s-title'>{sectionTitle}</h2>
           {arr}
         </div>
       )

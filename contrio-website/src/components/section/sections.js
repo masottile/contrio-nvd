@@ -17,7 +17,7 @@ export const defaultSections = {
     work: {
         id: 'WORK',
         title: 'Work Section',
-        allowCustom: true
+        allowCustom: false
     },
     compensation: {
         id: 'COMPENSATION',
