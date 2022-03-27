@@ -34,6 +34,7 @@ function ContractsPage() {
             setUser(userData);
           }
         })
+
         // retrieve all of that user's contracts
         // axios.get(`api/contracts/retrieve/${userData.Username}`).then((response) => {
         axios.get(`http://127.0.0.1:5000/api/contracts/retrieve/${userData.Username}`).then((response) => {
@@ -43,8 +44,6 @@ function ContractsPage() {
             }
         })
     }, []);
-
-    console.log(allContracts)
     
     return (
         <ViewContext.Provider value={viewContext}>

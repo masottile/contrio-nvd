@@ -1,5 +1,5 @@
 .s-item {
-    height: 300px;
+    height: fit-content;
     width: 80%;
     background: #f2f2f2;
     overflow: hidden;
