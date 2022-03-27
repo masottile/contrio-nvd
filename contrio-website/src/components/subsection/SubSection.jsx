@@ -131,7 +131,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
             }
     
             customContext.setElements(() => ({ ...newObj }));
-            console.log(customContext.currentElements);
+            // console.log(customContext.currentElements);
         }
 
         return (
