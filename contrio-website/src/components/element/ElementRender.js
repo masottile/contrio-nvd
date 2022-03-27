@@ -7,6 +7,7 @@ export const ElementRender = ({ type, sectionID, dbKey }) => {
     const context = useContext(ContractContext);
 
     const handleOnChange = ( event ) => {
+        event.preventDefault()
         console.log(event.target.value)
         if (context.currentContract[sectionID] === undefined || context.currentContract[sectionID] === null) {
             context.currentContract[sectionID] = {};
@@ -14,6 +15,7 @@ export const ElementRender = ({ type, sectionID, dbKey }) => {
         context.currentContract[sectionID][dbKey] = event.target.value;
     }
     const handleCustomNameChange = ( event ) => {
+        event.preventDefault()
         if (context.currentContract[sectionID] === undefined || context.currentContract[sectionID] === null) {
             context.currentContract[sectionID] = {};
         }
@@ -24,6 +26,7 @@ export const ElementRender = ({ type, sectionID, dbKey }) => {
     }
 
     const handleCustomValueChange = ( event ) => {
+        event.preventDefault()
         if (context.currentContract[sectionID] === undefined || context.currentContract[sectionID] === null) {
             context.currentContract[sectionID] = {};
         }
