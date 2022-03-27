@@ -40,7 +40,7 @@ function ContractsPage() {
         axios.get(`http://127.0.0.1:5000/api/contracts/retrieve/${userData.Username}`).then((response) => {
             console.log(response)
             if (response.status === 200) {
-                setAllContracts(response.data['items'])
+                setAllContracts(response.data['items'].sort((a, b) => a.contract_state - b.contract_state))
             }
         })
     }, []);
