@@ -74,7 +74,6 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
 
                     // if the section is custom, then all the elements will be custom too
                     Object.entries(contractObj.contract[item[0]]).forEach(jtem => {
-                        console.log(jtem)
                         let newElement = {};
                         if (jtem[0] !== "sectionTitle") {
                             newElement = {
@@ -150,7 +149,7 @@ const ContractComponent = ({ open, handleClose, contractObj }) => {
         event.preventDefault();
         const contractData = contractContext.currentContract;
 
-        alert('Creating contract ' + contractData.title + ' between ' + contractData.freelancer + ' and ' + contractData.client);
+        // alert('Creating contract ' + contractData.title + ' between ' + contractData.freelancer + ' and ' + contractData.client);
 
         if (contractObj.id !== undefined && contractObj.id !== null) {
             axios.put(`http://127.0.0.1:5000/api/contracts/edit/${user.Username}/${contractObj.id}`, contractData).then((response) => {

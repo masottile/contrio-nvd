@@ -38,6 +38,7 @@ function ViewContractsTable({ user }) {
         setAnchorEl(null);
         viewContext.setContract({});
     };
+
     const importData = () => {
         let input = document.createElement('input');
         input.type = 'file';
