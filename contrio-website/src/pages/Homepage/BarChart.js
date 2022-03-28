@@ -20,38 +20,62 @@ import { EventTracker } from '@devexpress/dx-react-chart';
 //     { argument: 'Friday', value: 60 },
 // ];
 
-const BarChart = () => {
-    const [data, setData] = useState([]);
+const BarChart = ( { project, setProject } ) => {
+    const [selected, setSelected] = useState();
 
     useEffect(() => {
-        setData(
-            [
-                { argument: 'Monday', value: 5 },
-                { argument: 'Tuesday', value: 12 },
-                { argument: 'Wednesday', value: 6 },
-                { argument: 'Thursday', value: 7 },
-                { argument: 'Friday', value: 8 },
-                { argument: 'Saturday', value: 3 },
-                { argument: 'Sunday', value: 2 },
-            ]
-        )
-    }, []);
+        setSelected(project);
+    }, [])
+
+    const data0 = [
+        { argument: 'Monday', value: 5 },
+        { argument: 'Tuesday', value: 12 },
+        { argument: 'Wednesday', value: 6 },
+        { argument: 'Thursday', value: 7 },
+        { argument: 'Friday', value: 8 },
+        { argument: 'Saturday', value: 3 },
+        { argument: 'Sunday', value: 2 },
+    ]
+
+    const data1 = [
+        { argument: 'Monday', value: 5 },
+        { argument: 'Tuesday', value: 6 },
+        { argument: 'Wednesday', value: 6 },
+        { argument: 'Thursday', value: 2 },
+        { argument: 'Friday', value: 0 },
+        { argument: 'Saturday', value: 0 },
+        { argument: 'Sunday', value: 0 },
+    ]
 
     return (
         <Paper>
-            <Chart
-                data={data}
+            {project == 0 ? (<Chart
+                data={data0}
             >
                 <ArgumentAxis />
                 <ValueAxis />
 
                 <BarSeries valueField="value" argumentField="argument" />
 
-                <Title text="Daily Productivity Tracker" style={{fontSize: 200}}/>
+                <Title text="Daily Productivity Tracker" />
                 <Animation />
                 <EventTracker />
                 <Tooltip />
-            </Chart>
+            </Chart>) : 
+            (<Chart
+                data={data1}
+            >
+                <ArgumentAxis />
+                <ValueAxis />
+
+                <BarSeries valueField="value" argumentField="argument" />
+
+                <Title text="Daily Productivity Tracker" />
+                <Animation />
+                <EventTracker />
+                <Tooltip />
+            </Chart>)}
+            
         </Paper>
     );
 }

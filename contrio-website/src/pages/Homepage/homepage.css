@@ -1,7 +1,7 @@
 .h {
     padding: 20px;
     height: 92vh;
-    background-color: #EEEEEE;
+    /* background-color: #EEEEEE; */
 }
 
 .h-progress {
@@ -33,4 +33,18 @@
 
 .h-enddate {
     height: 250px;
+}
+
+.h-default {
+    margin: auto;
+    width: 200%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.h-default-select-project-image {
+    justify-content:center; /* horizontally center */
+   align-items:center;    /* vertically center */
+   height:300px;
+   width:300px;
 }

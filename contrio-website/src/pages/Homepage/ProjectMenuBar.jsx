@@ -9,12 +9,12 @@ import { Status } from '../../components/Status';
 
 const ProjectMenuBar = (props) => {
     const menuItemList = [];
-    const [project, setProject] = React.useState('');
+    // const [project, setProject] = React.useState('');
 
     // console.log(project); // returns the index of the project
 
     const handleChange = (event) => {
-        setProject(event.target.value);
+        props.setProject(event.target.value);
     };
 
     const renderMenuItems = () => {
@@ -36,7 +36,7 @@ const ProjectMenuBar = (props) => {
                 displayEmpty
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={project}
+                value={props.project}
                 label="Project"
                 onChange={handleChange}
             >
