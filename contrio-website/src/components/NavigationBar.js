@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -50,30 +50,16 @@ export default function NavigationBar() {
             component={Link}
             to={'/'}
           >
-          <img src={contrioLogo} style={{height: 50}} />
+            <img src={contrioLogo} style={{ height: 50 }} />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button color="inherit" component={Link} to={'/contracts'}>
-              <Typography style={{textDecoration: 'none', color: 'white'}}>Contracts</Typography>
+              <Typography style={{ textDecoration: 'none', color: 'white' }}>Contracts</Typography>
             </Button>
             <Button color="inherit" component={Link} to={'/projects'}>
-              <Typography style={{textDecoration: 'none', color: 'white'}}>Projects</Typography>
-              </Button>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+              <Typography style={{ textDecoration: 'none', color: 'white' }}>Projects</Typography>
+            </Button>
             <IconButton
               size="small"
               edge="end"
@@ -83,10 +69,10 @@ export default function NavigationBar() {
               color="inherit"
               onClick={handleLogout}
             >
-              <AccountCircle fontSize='large'/>
+              <AccountCircle fontSize='large' />
               Logout
             </IconButton>
-            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

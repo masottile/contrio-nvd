@@ -10,11 +10,6 @@
       "StackName": "amplify-contriowebsite-dev-195707",
       "StackId": "arn:aws:cloudformation:us-west-2:481735647023:stack/amplify-contriowebsite-dev-195707/06b71c90-87ca-11ec-9a58-0266575e789f",
       "AmplifyAppId": "d6wrlrow0ko3k"
-    },
-    "categories": {
-      "auth": {
-        "contriowebsitebc520878": {}
-      }
     }
   }
 }
