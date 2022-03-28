@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +11,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
-
+import contrioLogo from '../images/contrio_logo.png'
 export default function NavigationBar() {
   const menuId = 'primary-search-account-menu';
   const [user, setUser] = useState(null);
@@ -46,34 +46,19 @@ export default function NavigationBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            component={Link}
+            to={'/'}
           >
-            <BusinessCenterTwoToneIcon fontSize='large' />
-          <Typography style={{textDecoration: 'none', color: 'white', marginLeft: '1rem'}} variant="h6" component={Link} to={'/'} sx={{ flexGrow: 1 }}>
-            CONTRIO
-          </Typography>
+            <img src={contrioLogo} style={{ height: 50 }} />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button color="inherit" component={Link} to={'/contracts'}>
-              <Typography style={{textDecoration: 'none', color: 'white'}}>Contracts</Typography>
+              <Typography style={{ textDecoration: 'none', color: 'white' }}>Contracts</Typography>
             </Button>
             <Button color="inherit" component={Link} to={'/projects'}>
-              <Typography style={{textDecoration: 'none', color: 'white'}}>Projects</Typography>
-              </Button>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+              <Typography style={{ textDecoration: 'none', color: 'white' }}>Projects</Typography>
+            </Button>
             <IconButton
               size="small"
               edge="end"
@@ -83,10 +68,10 @@ export default function NavigationBar() {
               color="inherit"
               onClick={handleLogout}
             >
-              <AccountCircle fontSize='large'/>
+              <AccountCircle fontSize='large' />
               Logout
             </IconButton>
-            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

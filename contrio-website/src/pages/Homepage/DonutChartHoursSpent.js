@@ -1,49 +1,118 @@
-import * as d3 from "d3";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
+import {
+    Chart,
+    PieSeries,
+    Title,
+    Tooltip,
+    Legend,
+} from '@devexpress/dx-react-chart-material-ui';
+import { Animation } from '@devexpress/dx-react-chart';
+import { EventTracker } from '@devexpress/dx-react-chart';
 
-const DonutChartHoursSpent = () => {
-    // set the dimensions and margins of the graph
-    var width = 450
-    var height = 450
-    var margin = 40
+const data0 = [
+    { region: 'Stage 1: Planning', val: 32 },
+    { region: 'Stage 2: Design', val: 21 },
+    { region: 'Stage 3: Development', val: 62 },
+    { region: 'Stage 3: Verification', val: 14 },
+];
 
-    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-    var radius = Math.min(width, height) / 2 - margin
+const data1 = [
+    { region: 'Stage 1: Planning', val: 23 },
+    { region: 'Stage 2: Design', val: 11 },
+    { region: 'Stage 3: Development', val: 0 },
+    { region: 'Stage 3: Verification', val: 0 },
+];
 
-    // append the svg object to the div called 'my_dataviz'
-    var svg = d3.select("#hoursSpent")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+const DonutChartHoursSpent = ({ project, setProject }) => {
+    const [selected, setSelected] = useState();
 
-    // Create dummy data
-    var data = { a: 9, b: 20, c: 30, d: 8, e: 12 }
+    useEffect(() => {
+        setSelected(project);
+    }, [])
 
-    // set the color scale
-    var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+    return (
+        <Paper>
+            {project == 0 ?
+                (<Chart
+                    data={data0}
+                >
+                    <PieSeries
+                        valueField="val"
+                        argumentField="region"
+                        innerRadius={0.4}
+                    />
+                    <Title
+                        text="Hours Spent Per Stage"
+                    />
+                    <Animation />
+                    <EventTracker />
+                    <Tooltip />
+                    <Legend
+                        position='bottom'
+                    />
+                </Chart>)
+                :
+                (<Chart
+                    data={data1}
+                >
+                    <PieSeries
+                        valueField="val"
+                        argumentField="region"
+                        innerRadius={0.4}
+                    />
+                    <Title
+                        text="Hours Spent Per Stage"
+                    />
+                    <Animation />
+                    <EventTracker />
+                    <Tooltip />
+                    <Legend
+                        position='bottom'
+                    />
+                </Chart>)
+            }
 
-    // Compute the position of each group on the pie:
-    var pie = d3.pie()
-        .value(function (d) { return d.value; })
-    var data_ready = pie(d3.entries(data))
-
-    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-    svg
-        .selectAll('whatever')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', d3.arc()
-            .innerRadius(100)         // This is the size of the donut hole
-            .outerRadius(radius)
-        )
-        .attr('fill', function (d) { return (color(d.data.key)) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7)
+        </Paper>
+    );
 }
 
-export default DonutChartHoursSpent
+export default DonutChartHoursSpent;
+
+// export default class Demo extends React.PureComponent {
+//     constructor(props) {
+//         super(props);
+
+//         this.state = {
+//             data,
+//         };
+//     }
+
+//     render() {
+//         const { data: chartData } = this.state;
+
+//         return (
+//             <Paper>
+//                 <Chart
+//                     data={chartData}
+//                 >
+//                     <PieSeries
+//                         valueField="val"
+//                         argumentField="region"
+//                         innerRadius={0.4}
+//                     />
+//                     <Title
+//                         text="Hours Spent Per Stage"
+//                     />
+//                     <Animation />
+//                     <EventTracker />
+//                     <Tooltip />
+//                     <Legend
+//                         position='bottom'
+//                     />
+//                 </Chart>
+//             </Paper>
+//         );
+//     }
+// }

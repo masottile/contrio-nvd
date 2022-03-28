@@ -1,11 +1,12 @@
 .h {
     padding: 20px;
     height: 92vh;
-    background-color: #EEEEEE;
+    /* background-color: #EEEEEE; */
 }
 
 .h-progress {
-    /* height: fit-content; */
+    height: 250px;
+    padding-bottom: 10px;
 }
 
 .h-basic-info {
@@ -15,7 +16,6 @@
 .h-progress-circular-all {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 5px;
 }
 
 .h-select-project {
@@ -28,6 +28,23 @@
 }
 
 .h-row1 {
-    /* min-height: 200px; */
     height: 200px;
+}
+
+.h-enddate {
+    height: 250px;
+}
+
+.h-default {
+    margin: auto;
+    width: 200%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.h-default-select-project-image {
+    justify-content:center; /* horizontally center */
+   align-items:center;    /* vertically center */
+   height:300px;
+   width:300px;
 }
