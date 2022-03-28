@@ -80,9 +80,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={() => addToSubsectionArray(Type.tbs)}>Short Term</MenuItem>
-                    <MenuItem onClick={() => addToSubsectionArray(Type.tbl)}>Long Term</MenuItem>
-                    <MenuItem onClick={() => addToSubsectionArray(Type.blp)}>Bullet Points</MenuItem>
+                    <MenuItem onClick={() => addToSubsectionArray()}>New Element</MenuItem>
                 </Menu>
             </>
         )
@@ -131,7 +129,7 @@ const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs })
             }
     
             customContext.setElements(() => ({ ...newObj }));
-            console.log(customContext.currentElements);
+            // console.log(customContext.currentElements);
         }
 
         return (

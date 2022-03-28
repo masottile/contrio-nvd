@@ -85,6 +85,15 @@ function ViewContractsTable({ user }) {
         handleClose();
     }
 
+    const handleDemoResetContract = () => {
+        axios.put(`http://127.0.0.1:5000/api/contracts/demo_reset/${user.Username}/${viewContext.currContract.id}`).then((response) => {
+            if (response.status === 200) {
+                updateListedContracts(response);
+            }
+        })
+        handleClose();
+    }
+
     const updateListedContracts = (response) => {
         const newContractsList = viewContext.listContracts.map((contract) => {
             if (contract.id === viewContext.currContract.id) {
@@ -239,7 +248,7 @@ function ViewContractsTable({ user }) {
                                             {viewContext.currContract.contract_state === '4' && (
                                                 <Box>
                                                     <Divider sx={{ my: 0.5 }} />
-                                                    <MenuItem onClick={handleClose} disableRipple>
+                                                    <MenuItem onClick={handleDemoResetContract} disableRipple>
                                                         <ArchiveIcon />
                                                         Archive
                                                     </MenuItem>

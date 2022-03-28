@@ -61,9 +61,12 @@ const SectionRender = ({id}) =>  {
 
     const RenderCompensation = () => {
         let inContract = ("COMPENSATION" in contractContext.currentContract);
+        let notes = (inContract && "notes" in contractContext.currentContract["WORK"] ? contractContext.currentContract.WORK.notes: "");
+
         let fixedFee = (inContract && ("fe-amount" in contractContext.currentContract.COMPENSATION || "fe-payment-buffer" in contractContext.currentContract.COMPENSATION));
         let feAmount = (fixedFee && "fe-amount" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["fe-amount"]: shortBlank);
         let feBuffer = (fixedFee && "fe-payment-buffer" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["fe-payment-buffer"]: shortBlank);
+        let paymentSchedule = (fixedFee && "paymentSchedule" in contractContext.currentContract["COMPENSATION"] ? contractContext.currentContract.COMPENSATION.paymentSchedule: longBlank);
 
         let hourWage = (inContract && ("hw-amount"in contractContext.currentContract.COMPENSATION || "hw-pay-interval" in contractContext.currentContract.COMPENSATION));
         let hwAmount = (hourWage && "hw-amount" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-amount"]: shortBlank);
@@ -73,27 +76,21 @@ const SectionRender = ({id}) =>  {
         return (
             <div className='s-subitem' xs={12}>
               <h2 className='s-title'>Compensation</h2>
-              <p>In consideration for Independent Contractor's performance of the Services, Client shall pay Independent Contractor:</p>
-            {/* Fixed Contract Output */}
-            { fixedFee &&
-                <p>A Set Fee. The Client shall pay the Independent Contract ${feAmount} 
-                after the Independent Contractor completes the Services. After the Independent Contractor sends Client an invoice. 
-                Client shall pay Independent Contractor within {feBuffer} days.
-                </p>
-            }
-            {/* Hourly Wage Contract Output */}
-            { hourWage && 
-            <p>
-                A Fixed Wage. The Client shall pay the Independent Contract ${hwAmount} per hour. The Independent 
-                Contractor will be paid {hwPayInt}. Independent Contractor will be paid on 
-                {hwPayInt === ("weekly") ? `${hwPayDay} of every week.` : 
-                (hwPayInt === ("biweekly") ? `${hwPayDay} of every two weeks.` :
-                (hwPayInt === ("monthly") ? `${hwPayDay} of every month.` : "")
-                )} After the Independent Contractor sends Client an invoice. Client shall pay Independent Contractor 
-                within {hwBuffer} days.
-            </p>
-            }
-              
+                {/* Fixed Contract Output */}
+                { fixedFee &&
+                    <p>As full compensation for all services provided, the Freelancer will be paid a total of {feAmount} CAD. The Client will pay the Freelancer within {feBuffer} days after recieving an invoice. Invoices will be sent to the Client according to the following schedule: {paymentSchedule}</p>
+                }
+                {/* Hourly Wage Contract Output */}
+                { hourWage && 
+                    <p> As full compensation for all services provided, the Freelancer will be paid a fixed wage of {hwAmount} CAD per hour. The Client will pay the Freelancer within {hwBuffer} days after recieving an invoice. Invoices will be sent {hwPayInt} by the
+                    {hwPayInt === ("weekly") ? `${hwPayDay} of every week.` : 
+                    (hwPayInt === ("biweekly") ? `${hwPayDay} of every two weeks.` :
+                    (hwPayInt === ("monthly") ? `${hwPayDay} of every month.` : shortBlank+shortBlank)
+                    )}
+                    </p>
+                }
+                <p>The Freelancer is responsible for the payment of all federal, provincial, and/or local taxes with respect to the services they perform for the Client as an independent contractor. The Client will not treat the Freelancer as an employee for any purpose.</p>
+                <p>{notes}</p>
             </div>
         )
     }

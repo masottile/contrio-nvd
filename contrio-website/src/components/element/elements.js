@@ -56,7 +56,7 @@ export const defaultElements = {
             desc: "Additional Notes",
             type: Type.tbl,
             enf: Enforce.none,
-            canDelete: true
+            canDelete: false
         }
     },
     "WORK": {
@@ -85,36 +85,36 @@ export const defaultElements = {
             desc: "Additional Notes",
             type: Type.tbl,
             enf: Enforce.none,
-            canDelete: true
+            canDelete: false
         }
     },
     "COMPENSATION": {
-        paymentAmount: {
-            id: 31,
-            status: Status.active,
-            name: "Payment Amount",
-            desc: "Total project payment in CAD",
-            type: Type.tbs,
-            enf: Enforce.none,
-            canDelete: false
-        },
-        revisions: {
-            id: 32,
-            status: Status.active,
-            name: "Payment Schedule",
-            desc: "Short description of when payments must be made during the project",
-            type: Type.tbl,
-            enf: Enforce.none,
-            canDelete: false
-        },
+        // paymentAmount: {
+        //     id: 31,
+        //     status: Status.active,
+        //     name: "Payment Amount",
+        //     desc: "Total project payment in CAD",
+        //     type: Type.tbs,
+        //     enf: Enforce.none,
+        //     canDelete: false
+        // },
+        // revisions: {
+        //     id: 32,
+        //     status: Status.active,
+        //     name: "Payment Schedule",
+        //     desc: "Short description of when payments must be made during the project",
+        //     type: Type.tbl,
+        //     enf: Enforce.none,
+        //     canDelete: false
+        // },
         notes: {
-            id: 33,
+            id: "comp_notes",
             status: Status.active,
             name: "Notes",
             desc: "Additional Notes",
             type: Type.tbl,
             enf: Enforce.none,
-            canDelete: true
+            canDelete: false
         }
     },
     "AGREEMENT": {

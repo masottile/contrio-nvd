@@ -15,8 +15,8 @@ export const feCompensationElements = {
     'fe-amount' : {
         id: 'fe-amount',
         status: Status.active,
-        name: 'Set Fee Amount',
-        desc: 'Dollar Figure Amount',
+        name: 'Payment Amount',
+        desc: 'Total project payment amount in CAD',
         type: Type.tbs,
         enf: Enforce.none,
         canDelete: false,
@@ -25,10 +25,19 @@ export const feCompensationElements = {
         id: 'fe-payment-buffer',
         status: Status.active,
         name: "Invoice Payment Buffer",
-        desc: "e.g. Independent Contract will be paid with in [X] Days after an invoice is submitted.",
+        desc: "Payment will be made [X] days after invoice is submitted",
         type: Type.tbs,
         enf: Enforce.none,
         canDelete: false,
+    },
+    notes: {
+        id: "comp_notes",
+        status: Status.active,
+        name: "Notes",
+        desc: "Additional Notes",
+        type: Type.tbl,
+        enf: Enforce.none,
+        canDelete: false
     }
 }
 
@@ -37,7 +46,7 @@ export const hwCompensationElements = {
         id: 'hw-amount',
         status: Status.active,
         name: "Hourly Wage",
-        desc: "Set Hourly Wage Amount",
+        desc: "Freelancer hourly wage in CAD",
         type: Type.tbs,
         enf: Enforce.none,
         canDelete: false,
@@ -60,15 +69,15 @@ export const hwCompensationElements = {
         enf: Enforce.none,
         canDelete: false,
     },
-    "hw-invoice-scheduled-date" : {
-        id: 'hw-invoice-scheduled-date',
-        status: Status.active,
-        name: "Invoice Schedule Interval",
-        desc: "e.g. Will Invoice weekly/bi-weekly/month",
-        type: Type.tbs,
-        enf: Enforce.none,
-        canDelete: false,
-    },
+    // "hw-invoice-scheduled-date" : {
+    //     id: 'hw-invoice-scheduled-date',
+    //     status: Status.active,
+    //     name: "Invoice Schedule Interval",
+    //     desc: "e.g. Will Invoice weekly/bi-weekly/month",
+    //     type: Type.tbs,
+    //     enf: Enforce.none,
+    //     canDelete: false,
+    // },
     "hw-payment-buffer" : {
         id: 'hw-payment-buffer',
         status: Status.active,
@@ -77,5 +86,14 @@ export const hwCompensationElements = {
         type: Type.tbs,
         enf: Enforce.none,
         canDelete: false,
+    },
+    notes: {
+        id: "comp_notes",
+        status: Status.active,
+        name: "Notes",
+        desc: "Additional Notes",
+        type: Type.tbl,
+        enf: Enforce.none,
+        canDelete: false
     }
 }

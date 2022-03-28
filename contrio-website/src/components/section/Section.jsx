@@ -48,33 +48,6 @@ const Section = ({ id, title }) => {
     }
   }
 
-  // const handleClick = () => {
-  //   // change the elementContext to reflect this
-  //   const prevElements = { ...elementContext.currentElements};
-  //   delete prevElements[section][id];
-  //   elementContext.setElements(elements => ({ ...prevElements}));
-
-  //   //change the contractContext to reflect this
-  //   const prevContract = contractContext.currentContract
-  //   delete prevContract[id];
-  //   contractContext.setContract(prevContract);
-  // };
-
-  // const RenderDeleteButton = () => {
-  //   if (deletable) {
-  //     return (
-  //       <IconButton
-  //         onClick={handleClick}
-  //         size="small"
-  //         sx={{ ml: 2 }}
-  //       >
-  //         <DeleteIcon sx={{ width: 32, height: 32 }} />
-  //       </IconButton>
-  //     )
-  //   }
-  //   else return null;
-  // }
-
   return (
     <Grid item className='s-item' onClick={() => { context.setSelectedSection(id) }} xs={12}>
       {isDefault && (
