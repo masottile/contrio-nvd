@@ -11,7 +11,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
-
+import contrioLogo from '../images/contrio_logo.png'
 export default function NavigationBar() {
   const menuId = 'primary-search-account-menu';
   const [user, setUser] = useState(null);
@@ -47,11 +47,10 @@ export default function NavigationBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            component={Link}
+            to={'/'}
           >
-            <BusinessCenterTwoToneIcon fontSize='large' />
-          <Typography style={{textDecoration: 'none', color: 'white', marginLeft: '1rem'}} variant="h6" component={Link} to={'/'} sx={{ flexGrow: 1 }}>
-            CONTRIO
-          </Typography>
+          <img src={contrioLogo} style={{height: 50}} />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
