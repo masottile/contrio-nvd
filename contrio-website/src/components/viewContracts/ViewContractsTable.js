@@ -38,6 +38,7 @@ function ViewContractsTable({ user }) {
         setAnchorEl(null);
         viewContext.setContract({});
     };
+
     const importData = () => {
         let input = document.createElement('input');
         input.type = 'file';
@@ -143,7 +144,6 @@ function ViewContractsTable({ user }) {
         },
     }));
 
-    // console.log(allContracts)
     return (
         <Paper>
             <TableContainer component={Paper}>
@@ -152,7 +152,8 @@ function ViewContractsTable({ user }) {
                         <TableRow>
                             <TableCell align="center">Title</TableCell>
                             <TableCell align="center">Client</TableCell>
-                            <TableCell align="center">Signature Date</TableCell>
+                            <TableCell align="center">Agreement Date</TableCell>
+                            <TableCell align="center">Signed</TableCell>
                             <TableCell align="center">State</TableCell>
                             <TableCell align="center" />
                         </TableRow>
@@ -166,9 +167,10 @@ function ViewContractsTable({ user }) {
                                     value={row.contract}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align="center" component="th" scope="row">{row.contract.title}</TableCell>
-                                    <TableCell align="center">{row.contract.client}</TableCell>
-                                    <TableCell align="center">{row.contract.date}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{("HEADER" in row.contract ? row.contract.HEADER.title : "[missing title]")}</TableCell>
+                                    <TableCell align="center">{("HEADER" in row.contract ? row.contract.HEADER.client : "[missing client]")}</TableCell>
+                                    <TableCell align="center">{("HEADER" in row.contract ? row.contract.HEADER.date : "")}</TableCell>
+                                    <TableCell align="center">{(row.signed ? "yes" : "no")}</TableCell>
                                     <TableCell align="center">
                                         <Chip size='small' label={CONTRACT_STATES[parseInt(row.contract_state)].label} style={{ marginTop: '0.5rem', backgroundColor: `${CONTRACT_STATES[row.contract_state].color}`, color: '#FFF' }} />
                                     </TableCell>

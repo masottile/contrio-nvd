@@ -32,7 +32,6 @@ export default function NavigationBar() {
       if (keySplit[0] === 'CognitoIdentityServiceProvider' && keySplit[keySplit.length - 1] === 'userData') {
         const userData = JSON.parse(localStorage.getItem(key))
         setUser(userData)
-        // console.log(userData)
       }
     })
   }, [])

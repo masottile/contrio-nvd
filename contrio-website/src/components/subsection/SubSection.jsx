@@ -8,15 +8,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Type } from '../Type';
-import { getID } from '../idGenerator/getID'
+import { v4 as uuidv4 } from 'uuid';
 import { Enforce } from '../Enforce';
-import newID from '../idGenerator/getID';
-import ElementContext from '../context/ElementContext';
+import CustomContext from '../context/CustomContext';
 
-const SubSection = ({ sectionName, sectionTitle, currContext }) => {
-    const elementContext = useContext(ElementContext);
+import {feCompensationElements, hwCompensationElements} from '../element/compensationElements'
+
+const SubSection = ({ sectionID, sectionTitle, currContext, allowCustomInputs }) => {
+    const customContext = useContext(CustomContext);
     const default_ComponentName = "Component Name";
     const default_ComponentDesc = "Component Description";
 
@@ -30,31 +30,34 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
             setAnchorEl(null);
         };
 
-        const addToSubsectionArray = (elementType) => {
-            const newid = newID();
+        const addToSubsectionArray = () => {
+            const newid = uuidv4();
 
             setAnchorEl(null);
 
             // const el = <Element className='c-element' key={newid} name={default_ComponentName} desc={default_ComponentDesc} type={elementType} enf={Enforce.none} />
-            const newObj = {...elementContext.currentElements};
+            const newObj = { ...customContext.currentElements };
             const newElement = {
                 id: newid,
                 status: Status.active,
                 name: default_ComponentName,
                 desc: default_ComponentDesc,
-                type: elementType,
+                type: Type.cust,
                 enf: Enforce.none,
                 canDelete: true,
             };
-            console.log(sectionName);
-            newObj[sectionName][newid] = newElement
-            // console.log(newObj[sectionName][newid]);
 
-            elementContext.setElements(elements => ({ ...newObj}));
-            console.log(elementContext.currentElements);
+            if (newObj[sectionID] === undefined || newObj[sectionID] === null) {
+                newObj[sectionID] = {};
+            }
+            newObj[sectionID][newid] = newElement
+
+            customContext.setElements(elements => ({ ...newObj }));
+            console.log(customContext.currentElements);
         }
 
         return (
+            allowCustomInputs &&
             <>
                 <Tooltip title="Create Custom Elements">
                     <IconButton
@@ -89,29 +92,86 @@ const SubSection = ({ sectionName, sectionTitle, currContext }) => {
     const printElements = () => {
         const arr = [];
 
-        Object.entries(elementContext.currentElements).map(item => {
-            console.log(item);
-            if (item[0] === currContext.currSection) {
-                Object.entries(item[1]).map(e => {
+        Object.entries(customContext.currentElements).forEach(item => {
+            if (item[0] === currContext.currSelectedSection) {
+                Object.entries(item[1]).forEach(e => {
                     const dbKey = e[0];
                     const element = e[1];
                     if (element.status === Status.active) {
                         arr.push(
-                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} section={sectionName} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
+                            <Element className='c-element' key={element.id} id={element.id} dbKey={dbKey} sectionID={sectionID} name={element.name} desc={element.desc} type={element.type} enf={element.enf} deletable={element.canDelete} />
                         )
                     }
                 });
             }
         })
+        // console.log(arr)
 
         return arr
     }
 
+    const CompensationOptionAddButton = () => {
+        const [anchorEl, setAnchorEl] = useState(null);
+        const open = Boolean(anchorEl);
+        const handleClick = (event) => {
+            setAnchorEl(event.currentTarget);
+        };
+        const handleClose = () => {
+            setAnchorEl(null);
+        };
+
+        const addCompensationOption = (isSetFee) => {
+            const newObj = { ...customContext.currentElements };
+            newObj[sectionID] = {};
+  
+            if (isSetFee) {
+                newObj[sectionID] = feCompensationElements
+            } else {
+                newObj[sectionID] = hwCompensationElements
+            }
+    
+            customContext.setElements(() => ({ ...newObj }));
+            console.log(customContext.currentElements);
+        }
+
+        return (
+            sectionID === 'COMPENSATION' &&
+            <>
+                <Tooltip title="Select Payment Option">
+                    <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'create-elements-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                    >
+                        <AddIcon sx={{ width: 32, height: 32 }} />
+                    </IconButton>
+                </Tooltip>
+                <Menu
+                    id="create-elements-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={() => addCompensationOption(true)}>Fixed Fee</MenuItem>
+                    <MenuItem onClick={() => addCompensationOption(false)}>Hourly Wage</MenuItem>
+                </Menu>
+            </>
+        )
+    }
+
     return <Grid item className='c-item' xs={12}>
-        <h2 className='c-title'>{sectionTitle}</h2>
+        {/* <h2 className='c-title'>{sectionTitle}</h2> */}
         {/* {subsectionArray} */}
         {printElements()}
         {/* {elements} */}
+        <CompensationOptionAddButton />
+
         <CustomElementCreationButton />
     </Grid>
 };

@@ -12,7 +12,6 @@ import {
   Route,
 } from "react-router-dom";
 import NavigationBar from './components/NavigationBar'
-import { Grid } from '@mui/material';
 
 Amplify.configure(awsExports);
 

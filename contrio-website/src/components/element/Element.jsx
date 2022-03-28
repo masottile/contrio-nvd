@@ -3,28 +3,27 @@ import './element.css'
 import { ElementRender } from './ElementRender';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import ElementContext from '../context/ElementContext';
+import CustomContext from '../context/CustomContext';
 import ContractContext from '../context/ContractContext';
 import { containerClasses } from '@mui/material';
 import { defaultElements, customElements } from '../element/elements';
+import { Type } from '../Type';
 
-const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
-  const elementContext = useContext(ElementContext);
+const Element = ({ id, dbKey, sectionID, name, desc, type, enf, deletable }) => {
+  const customContext = useContext(CustomContext);
   const contractContext = useContext(ContractContext)
+  
   
   const handleClick = () => {
     // change the elementContext to reflect this
-    const prevElements = { ...elementContext.currentElements};
-    delete prevElements[section][id];
-    elementContext.setElements(elements => ({ ...prevElements}));
+    const prevElements = { ...customContext.currentElements};
+    delete prevElements[sectionID][dbKey];
+    customContext.setElements(elements => ({ ...prevElements}));
 
     //change the contractContext to reflect this
     const prevContract = contractContext.currentContract
-    delete prevContract[id];
+    delete prevContract[sectionID][dbKey];
     contractContext.setContract(prevContract);
-
-    // console.log(elementContext);
-    // console.log(contractContext);
   };
 
   const RenderDeleteButton = () => {
@@ -42,11 +41,22 @@ const Element = ({ id, dbKey, section, name, desc, type, enf, deletable }) => {
     else return null;
   }
 
+  const RenderElement = () => {
+    if (type !== Type.cust){
+      return (
+        <div>
+          <div className='e-name' >{name}</div>
+          <p className='e-desc'>{desc}</p>
+        </div>
+      )
+    }
+    else return null
+  }
+
   return (
     <div className='e-item' xs={12}>
-      <div className='e-name' >{name}</div>
-      <p className='e-desc'>{desc}</p>
-      <ElementRender dbKey={dbKey} type={type} enf={enf}/>
+      <RenderElement />
+      <ElementRender sectionID={sectionID} dbKey={dbKey} type={type} enf={enf}/>
       <RenderDeleteButton />
     </div>
   )

@@ -11,14 +11,11 @@ const ProjectMenuBar = (props) => {
     const menuItemList = [];
     // const [project, setProject] = React.useState('');
 
-    // console.log(project); // returns the index of the project
-
     const handleChange = (event) => {
         props.setProject(event.target.value);
     };
 
     const renderMenuItems = () => {
-        // console.log({Projects}[0]);
         Projects.forEach(p => {
             if (p.status !== Status.project_terminated && p.status !== Status.project_closed) {
                 menuItemList.push(
@@ -26,8 +23,6 @@ const ProjectMenuBar = (props) => {
             }
         });
     }
-
-    // console.log(menuItemList);
 
     return (
         <FormControl fullWidth className={props.className}>
