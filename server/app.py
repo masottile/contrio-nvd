@@ -117,7 +117,6 @@ def delete_contract(user_id, contract_id):
         print(e)
         return make_response("Encountered Error", 500)
 
-
 @app.route(BASE_ROUTE + "/sign/<user_id>/<contract_id>", methods=["PUT"])
 def sign_contract(user_id, contract_id):
     ''' "sign" the given contract. Contract will be signed by the user 
@@ -144,11 +143,9 @@ def sign_contract(user_id, contract_id):
         print(e)
         return make_response("Encountered Error", 500)
 
-
 @app.route(BASE_ROUTE + "/start/<user_id>/<contract_id>", methods=["PUT"])
 def start_contract(user_id, contract_id):
-    ''' "sign" the given contract. Contract will be signed by the user 
-        and assumed signed by the second party for demo purposes
+    ''' "start" the given contract. Indicate that the freelancer has started work on the project
     '''
     try:
         # Find Contract using contract_id
@@ -171,9 +168,10 @@ def start_contract(user_id, contract_id):
         print(e)
         return make_response("Encountered Error", 500)
 
-
 @app.route(BASE_ROUTE + "/submit/<freelancer_id>/<contract_id>", methods=["PUT"])
 def submit_deliverable(freelancer_id, contract_id):
+    """ Submit a deliverable to the the project for review by the client
+    """
     try:
         db_response = table.update_item(
             Key={'userid': str(freelancer_id), 'id':str(contract_id)
@@ -193,6 +191,8 @@ def submit_deliverable(freelancer_id, contract_id):
 
 @app.route(BASE_ROUTE + "/approve/<freelancer_id>/<contract_id>", methods=["PUT"])
 def approve_deliverable(freelancer_id, contract_id):
+    """ Have the client approve the deliverable and indicate the project is complete
+    """
     try:
         db_response = table.update_item(
             Key={'userid': str(freelancer_id), 'id':str(contract_id)
@@ -227,3 +227,30 @@ def fund_contract(client_id, contract_id):
     except Exception as e:
         print(e)
         return "Error"
+
+@app.route(BASE_ROUTE + "/demo_reset/<user_id>/<contract_id>", methods=["PUT"])
+def demo_reset(user_id, contract_id):
+    ''' RESET the Contract to be unsigned and in state CREATED
+        This is for demo purposes only and will make showing the demo multiple time easier
+    '''
+    try:
+        # Find Contract using contract_id
+        db_response = table.update_item(
+            Key={'userid': str(user_id), 'id': str(contract_id)},
+            UpdateExpression="set signed=:signed, contract_state=:contract_state",
+            ExpressionAttributeValues={
+                ':signed' : False,
+                ':contract_state': State.CREATED,
+                },
+                ReturnValues="UPDATED_NEW"
+        )
+        print(db_response)
+        if db_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+            http_response = make_response(jsonify(db_response), 200)
+        else:
+            http_response = make_response("Database Error Encountered", db_response['ResponseMetadata']['HTTPStatusCode'])
+
+        return http_response
+    except Exception as e:
+        print(e)
+        return make_response("Encountered Error", 500)
