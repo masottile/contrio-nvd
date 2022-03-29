@@ -30,6 +30,15 @@ export const feCompensationElements = {
         enf: Enforce.none,
         canDelete: false,
     },
+    paymentSchedule: {
+        id: "paymentSchedule",
+        status: Status.active,
+        name: "Payment Schedule",
+        desc: "Short description of when payments must be made during the project",
+        type: Type.tbl,
+        enf: Enforce.none,
+        canDelete: false
+    },
     notes: {
         id: "comp_notes",
         status: Status.active,

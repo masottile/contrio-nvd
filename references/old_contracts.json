@@ -1,0 +1,32 @@
+[
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "6ef7c6e2-f892-4b3c-b9ff-86bca38e37c8",
+        "contract_state": 2,
+        "signed": true,
+        "contract": {
+         "HEADER": {
+          "date": "03/08/2022",
+          "client": "Elise Burgess",
+          "title": "Maple Gifts Website Email Connection",
+          "freelancer": "Maria Sottile"
+         }
+        },
+        "state": 1
+    },
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "c17eb66c-3571-4b6e-b4a9-c5d4b9a9c61d",
+        "contract_state": 4,
+        "signed": true,
+        "contract": {
+         "HEADER": {
+          "date": "2/28/2022",
+          "client": "Jana Coates",
+          "title": "Sewing Center Website Update",
+          "freelancer": "Maria Sottile"
+         }
+        },
+        "state": 4
+    }
+]

@@ -1,0 +1,167 @@
+[
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "2d4bcd00-4a80-48f4-9e94-299367fe579c",
+        "contract_state": 0,
+        "signed": false,
+        "contract": {
+            "WORK": {
+                "revisions": "3",
+                "workDescription": "Build a website visualization tool for fabric tension data; integrate a database for tension data storage; set up access portal for Client to maintain the data"
+            },
+            "HEADER": {
+                "date": "03/25/2022",
+                "client": "FAB Mechanics",
+                "notes": "",
+                "title": "FABMech: Fabric Tension Visualizer",
+                "freelancer": "Maria Sottile"
+            },
+            "fbb7a305-d346-4a2c-9ee5-2ad8a35e5e62": {
+                "sectionTitle": "Confidentiality",
+                "1234": {
+                    "name": "The Freelancer acknowledges they may have access to information on",
+                    "value": "the Clients past, present, or future products, vendor lists, creative works, and other proprietary information (hereafter called \"Proprietary Information\")"
+                },
+                "2345": {
+                    "name": "The Freelancer agrees to",
+                    "value": "preserve and protect the confidentiality of the Proprietary Information and forms thereof, whether disclosed to the Freelancer before this Agreement is signed or afterward."
+                }
+            },
+            "COMPENSATION": {
+                "fe-payment-buffer": "10",
+                "fe-amount": "1500",
+                "paymentSchedule": "An invoice for 500 CAD will be sent upon completion of project planning as a down payment. An invoice for the remainder will be sent along with the final project deliverable and must be paid before visualization tool will be made live."
+            }
+        }
+    },
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "35905432-4047-45d5-82b2-db0a17f956a7",
+        "contract_state": 0,
+        "signed": false,
+        "contract": {
+            "WORK": {
+                "workDescription": "Maintenace of the survey data and database; ongoing improvements to the visuals and usability of the survey user interface; assisting the Client in accessing and analyzing survey data; other services related to the survey as they arise.",
+                "revisions": "NA",
+                "notes": "As part of the ongoing nature of this project, the Client and Freelancer agree to discuss any and all necessary changes to the Work as they arise. The Client agrees to give the Freelancer at least two weeks notice if they require a substantial change to the Work."
+            },
+            "COMPENSATION": {
+                "hw-pay-interval": "biweekly",
+                "hw-pay-scheduled-date": "Friday ",
+                "hw-payment-buffer": "5",
+                "hw-amount": "60"
+            },
+            "fbb7a305-d346-4a2c-9ee5-2ad8a35e5e62": {
+                "sectionTitle": "Term",
+                "1234": {
+                    "name": "The Work will commence on",
+                    "value": "03/15/2022"
+                },
+                "2345": {
+                    "name": "Either Party",
+                    "value": "may decide to end this Contract for any reason and is required to provide the other party with two-weeks notice of their intention to do so. At this time, the Freelancer agrees to make arrangements to transfer all project materials to the Client or a third party of the Client's choice. The Freelancer also agrees to instruct the Client on how to continue project maintenance."
+                }
+            },
+            "HEADER": {
+                "date": "03/10/2022",
+                "client": "John Smith",
+                "title": "Stream19 Medical Pre-Survey Project",
+                "freelancer": "Maria Sottile",
+                "notes" : "The scope of this Contract covers the ongoing services provided by the Freelancer to maintain and update the Client's Medical Pre-Survey."
+            }
+        }
+    },
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "3fea63c5-8c15-4fe0-bf39-d90d1d4d1f3a",
+        "contract_state": 0,
+        "signed": false,
+        "contract": {
+            "WORK": {
+                "workDescription": "Development of a website that lays out Project Aurora's mental health services",
+                "revisions": "5",
+                "notes": "The Client agrees to review the Freelancer's work on an ongoing basis and to request revisions at each stage of the project as needed."
+            },
+            "93d3b70e-00fe-4984-b818-e31fd42eca39": {
+                "sectionTitle": "Project Stages",
+                "243b1aa6-7d08-462a-9253-0573e9e421b1": {
+                    "name": "Stage 1: Planning",
+                    "value": "The Freelancer will consult with the Client on how to structure the website and what information to display. The Freelancer will present three possible Themes (fonts, colors, general layout) for the Client's feedback."
+                },
+                "244": {
+                    "name": "Stage 2: Design",
+                    "value": "The Freelancer will sketch out each page of the website for the Client's feedback."
+                },
+                "2445": {
+                    "name": "Stage 3: Development",
+                    "value": "The Freelancer will develop the website based on feedback from the Planning and Design stages. The website will be submitted for the Client's review and revisions may be requested."
+                },
+                "245": {
+                    "name": "Stage 4: Verification",
+                    "value": "The Freelancer will fully deploy the website for the Client. For a period of one month, the Freelancer will any visual or usability issues that arise."
+                }
+            },
+            "HEADER": {
+                "date": "3/28/2022",
+                "client": "Lisa Dowd",
+                "title": "Project Aurora Website",
+                "freelancer": "Maria Sottile"
+            },
+            "COMPENSATION": {
+                "hw-pay-interval": "monthly",
+                "hw-pay-scheduled-date": "1st",
+                "hw-payment-buffer": "10",
+                "hw-amount": "50"
+            }
+        }
+    },
+    {
+        "userid": "71f6270b-ddf1-4259-b648-68214e23d265",
+        "id": "b493e0c4-47a4-484f-ac23-2e60a2bca17a",
+        "contract_state": 0,
+        "signed": false,
+        "contract": {
+            "WORK": {
+                "workDescription": "Redesign the Client's customer data entry portal including a connected database; migrate old customer data to this database",
+                "revisions": "4"
+            },
+            "COMPENSATION": {
+                "paymentSchedule": "Invoices of 500 CAD each will be set after the first two stages of the project. A third invoice with the remaining balance will be sent after project completion",
+                "fe-payment-buffer": "10",
+                "fe-amount": "2000"
+            },
+            "HEADER": {
+                "date": "3/05/2022",
+                "client": "Richard Wolfe",
+                "title": "B3nd3r Customer Data Collection Design Proposal",
+                "freelancer": "Maria Sottile"
+            },
+            "ffb7a305-d346-4a2c-9ee5-2ad8a35e5e62": {
+                "sectionTitle": "Confidentiality",
+                "1234": {
+                    "name": "The Freelancer acknowledges they may have access to information on",
+                    "value": "the Clients past, present, or future products, customer data, creative works, and other proprietary information (hereafter called \"Proprietary Information\")"
+                },
+                "2345": {
+                    "name": "The Freelancer agrees to",
+                    "value": "preserve and protect the confidentiality of the Proprietary Information and forms thereof, whether disclosed to the Freelancer before this Agreement is signed or afterward."
+                }
+            },
+            "93d3b70e-00fe-4984-b818-e31fd42eca39": {
+                "sectionTitle": "Project Stages",
+                "243b1aa6-7d08-462a-9253-0573e9e421b1": {
+                    "name": "Stage 1: Design",
+                    "value": "The Freelancer will consult with the Client on how to structure the portal and what data entry is needed. The Client will share the old customer data and the Freelancer will propose how to migrate it to the new database."
+                },
+                "244": {
+                    "name": "Stage 2: Development",
+                    "value": "The Freelancer will develope the website portal page and set up the new database. Old customer data will be migrated."
+                },
+                "2445": {
+                    "name": "Stage 3: Verification",
+                    "value": "The Freelancer will run verification tests with the Client to ensure everything functions as intended."
+                }
+            }
+        }
+    }
+]

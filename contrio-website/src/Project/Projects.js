@@ -9,14 +9,14 @@ import { Status } from "../components/Status"
 export var Projects = [
     {
         id: 0,
-        name: "Project Aurora Website",
-        client: "Prj Aurora Mental Health Foundation",
+        name: "B3nd3r Customer Data Collection Design Proposal",
+        client: "Richard Wolfe",
         status: Status.project_ongoing,
     },
     {
         id: 1,
-        name: "CLB",
-        client: "Campus Lightbox",
+        name: "Stream19 Medical Pre-Survey Project",
+        client: "John Smith",
         status: Status.project_ongoing,      
     },
     {

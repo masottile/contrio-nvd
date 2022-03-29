@@ -61,7 +61,7 @@ const SectionRender = ({id}) =>  {
 
     const RenderCompensation = () => {
         let inContract = ("COMPENSATION" in contractContext.currentContract);
-        let notes = (inContract && "notes" in contractContext.currentContract["WORK"] ? contractContext.currentContract.WORK.notes: "");
+        let notes = (inContract && "notes" in contractContext.currentContract["COMPENSATION"] ? contractContext.currentContract.COMPENSATION.notes: "");
 
         let fixedFee = (inContract && ("fe-amount" in contractContext.currentContract.COMPENSATION || "fe-payment-buffer" in contractContext.currentContract.COMPENSATION));
         let feAmount = (fixedFee && "fe-amount" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["fe-amount"]: shortBlank);
@@ -71,7 +71,7 @@ const SectionRender = ({id}) =>  {
         let hourWage = (inContract && ("hw-amount"in contractContext.currentContract.COMPENSATION || "hw-pay-interval" in contractContext.currentContract.COMPENSATION));
         let hwAmount = (hourWage && "hw-amount" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-amount"]: shortBlank);
         let hwPayInt = (hourWage && "hw-pay-interval" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-pay-interval"]: shortBlank);
-        let hwPayDay = (hourWage && "hw-pay-schduled-date" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-pay-schduled-date"]: shortBlank);
+        let hwPayDay = (hourWage && "hw-pay-scheduled-date" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-pay-scheduled-date"]: shortBlank);
         let hwBuffer = (hourWage && "hw-payment-buffer" in contractContext.currentContract.COMPENSATION ? contractContext.currentContract.COMPENSATION["hw-payment-buffer"]: shortBlank);
         return (
             <div className='s-subitem' xs={12}>
@@ -83,9 +83,9 @@ const SectionRender = ({id}) =>  {
                 {/* Hourly Wage Contract Output */}
                 { hourWage && 
                     <p> As full compensation for all services provided, the Freelancer will be paid a fixed wage of {hwAmount} CAD per hour. The Client will pay the Freelancer within {hwBuffer} days after recieving an invoice. Invoices will be sent {hwPayInt} by the
-                    {hwPayInt === ("weekly") ? `${hwPayDay} of every week.` : 
-                    (hwPayInt === ("biweekly") ? `${hwPayDay} of every two weeks.` :
-                    (hwPayInt === ("monthly") ? `${hwPayDay} of every month.` : shortBlank+shortBlank)
+                    {hwPayInt === ("weekly") ? ` ${hwPayDay} of every week.` : 
+                    (hwPayInt === ("biweekly") ? ` ${hwPayDay} of every two weeks.` :
+                    (hwPayInt === ("monthly") ? ` ${hwPayDay} of every month.` : shortBlank+shortBlank)
                     )}
                     </p>
                 }
