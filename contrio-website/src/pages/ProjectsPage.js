@@ -3,6 +3,8 @@ import { Paper } from "@mui/material";
 import Stage from "../components/kanban/Stage";
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
+// blocked "#e4e669" (for test)
+// feature "#7057ff" (for everything else)
 
 const testData = {
     'project-1': {
@@ -12,8 +14,8 @@ const testData = {
                 'name': 'Backlog',
                 'tasks': {
                     'backlog-task-1': {
-                        'title': 'Backlog Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Project Aurora Stage 1: Planning',
+                        'description': 'Discuss with Lisa and add cards for the planning stage',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
@@ -26,107 +28,83 @@ const testData = {
                 'id': 'design-1',
                 'name': 'Design',
                 'tasks': {
-                    'design-task-1': {
-                        'title': 'Design Title Task Name 1',
-                        'description': 'Short Description explaining work that needs to be done',
-                        'tag': {
-                            label: "Feature",
-                            color: "#7057ff",
-                        }
-                    },
                     'design-task-2': {
-                        'title': 'Design Title Task Name 2',
-                        'description': 'Short Description explaining work that needs to be done',
-                        'tag': {
-                            label: "Feature",
-                            color: "#7057ff",
-                        }
-                    },
-                    'design-task-3': {
-                        'title': 'Design Title Task Name 3',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Stream19 Database Table Schema',
+                        'description': 'Decide on Table Schema for optimal patient data storage',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
                     }
                 },
-                'taskIds': ['design-task-1', 'design-task-2', 'design-task-3']
+                'taskIds': ['design-task-2']
             },
             'build-1': {
                 'id': 'build-1',
                 'name': 'Build',
-                'tasks': {
+                'tasks': {     
                     'build-task-1': {
-                        'title': ' Build Title Task Name 1',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Edit Bug',
+                        'description': 'Keys not working when users try to edit their data',
                         'tag': {
-                            label: "Feature",
-                            color: "#7057ff",
+                            label: "Bug",
+                            color: "#d73a4a",
                         }
-                    },
-                    'build-task-2': {
-                        'title': 'Build Title Task Name 2',
-                        'description': 'Short Description explaining work that needs to be done',
-                        'tag': {
-                            label: "Feature",
-                            color: "#7057ff",
-                        }
-                    },
+                    },              
                     'build-task-3': {
-                        'title': 'Build Title Task Name 3',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Stream19 Survey Portal Build',
+                        'description': 'Implement Frontend for the new Data Entry Portal',
+                        'tag': {
+                            label: "Feature",
+                            color: "#7057ff",
+                        }
+                    },
+                    'build-task-4': {
+                        'title': 'Stream19 Frontend-Backend Connection through APIs',
+                        'description': 'Set up the APIs to integrate the Entry Portal frontend with the Database Backend',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
                     },
                 },
-                'taskIds': ['build-task-1', 'build-task-2', 'build-task-3']
+                'taskIds': ['build-task-1', 'build-task-3', 'build-task-4']
             },
             'test-1': {
                 'id': 'test-1',
                 'name': 'Test',
                 'tasks': {
                     'test-task-1': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'Stream19 Stress and Security test',
+                        'description': 'Test with malformed input and identify attack surface. Make any necessary changes to fix bugs found.',
                         'tag': {
                             label: "Blocked",
                             color: "#e4e669",
                         }
                     },
                     'test-task-2': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
-                        'tag': {
-                            label: "Blocked",
-                            color: "#e4e669",
-                        }
-                    },
-                    'test-task-3': {
-                        'title': 'Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Data Collection Stress and Security Test',
+                        'description': 'Test with malformed input and identify attack surface. Make any necessary changes to fix bugs found.',
                         'tag': {
                             label: "Blocked",
                             color: "#e4e669",
                         }
                     },
                 },
-                'taskIds': ['test-task-1', 'test-task-2', 'test-task-3']
+                'taskIds': ['test-task-1', 'test-task-2']
             },
             'finished-1': {
                 'id': 'finished-1',
                 'name': 'Finished',
                 'tasks': {
                     'finished-task-1': {
-                        'title': 'Finished Title Task Name',
-                        'description': 'Short Description explaining work that needs to be done',
+                        'title': 'B3nd3r Database Migration',
+                        'description': 'Convert existing stored data into the new DB schema and add it to the DB',
                         'tag': {
                             label: "Feature",
                             color: "#7057ff",
                         }
-                    },
+                    }
                 },
                 'taskIds': ['finished-task-1']
             },
