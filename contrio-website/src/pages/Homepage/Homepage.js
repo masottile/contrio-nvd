@@ -119,7 +119,7 @@ function Homepage() {
                                     fontWeight: 'bold',
                                     color: '#78A2CC'
                                 }}>
-                                    {project == 0 ? ("43 ") : ("88 ")}
+                                    {project == 0 ? ("16 ") : ("250 ")}
                                     Days
                                 </Typography>
                                 <Typography sx={{
